@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Allow specification of more than one file to combine into a personal dictionary.
+
 ## [3.0.1] - 2017-12-30
 
 ### Fixed
