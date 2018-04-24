@@ -8,4 +8,5 @@ plaintext
 pre-commit
 pre-push
 preprocessing
+regexes
 retext
