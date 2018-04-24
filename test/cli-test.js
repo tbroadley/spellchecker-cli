@@ -271,4 +271,11 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI() {
     stdout.should.include('`Thisisnotaword` is misspelt');
     stdout.should.include('`preprocessed` is misspelt');
   });
+
+  it('treats spelling mistakes ending in periods followed by a lowercase bullet correctly', async () => {
+    const { code, stdout } = await runWithArguments('test/fixtures/period-after-misspelling.md');
+    code.should.equal(1);
+    stdout.should.not.include('`misspellig.` is misspelt');
+    stdout.should.include('`misspellig` is misspelt');
+  });
 });
