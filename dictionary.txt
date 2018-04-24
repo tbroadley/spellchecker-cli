@@ -1,11 +1,11 @@
 CLI
 Changelog
 Gemoji
-npm
 NPM
+SHAs
+npm
 plaintext
 pre-commit
 pre-push
 preprocessing
 retext
-SHAs
