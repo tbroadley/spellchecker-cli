@@ -41,6 +41,7 @@
     "retext-spell": "^2.3.1",
     "retext-syntax-mentions": "^1.1.4",
     "retext-syntax-urls": "^1.0.0",
+    "tslib": "^1.9.3",
     "vfile": "^3.0.0",
     "vfile-reporter": "^5.0.0"
   },

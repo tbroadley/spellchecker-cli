@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
     "outDir": "lib",
-    "lib": ["es2015", "es2016.array.include"]
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["es2018"],
+    "declaration": true,
+    "sourceMap": true,
+    "importHelpers": true
   },
   "include": [
     "src/**/**.ts"
