@@ -1,6 +1,6 @@
-const fs = require('fs-extra');
-const concat = require('lodash/concat');
-const path = require('path');
+import * as fs from 'fs-extra';
+import * as path from 'path';
+import { concat } from 'lodash';
 
 function toDictionaryRegExp(entry) {
   return new RegExp(`^${entry}$`);

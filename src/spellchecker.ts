@@ -1,18 +1,17 @@
-const fs = require('fs-extra');
-const every = require('lodash/every');
-const assign = require('lodash/assign');
-const remark = require('remark');
-const gemoji = require('remark-gemoji-to-emoji');
-const remarkRetext = require('remark-retext');
-const retext = require('retext');
-const indefiniteArticle = require('retext-indefinite-article');
-const repeatedWords = require('retext-repeated-words');
-const spell = require('retext-spell');
-const syntaxMentions = require('retext-syntax-mentions');
-const syntaxUrls = require('retext-syntax-urls');
-const vfile = require('vfile');
+import { readFile } from 'fs-extra';
+import { assign, every } from 'lodash';
+import remark from 'remark';
+import gemoji from 'remark-gemoji-to-emoji';
+import remarkRetext from 'remark-retext';
+import retext from 'retext';
+import indefiniteArticle from 'retext-indefinite-article';
+import repeatedWords from 'retext-repeated-words';
+import spell from 'retext-spell';
+import syntaxMentions from 'retext-syntax-mentions';
+import syntaxUrls from 'retext-syntax-urls';
+import vfile from 'vfile';
 
-const { isMarkdownFile } = require('./is-markdown-file');
+import { isMarkdownFile } from './is-markdown-file';
 
 function buildSpellchecker({
   dictionary,
@@ -47,7 +46,7 @@ function buildSpellchecker({
   return spellchecker;
 }
 
-class Spellchecker {
+export class Spellchecker {
   constructor({
     language,
     personalDictionary,
@@ -68,7 +67,7 @@ class Spellchecker {
       ? this.markdownSpellchecker
       : this.spellchecker;
 
-    const contents = await fs.readFile(filePath);
+    const contents = await readFile(filePath);
     const file = vfile({
       contents,
       path: filePath,
@@ -83,5 +82,3 @@ class Spellchecker {
     });
   }
 }
-
-exports.Spellchecker = Spellchecker;

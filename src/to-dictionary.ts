@@ -1,7 +1,6 @@
-const flatMap = require('lodash/flatMap');
-const uniq = require('lodash/uniq');
+import { flatMap, uniq } from 'lodash';
 
-exports.toDictionary = (vfiles) => {
+export const toDictionary = (vfiles) => {
   const misspellings = flatMap(vfiles, (file) => {
     const retextSpellMessages = file.messages.filter((message) => {
       const { source, ruleId } = message;

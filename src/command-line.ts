@@ -4,7 +4,7 @@ const difference = require('lodash/difference');
 
 const { printError } = require('./print-error');
 
-const supportedLanguages = [
+export const supportedLanguages = [
   'en-AU',
   'en-CA',
   'en-GB',
@@ -12,36 +12,26 @@ const supportedLanguages = [
   'en-ZA',
 ];
 
-exports.supportedLanguages = supportedLanguages;
-
-const addPlugins = [
+export const addPlugins = [
   'spell',
   'indefinite-article',
   'repeated-words',
 ];
 
-exports.addPlugins = addPlugins;
-
-const removePlugins = [
+export const removePlugins = [
   'syntax-mentions',
   'syntax-urls',
 ];
 
-exports.removePlugins = removePlugins;
+export const supportedPlugins = addPlugins.concat(removePlugins);
 
-const supportedPlugins = addPlugins.concat(removePlugins);
-
-exports.supportedPlugins = supportedPlugins;
-
-const defaultPlugins = [
+export const defaultPlugins = [
   'spell',
   'indefinite-article',
   'repeated-words',
   'syntax-mentions',
   'syntax-urls',
 ];
-
-exports.defaultPlugins = defaultPlugins;
 
 const optionList = [
   {
@@ -118,9 +108,10 @@ const usage = getUsage([
   },
 ]);
 
-exports.getUsage = () => usage;
+const getSpellcheckerUsage = () => usage;
+export { getSpellcheckerUsage as getUsage };
 
-exports.parseArgs = () => {
+export function parseArgs() {
   let parsedArgs;
 
   try {
