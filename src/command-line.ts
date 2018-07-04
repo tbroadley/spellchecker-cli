@@ -1,5 +1,5 @@
-import commandLineArgs from 'command-line-args';
-import getUsage from 'command-line-usage';
+import * as commandLineArgs from 'command-line-args';
+import * as commandLineUsage from 'command-line-usage';
 import { difference } from 'lodash';
 
 import { printError } from './print-error';
@@ -99,7 +99,7 @@ const optionList = [
 ];
 // tslint:enable:max-line-length
 
-const usage = getUsage([
+const usage = commandLineUsage([
   {
     content: 'A command-line tool for spellchecking files.',
     header: 'spellchecker',
@@ -110,8 +110,7 @@ const usage = getUsage([
   },
 ]);
 
-const getSpellcheckerUsage = () => usage;
-export { getSpellcheckerUsage as getUsage };
+export const getUsage = () => usage;
 
 export function parseArgs() {
   let parsedArgs;

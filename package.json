@@ -2,14 +2,16 @@
   "name": "spellchecker-cli",
   "version": "3.1.0",
   "description": "A command-line tool for spellchecking files.",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "bin": {
-    "spellchecker": "./index.js"
+    "spellchecker": "./lib/index.js"
   },
   "scripts": {
-    "ci": "npm run spellchecker && npm run lint && npm run test",
-    "lint": "tslint -p . && eslint \"**/*.js\"",
-    "spellchecker": "node ./index.js --files \"**/*.md\" \"!test/**/*.md\" --dictionaries dictionary.txt",
+    "ci": "npm run build && npm run spellchecker && npm run lint && npm run test",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "lint": "tslint -p . -t codeFrame && eslint \"test/*.js\"",
+    "spellchecker": "node ./lib/index.js --files \"**/*.md\" \"!test/**/*.md\" --dictionaries dictionary.txt",
     "test": "mocha"
   },
   "author": "Thomas Broadley <buriedunderbooks@hotmail.com>",
@@ -43,9 +45,12 @@
     "vfile-reporter": "^5.0.0"
   },
   "devDependencies": {
+    "@types/command-line-args": "^5.0.0",
+    "@types/command-line-usage": "^5.0.1",
     "@types/fs-extra": "^5.0.3",
     "@types/lodash": "^4.14.110",
     "@types/node": "^10.5.1",
+    "@types/vfile": "^2.2.2",
     "chai": "^4.1.2",
     "eslint": "^5.0.1",
     "eslint-config-airbnb-base": "^13.0.0",

@@ -1,15 +1,15 @@
 import { readFile } from 'fs-extra';
 import { assign, every } from 'lodash';
-import remark from 'remark';
-import gemoji from 'remark-gemoji-to-emoji';
-import remarkRetext from 'remark-retext';
-import retext from 'retext';
-import indefiniteArticle from 'retext-indefinite-article';
-import repeatedWords from 'retext-repeated-words';
-import spell from 'retext-spell';
-import syntaxMentions from 'retext-syntax-mentions';
-import syntaxUrls from 'retext-syntax-urls';
-import vfile from 'vfile';
+import * as remark from 'remark';
+import * as gemoji from 'remark-gemoji-to-emoji';
+import * as remarkRetext from 'remark-retext';
+import * as retext from 'retext';
+import * as indefiniteArticle from 'retext-indefinite-article';
+import * as repeatedWords from 'retext-repeated-words';
+import * as spell from 'retext-spell';
+import * as syntaxMentions from 'retext-syntax-mentions';
+import * as syntaxUrls from 'retext-syntax-urls';
+import * as vfile from 'vfile';
 
 import { isMarkdownFile } from './is-markdown-file';
 
@@ -47,6 +47,11 @@ function buildSpellchecker({
 }
 
 export class Spellchecker {
+  private spellchecker: any;
+  private markdownSpellchecker: any;
+  private ignoreRegexes: RegExp[];
+  private personalDictionary: string[];
+
   constructor({
     language,
     personalDictionary,

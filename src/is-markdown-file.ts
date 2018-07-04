@@ -1,4 +1,3 @@
-import * as path from 'path';
+import { extname } from 'path';
 
-export const isMarkdownFile =
-    (filePath) => ['.md', '.markdown'].includes(path.extname(filePath).toLowerCase());
+export const isMarkdownFile = (filePath) => ['.md', '.markdown'].includes(extname(filePath).toLowerCase());

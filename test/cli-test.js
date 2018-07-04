@@ -27,7 +27,7 @@ function runCommand(command) {
 }
 
 function runWithArguments(args) {
-  return runCommand(`node index.js ${args}`);
+  return runCommand(`node lib/index.js ${args}`);
 }
 
 const notSpell = plugin => plugin !== 'spell';
@@ -275,7 +275,7 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI() {
   });
 
   it('loads programmatic dictionaries relative to the current working directory', async () => {
-    const result = await runCommand('cd test && node ../index.js fixtures/incorrect.txt --dictionaries fixtures/dictionaries/programmatic.js');
+    const result = await runCommand('cd test && node ../lib/index.js fixtures/incorrect.txt --dictionaries fixtures/dictionaries/programmatic.js');
     result.should.not.have.property('code');
   });
 
