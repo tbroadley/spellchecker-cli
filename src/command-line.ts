@@ -1,8 +1,8 @@
-const commandLineArgs = require('command-line-args');
-const getUsage = require('command-line-usage');
-const difference = require('lodash/difference');
+import commandLineArgs from 'command-line-args';
+import getUsage from 'command-line-usage';
+import { difference } from 'lodash';
 
-const { printError } = require('./print-error');
+import { printError } from './print-error';
 
 export const supportedLanguages = [
   'en-AU',
@@ -33,74 +33,76 @@ export const defaultPlugins = [
   'syntax-urls',
 ];
 
+// tslint:disable:max-line-length
 const optionList = [
   {
-    name: 'files',
     alias: 'f',
-    typeLabel: '<file|glob> <file|glob>...',
+    defaultOption: true,
     description: 'A list of files or globs to spellcheck.',
     multiple: true,
-    defaultOption: true,
+    name: 'files',
+    typeLabel: '<file|glob> <file|glob>...',
   },
   {
-    name: 'language',
     alias: 'l',
-    typeLabel: '<language>',
-    description: `The language of the files. The default language is en-US. The following languages are supported: ${supportedLanguages.join(', ')}.`,
     defaultValue: 'en-US',
+    description: `The language of the files. The default language is en-US. The following languages are supported: ${supportedLanguages.join(', ')}.`,
+    name: 'language',
+    typeLabel: '<language>',
   },
   {
-    name: 'dictionaries',
     alias: 'd',
-    typeLabel: '<file> <file>...',
+    defaultValue: [],
     description: 'Files to combine into a personal dictionary.',
     multiple: true,
-    defaultValue: [],
+    name: 'dictionaries',
+    typeLabel: '<file> <file>...',
   },
   {
+    description: 'Write a personal dictionary that contains all found misspellings to dictionary.txt.',
     name: 'generate-dictionary',
     type: Boolean,
-    description: 'Write a personal dictionary that contains all found misspellings to dictionary.txt.',
   },
   {
-    name: 'ignore',
     alias: 'i',
-    typeLabel: '<regex> <regex>...',
+    defaultValue: [],
     description: 'Spelling mistakes that match any of these regexes (after being wrapped with ^ and $) will be ignored.',
     multiple: true,
-    defaultValue: [],
+    name: 'ignore',
+    typeLabel: '<regex> <regex>...',
   },
   {
-    name: 'plugins',
     alias: 'p',
-    typeLabel: '<name> <name>...',
+    defaultValue: defaultPlugins,
     description: `A list of retext plugins to use. The default is "${defaultPlugins.join(' ')}". The following plugins are supported: ${supportedPlugins.join(', ')}.`,
     multiple: true,
-    defaultValue: defaultPlugins,
+    name: 'plugins',
+    typeLabel: '<name> <name>...',
   },
   {
+    description: 'Do not print suggested replacements for misspelled words. This option will improve Spellchecker\'s runtime when many errors are detected.',
     name: 'no-suggestions',
     type: Boolean,
-    description: 'Do not print suggested replacements for misspelled words. This option will improve Spellchecker\'s runtime when many errors are detected.',
   },
   {
-    name: 'quiet',
     alias: 'q',
-    type: Boolean,
     description: 'Do not output anything for files that contain no spelling mistakes.',
+    name: 'quiet',
+    type: Boolean,
   },
   {
-    name: 'help',
     alias: 'h',
-    type: Boolean,
     description: 'Print this help screen.',
+    name: 'help',
+    type: Boolean,
   },
 ];
+// tslint:enable:max-line-length
 
 const usage = getUsage([
   {
-    header: 'spellchecker',
     content: 'A command-line tool for spellchecking files.',
+    header: 'spellchecker',
   },
   {
     header: 'Options',
@@ -158,16 +160,16 @@ export function parseArgs() {
     process.exit(1);
   }
 
-  const ignoreRegexes = ignoreRegexStrings.map(regexString => new RegExp(`^${regexString}$`));
+  const ignoreRegexes = ignoreRegexStrings.map((regexString) => new RegExp(`^${regexString}$`));
 
   return {
     files,
-    language,
-    personalDictionaryPaths,
     generateDictionary,
     ignoreRegexes,
-    suggestions,
+    language,
+    personalDictionaryPaths,
     plugins,
     quiet,
+    suggestions,
   };
-};
+}

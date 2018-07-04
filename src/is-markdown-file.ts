@@ -1,4 +1,4 @@
-const path = require('path');
+import * as path from 'path';
 
 export const isMarkdownFile =
-    filePath => ['.md', '.markdown'].includes(path.extname(filePath).toLowerCase());
+    (filePath) => ['.md', '.markdown'].includes(path.extname(filePath).toLowerCase());

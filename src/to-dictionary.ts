@@ -6,7 +6,7 @@ export const toDictionary = (vfiles) => {
       const { source, ruleId } = message;
       return source === 'retext-spell' && ruleId !== 'overflow';
     });
-    return retextSpellMessages.map(m => m.actual);
+    return retextSpellMessages.map((m) => m.actual);
   });
-  return uniq(misspellings).sort().map(s => `${s}\n`).join('');
+  return uniq(misspellings).sort().map((s) => `${s}\n`).join('');
 };

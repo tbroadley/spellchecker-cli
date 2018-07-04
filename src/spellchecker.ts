@@ -62,7 +62,7 @@ export class Spellchecker {
     this.personalDictionary = personalDictionary;
   }
 
-  async checkSpelling(filePath) {
+  public async checkSpelling(filePath) {
     const spellcheckerForFileType = isMarkdownFile(filePath)
       ? this.markdownSpellchecker
       : this.spellchecker;
@@ -75,7 +75,7 @@ export class Spellchecker {
     const result = await spellcheckerForFileType.process(file);
     return assign({}, result, {
       messages: result.messages.filter(({ actual }) => {
-        const doesNotMatch = regex => !regex.test(actual);
+        const doesNotMatch = (regex) => !regex.test(actual);
         return every(this.ignoreRegexes, doesNotMatch)
             && every(this.personalDictionary, doesNotMatch);
       }),
