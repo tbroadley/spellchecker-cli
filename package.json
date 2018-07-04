@@ -12,7 +12,7 @@
     "watch": "tsc -w",
     "lint": "tslint -p . -t codeFrame",
     "spellchecker": "ts-node ./src/ --files \"**/*.md\" \"!test/**/*.md\" --dictionaries dictionary.txt",
-    "test": "mocha -r ts-node/register -r chai/register-should ./test/**/**.ts"
+    "test": "mocha -r ts-node/register -r chai/register-should ./test/**/*.ts"
   },
   "author": "Thomas Broadley <buriedunderbooks@hotmail.com>",
   "license": "MIT",
