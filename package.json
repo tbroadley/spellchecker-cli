@@ -7,12 +7,12 @@
     "spellchecker": "./lib/index.js"
   },
   "scripts": {
-    "ci": "npm run build && npm run spellchecker && npm run lint && npm run test",
+    "ci": "npm run spellchecker && npm run lint && npm run build && npm run test",
     "build": "tsc",
     "watch": "tsc -w",
-    "lint": "tslint -p . -t codeFrame && eslint \"test/*.js\"",
-    "spellchecker": "node ./lib/index.js --files \"**/*.md\" \"!test/**/*.md\" --dictionaries dictionary.txt",
-    "test": "mocha"
+    "lint": "tslint -p . -t codeFrame",
+    "spellchecker": "ts-node ./src/ --files \"**/*.md\" \"!test/**/*.md\" --dictionaries dictionary.txt",
+    "test": "mocha -r ts-node/register -r chai/register-should ./test/**/**.ts"
   },
   "author": "Thomas Broadley <buriedunderbooks@hotmail.com>",
   "license": "MIT",
@@ -45,18 +45,18 @@
     "vfile-reporter": "^5.0.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.1.4",
     "@types/command-line-args": "^5.0.0",
     "@types/command-line-usage": "^5.0.1",
     "@types/fs-extra": "^5.0.3",
     "@types/lodash": "^4.14.110",
+    "@types/mocha": "^5.2.4",
     "@types/node": "^10.5.1",
     "@types/vfile": "^2.2.2",
     "chai": "^4.1.2",
-    "eslint": "^5.0.1",
-    "eslint-config-airbnb-base": "^13.0.0",
-    "eslint-plugin-import": "^2.13.0",
     "mocha": "^5.2.0",
     "mocha.parallel": "0.15.5",
+    "ts-node": "^7.0.0",
     "tslint": "^5.10.0",
     "typescript": "^2.9.2"
   }

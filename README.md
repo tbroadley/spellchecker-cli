@@ -119,4 +119,4 @@ Spellchecker CLI performs some preprocessing on Markdown files (_i.e._ files wit
 
 ## Development
 
-Run `npm install` to install dependencies and `npm run build` to build the project. Then, run `node lib/index.js` to run Spellcheck CLI. You can also run `npm run spellchecker` to run Spellcheck CLI against its own documentation, `npm run lint` to lint the JavaScript source files, and `npm run test` to run the test suite.
+Run `npm install` to install dependencies. Then, run `npx ts-node src/` to run Spellcheck CLI. You can also run `npm run spellchecker` to run Spellcheck CLI against its own documentation, `npm run lint` to lint the JavaScript source files, and `npm run test` to run the test suite.

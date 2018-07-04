@@ -1,8 +1,4 @@
-const chai = require('chai');
-
-const { isMarkdownFile } = require('../lib/is-markdown-file');
-
-chai.should();
+import { isMarkdownFile } from '../src/is-markdown-file';
 
 describe('isMarkdownFile', () => {
   it('returns true for a file with the extension `.md`', () => {

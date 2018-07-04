@@ -1,11 +1,9 @@
 {
   "compilerOptions": {
     "outDir": "lib",
-    "lib": ["es2015", "es2016.array.include"],
-    "allowJs": true,
-    "checkJs": true,
+    "lib": ["es2015", "es2016.array.include"]
   },
   "include": [
-    "src/**/**.**"
+    "src/**/**.ts"
   ]
 }

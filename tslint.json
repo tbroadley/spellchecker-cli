@@ -1,7 +1,7 @@
 {
-    "extends": "tslint:latest",
-    "rules": {
-        "quotemark": [true, "single"],
-        "no-console": false
-    }
+  "extends": "tslint:latest",
+  "rules": {
+    "quotemark": [true, "single"],
+    "no-console": false
+  }
 }

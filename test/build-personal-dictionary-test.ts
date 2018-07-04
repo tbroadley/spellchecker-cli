@@ -1,8 +1,4 @@
-const chai = require('chai');
-
-const { buildPersonalDictionary } = require('../lib/build-personal-dictionary');
-
-chai.should();
+import { buildPersonalDictionary } from '../src/build-personal-dictionary';
 
 describe('buildPersonalDictionary', () => {
   it('returns an empty array when no dictionaries are specified', async () => {
