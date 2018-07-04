@@ -2,5 +2,5 @@ const chalk = require('chalk');
 
 exports.printError = (message) => {
   console.error();
-  console.error(chalk.red(message));
+  console.error(chalk.default.red(message));
 };

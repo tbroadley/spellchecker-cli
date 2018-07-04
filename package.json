@@ -8,7 +8,7 @@
   },
   "scripts": {
     "ci": "npm run spellchecker && npm run lint && npm run test",
-    "lint": "eslint \"**/*.js\"",
+    "lint": "tslint -p . && eslint \"**/*.js\"",
     "spellchecker": "node ./index.js --files \"**/*.md\" \"!test/**/*.md\" --dictionaries dictionary.txt",
     "test": "mocha"
   },
@@ -43,11 +43,14 @@
     "vfile-reporter": "^5.0.0"
   },
   "devDependencies": {
+    "@types/node": "^10.5.1",
     "chai": "^4.1.2",
     "eslint": "^5.0.1",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.13.0",
     "mocha": "^5.2.0",
-    "mocha.parallel": "0.15.5"
+    "mocha.parallel": "0.15.5",
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.2"
   }
 }
