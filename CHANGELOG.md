@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
@@ -6,7 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-- Compile project using the TypeScript compiler.
+## [4.8.0] - 2021-06-13
+
+- Convert project to TypeScript.
 
 ## [4.7.0] - 2021-06-12
 
@@ -134,7 +137,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Added a shebang to [index.js](./index.js).
 
-[Unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v4.7.0...HEAD
+[Unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v4.8.0...HEAD
+[4.8.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.7.0...v4.8.0
 [4.7.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.6.0...v4.7.0
 [4.6.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.5.0...v4.6.0
 [4.5.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.4.1...v4.5.0
