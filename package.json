@@ -13,7 +13,7 @@
     "ci": "yarn spellchecker && yarn lint && yarn test",
     "lint": "eslint \"**/*.js\" \"**/*.ts\"",
     "spellchecker": "ts-node ./index.ts",
-    "test": "tsc && mocha",
+    "test": "tsc && mocha -r ts-node/register test/**/*test.ts",
     "prepack": "tsc"
   },
   "author": "Thomas Broadley <buriedunderbooks@hotmail.com>",
@@ -55,7 +55,14 @@
     "vfile-reporter": "^6.0.0"
   },
   "devDependencies": {
+    "@types/app-root-path": "^1.2.4",
+    "@types/chai": "^4.2.18",
+    "@types/command-line-args": "^5.0.0",
+    "@types/command-line-usage": "^5.0.1",
     "@types/fs-extra": "^9.0.11",
+    "@types/js-yaml": "^4.0.1",
+    "@types/lodash": "^4.14.170",
+    "@types/mocha": "^8.2.2",
     "@types/node": "^15.12.2",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",

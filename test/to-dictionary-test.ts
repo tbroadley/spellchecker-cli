@@ -1,12 +1,12 @@
-const chai = require('chai');
+import chai from 'chai';
 
-const { toDictionary } = require('../lib/to-dictionary');
+import { toDictionary } from '../lib/to-dictionary';
 
-const { fileWithNoMessages, buildVfile } = require('./helpers/vfile');
+import { fileWithNoMessages, buildVfile } from './helpers/vfile';
 
 chai.should();
 
-const addNewlines = strings => strings.map(s => `${s}\n`).join('');
+const addNewlines = (strings: any) => strings.map((s: any) => `${s}\n`).join('');
 
 describe('toDictionary', () => {
   it('returns an empty string when passed an empty array', () => {

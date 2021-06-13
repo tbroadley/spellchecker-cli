@@ -1,12 +1,12 @@
-const { extname } = require('path');
-const appRootPath = require('app-root-path');
-const { accessSync, readFileSync } = require('fs');
-const yaml = require('js-yaml');
-const jsonc = require('jsonc');
+import { extname } from 'path';
+import appRootPath from 'app-root-path';
+import { accessSync, readFileSync } from 'fs';
+import yaml from 'js-yaml';
+import { jsonc } from 'jsonc';
 
-const { printError } = require('./print-error');
+import { printError } from './print-error';
 
-const tryLoad = (filePath) => {
+const tryLoad = (filePath: any) => {
   let result;
 
   try {
@@ -26,7 +26,7 @@ const tryLoad = (filePath) => {
   return result;
 };
 
-const readConfigFile = (filePathFromArgs) => {
+export const readConfigFile = (filePathFromArgs: any) => {
   if (filePathFromArgs) {
     return tryLoad(filePathFromArgs);
   }
@@ -50,5 +50,3 @@ const readConfigFile = (filePathFromArgs) => {
 
   return filePath ? tryLoad(filePath) : {};
 };
-
-exports.readConfigFile = readConfigFile;

@@ -1,6 +1,6 @@
-const fs = require('fs');
+import fs from 'fs';
 
-exports.genJsonReport = (path, vfiles) => {
+export const genJsonReport = (path: any, vfiles: any) => {
   const json = JSON.stringify(vfiles, null, 4);
 
   fs.writeFileSync(path, json);

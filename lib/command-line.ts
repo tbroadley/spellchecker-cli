@@ -1,11 +1,11 @@
-const commandLineArgs = require('command-line-args');
-const getUsage = require('command-line-usage');
-const camelCase = require('lodash/camelCase');
-const mapKeys = require('lodash/mapKeys');
+import commandLineArgs from 'command-line-args';
+import getCommandLineUsage from 'command-line-usage';
+import camelCase from 'lodash/camelCase';
+import mapKeys from 'lodash/mapKeys';
 
-const { printError } = require('./print-error');
+import { printError } from './print-error';
 
-const supportedLanguages = [
+export const supportedLanguages = [
   'en-AU',
   'en-CA',
   'en-GB',
@@ -14,37 +14,27 @@ const supportedLanguages = [
   'vi',
 ];
 
-exports.supportedLanguages = supportedLanguages;
-
-const addPlugins = [
+export const addPlugins = [
   'spell',
   'indefinite-article',
   'repeated-words',
 ];
 
-exports.addPlugins = addPlugins;
-
-const removePlugins = [
+export const removePlugins = [
   'syntax-mentions',
   'syntax-urls',
   'frontmatter',
 ];
 
-exports.removePlugins = removePlugins;
+export const supportedPlugins = addPlugins.concat(removePlugins);
 
-const supportedPlugins = addPlugins.concat(removePlugins);
-
-exports.supportedPlugins = supportedPlugins;
-
-const defaultPlugins = [
+export const defaultPlugins = [
   'spell',
   'indefinite-article',
   'repeated-words',
   'syntax-mentions',
   'syntax-urls',
 ];
-
-exports.defaultPlugins = defaultPlugins;
 
 const optionList = [
   {
@@ -128,7 +118,7 @@ const optionList = [
   },
 ];
 
-const usage = getUsage([
+const usage = getCommandLineUsage([
   {
     header: 'spellchecker',
     content: 'A command-line tool for spellchecking files.',
@@ -139,9 +129,9 @@ const usage = getUsage([
   },
 ]);
 
-exports.getUsage = () => usage;
+export const getUsage = () => usage;
 
-exports.readArgs = () => {
+export const readArgs = () => {
   let args;
 
   try {

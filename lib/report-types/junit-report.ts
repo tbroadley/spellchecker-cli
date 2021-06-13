@@ -1,10 +1,10 @@
-const builder = require('junit-report-builder');
+import builder from 'junit-report-builder';
 
-exports.genJunitReport = (path, vfiles) => {
+export const genJunitReport = (path: any, vfiles: any) => {
   const suite = builder.testSuite().name('spellchecker');
 
-  vfiles.forEach((file) => {
-    file.messages.forEach((error) => {
+  vfiles.forEach((file: any) => {
+    file.messages.forEach((error: any) => {
       const testCase = suite.testCase()
         .className(error.ruleId)
         .name(error.name);

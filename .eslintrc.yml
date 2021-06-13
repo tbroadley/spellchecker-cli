@@ -1,6 +1,7 @@
 extends:
   - airbnb-base
   - "plugin:@typescript-eslint/recommended"
+  - "plugin:import/typescript"
 root: true
 parser: "@typescript-eslint/parser"
 plugins:
@@ -21,3 +22,8 @@ rules:
     - off
   "@typescript-eslint/no-var-requires":
     - off
+  "import/prefer-default-export":
+    - off
+  "import/extensions":
+    - error
+    - never

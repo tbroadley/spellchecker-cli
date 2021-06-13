@@ -42,3 +42,17 @@ declare module 'vfile-reporter' {
     options?: Options
   ): string;
 }
+
+declare module 'junit-report-builder';
+declare module 'remark-gemoji-to-emoji';
+declare module 'remark-retext';
+declare module 'retext';
+declare module 'retext-indefinite-article';
+declare module 'retext-repeated-words';
+declare module 'retext-spell';
+declare module 'retext-syntax-mentions';
+declare module 'retext-syntax-urls';
+declare module 'unist-util-visit';
+declare module 'vfile';
+
+declare module 'mocha.parallel';
