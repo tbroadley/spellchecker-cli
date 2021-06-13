@@ -3,8 +3,8 @@ import getCommandLineUsage from 'command-line-usage';
 import camelCase from 'lodash/camelCase';
 import mapKeys from 'lodash/mapKeys';
 
-import { ExternalConfig } from './config';
-import { printError } from './print-error';
+import { ExternalConfig } from './types';
+import { printError } from '../print-error';
 
 export const supportedLanguages = [
   'en-AU',

@@ -1,39 +1,12 @@
 import difference from 'lodash/difference';
 import merge from 'lodash/merge';
 
-import { readConfigFile } from './config-file';
-import { printError } from './print-error';
 import {
   defaultPlugins, getUsage, readArgs, supportedPlugins, supportedLanguages,
 } from './command-line';
-
-export type ExternalConfig = {
-  files?: string[]
-  language?: string
-  plugins?: string[]
-  dictionaries?: string[]
-  quiet?: boolean
-  reports?: string[]
-  help?: boolean
-  generateDictionary?: boolean
-  noGitignore?: boolean
-  noSuggestions?: boolean
-  frontmatterKeys?: string[]
-  config?: string;
-}
-
-export type InternalConfig = {
-  files: string[],
-    language: string,
-    personalDictionaryPaths: string[],
-    generateDictionary: boolean,
-    noGitignore: boolean,
-    ignoreRegexes: RegExp[],
-    suggestions: boolean
-    plugins: (string | { [key: string]: any })[],
-    reports: string[],
-    quiet: boolean,
-}
+import { readConfigFile } from './file';
+import { InternalConfig } from './types';
+import { printError } from '../print-error';
 
 const defaultValues = {
   language: 'en-US',
@@ -101,7 +74,7 @@ export const parseConfig = (): InternalConfig => {
     updatedPlugins[frontmatterPluginIndex] = { frontmatter: frontmatterKeys };
   }
 
-  const ignoreRegexes = ignoreRegexStrings.map((regexString: any) => new RegExp(`^${regexString}$`));
+  const ignoreRegexes = ignoreRegexStrings.map((regexString: string) => new RegExp(`^${regexString}$`));
 
   return {
     files,

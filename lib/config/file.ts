@@ -4,8 +4,8 @@ import { accessSync, readFileSync } from 'fs';
 import yaml from 'js-yaml';
 import { jsonc } from 'jsonc';
 
-import { ExternalConfig } from './config';
-import { printError } from './print-error';
+import { ExternalConfig } from './types';
+import { printError } from '../print-error';
 
 const tryLoad = (filePath: string): ExternalConfig => {
   let result: ExternalConfig;

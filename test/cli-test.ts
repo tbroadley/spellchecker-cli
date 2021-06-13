@@ -11,7 +11,7 @@ import {
   removePlugins,
   supportedPlugins,
   defaultPlugins,
-} from '../lib/command-line';
+} from '../lib/config/command-line';
 
 chai.should();
 
