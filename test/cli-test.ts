@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 import chai from 'chai';
-import { exec } from 'child_process';
+import { exec, ExecException } from 'child_process';
 import glob from 'globby';
 import merge from 'lodash/merge';
 import parallel from 'mocha.parallel';
@@ -15,7 +17,9 @@ import {
 
 chai.should();
 
-function runCommand(command: any): any {
+type CommandResult = { stdout: string, stderr: string } & Partial<ExecException>
+
+function runCommand(command: string): Promise<CommandResult> {
   return new Promise((resolve) => {
     exec(
       command,
@@ -31,19 +35,19 @@ function runCommand(command: any): any {
   });
 }
 
-function runWithArguments(args: any) {
+function runWithArguments(args: string) {
   return runCommand(`node build/index.js ${args}`);
 }
 
-const notSpell = (plugin: any) => plugin !== 'spell';
+const notSpell = (plugin: string) => plugin !== 'spell';
 
 const nonSpellPlugins = supportedPlugins.filter(notSpell);
 const nonSpellAddPlugins = addPlugins.filter(notSpell);
 const nonSpellRemovePlugins = removePlugins.filter(notSpell);
 
-const toSpaceAndHyphenSplitRegex = (word: any) => word.replace(/ /g, '\\s*').replace(/-/g, '-\\s*');
+const toSpaceAndHyphenSplitRegex = (word: string) => word.replace(/ /g, '\\s*').replace(/-/g, '-\\s*');
 
-parallel('Spellchecker CLI', function testSpellcheckerCLI(this: any) {
+parallel('Spellchecker CLI', function testSpellcheckerCLI(this: { timeout(n: number): void, slow(n: number): void }) {
   this.timeout(5 * 60 * 1000);
   this.slow(5 * 60 * 1000);
 
@@ -85,37 +89,37 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: any) {
 
   it('exits with an error when no arguments are provided', async () => {
     const { code, stderr } = await runWithArguments('');
-    code.should.equal(1);
+    code!.should.equal(1);
     stderr.should.include('A list of files is required.');
   });
 
   it('exits with an error when an empty config file is specified', async () => {
     const { code, stderr } = await runWithArguments('--config test/fixtures/config/empty.yml');
-    code.should.equal(1);
+    code!.should.equal(1);
     stderr.should.include('A list of files is required.');
   });
 
   it('exits with an error when an empty list of files is provided', async () => {
     const { code, stderr } = await runWithArguments('--files');
-    code.should.equal(1);
+    code!.should.equal(1);
     stderr.should.include('A list of files is required.');
   });
 
   it('exits with an error when passed an unknown argument', async () => {
     const { code, stderr } = await runWithArguments('--test');
-    code.should.equal(1);
+    code!.should.equal(1);
     stderr.should.include('UNKNOWN_OPTION: Unknown option: --test');
   });
 
   it('exits with an error when passed an unknown language', async () => {
     const { code, stderr } = await runWithArguments('--files a b c --language test');
-    code.should.equal(1);
+    code!.should.equal(1);
     stderr.should.include('The language "test" is not supported.');
   });
 
   it('exits with an error when run on a file with a spelling mistake', async () => {
     const { code, stdout } = await runWithArguments('test/fixtures/incorrect.txt');
-    code.should.equal(1);
+    code!.should.equal(1);
     stdout.should.include('`Thisisnotaword` is misspelt');
   });
 
@@ -126,7 +130,7 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: any) {
 
   it('exits with an error when run with a dictionary that does not contain the words in the given file', async () => {
     const { code, stdout } = await runWithArguments('test/fixtures/en-CA.txt');
-    code.should.equal(1);
+    code!.should.equal(1);
     ['Colour', 'honour', 'behaviour'].forEach((word) => {
       stdout.should.include(`\`${word}\` is misspelt`);
     });
@@ -139,7 +143,7 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: any) {
 
   it('handles Markdown syntax', async () => {
     const { code, stdout } = await runWithArguments('--files test/fixtures/markdown.md');
-    code.should.equal(1);
+    code!.should.equal(1);
     ['Spellig', 'paragrap', 'containin', 'mistaks', 'Bullts', 'Moar'].forEach((word) => {
       stdout.should.include(`\`${word}\` is misspelt`);
     });
@@ -190,7 +194,7 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: any) {
 
   it('prints errors in quiet mode', async () => {
     const { code, stdout } = await runWithArguments('--files test/fixtures/incorrect.txt --quiet');
-    code.should.equal(1);
+    code!.should.equal(1);
     stdout.should.include('`Thisisnotaword` is misspelt');
   });
 
@@ -213,7 +217,7 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: any) {
 
   it('exits with an error when passed unknown plugins', async () => {
     const { code, stderr } = await runWithArguments('--files a b c --plugins d e f');
-    code.should.equal(1);
+    code!.should.equal(1);
     stderr.should.include('The following retext plugins are not supported: d, e, f.');
   });
 
@@ -225,7 +229,7 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: any) {
   it('applies all default plugins by default', async () => {
     const { code, stdout } = await runWithArguments(`--files test/fixtures/{{${nonSpellPlugins.join(',')}}.md,incorrect.txt}`);
 
-    code.should.equal(1);
+    code!.should.equal(1);
 
     stdout.should.include('retext-spell');
     stdout.should.not.include('test/fixtures/incorrect.txt: no issues found');
@@ -241,7 +245,7 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: any) {
 
   it('applies all the specified plugins', async () => {
     const { code, stdout } = await runWithArguments(`--files test/fixtures/{${nonSpellPlugins.join(',')}}.md --plugins ${nonSpellPlugins.join(' ')}`);
-    code.should.equal(1);
+    code!.should.equal(1);
     nonSpellAddPlugins.forEach((plugin) => {
       stdout.should.include(`retext-${plugin}`);
     });
@@ -252,7 +256,7 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: any) {
 
   it('applies retext-indefinite-article when it is specified', async () => {
     const { code, stdout } = await runWithArguments('test/fixtures/indefinite-article.md -p indefinite-article');
-    code.should.equal(1);
+    code!.should.equal(1);
     stdout.should.include('Use `an` before `8-year`, not `a`');
     stdout.should.include('Use `an` before `hour`, not `a`');
     stdout.should.include('Use `a` before `European`, not `an`');
@@ -260,7 +264,7 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: any) {
 
   it('applies retext-repeated-words when it is specified', async () => {
     const { code, stdout } = await runWithArguments('test/fixtures/repeated-words.md -p repeated-words');
-    code.should.equal(1);
+    code!.should.equal(1);
     stdout.should.include('Expected `it` once, not twice');
     stdout.should.include('Expected `to` once, not twice');
     stdout.should.include('Expected `the` once, not twice');
@@ -288,42 +292,42 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: any) {
 
   it('checks only the given keys in the frontmatter (1)', async () => {
     const { code, stdout } = await runWithArguments('test/fixtures/frontmatter-incorrect.md -p spell frontmatter --frontmatter-keys contributors');
-    code.should.equal(1);
+    code!.should.equal(1);
     stdout.should.include('`tbroadley` is misspelt');
     stdout.should.not.include('`documnet` is misspelt');
   });
 
   it('checks only the given keys in the frontmatter (2)', async () => {
     const { code, stdout } = await runWithArguments('test/fixtures/frontmatter-incorrect.md -p spell frontmatter --frontmatter-keys title');
-    code.should.equal(1);
+    code!.should.equal(1);
     stdout.should.include('`documnet` is misspelt');
     stdout.should.not.include('`tbroadley` is misspelt');
   });
 
   it('checks only the given keys in the frontmatter (3)', async () => {
     const { code, stdout } = await runWithArguments('test/fixtures/frontmatter-incorrect.md -p spell frontmatter --frontmatter-keys title contributors');
-    code.should.equal(1);
+    code!.should.equal(1);
     stdout.should.include('`documnet` is misspelt');
     stdout.should.include('`tbroadley` is misspelt');
   });
 
   it('checks only the given keys in the frontmatter (toml) (1)', async () => {
     const { code, stdout } = await runWithArguments('test/fixtures/frontmatter-incorrect-toml.md -p spell frontmatter --frontmatter-keys contributors');
-    code.should.equal(1);
+    code!.should.equal(1);
     stdout.should.include('`tbroadley` is misspelt');
     stdout.should.not.include('`documnet` is misspelt');
   });
 
   it('checks only the given keys in the frontmatter (toml) (2)', async () => {
     const { code, stdout } = await runWithArguments('test/fixtures/frontmatter-incorrect-toml.md -p spell frontmatter --frontmatter-keys title');
-    code.should.equal(1);
+    code!.should.equal(1);
     stdout.should.include('`documnet` is misspelt');
     stdout.should.not.include('`tbroadley` is misspelt');
   });
 
   it('checks only the given keys in the frontmatter (toml) (3)', async () => {
     const { code, stdout } = await runWithArguments('test/fixtures/frontmatter-incorrect-toml.md -p spell frontmatter --frontmatter-keys title contributors');
-    code.should.equal(1);
+    code!.should.equal(1);
     stdout.should.include('`documnet` is misspelt');
     stdout.should.include('`tbroadley` is misspelt');
   });
@@ -360,7 +364,7 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: any) {
 
   it('treats dictionary entries as if they were wrapped in ^ and $', async () => {
     const { code, stdout } = await runWithArguments('test/fixtures/incorrect.txt --dictionaries test/fixtures/dictionaries/regex-no-match.txt');
-    code.should.equal(1);
+    code!.should.equal(1);
     stdout.should.include('`Thisisnotaword` is misspelt');
     stdout.should.include('`preprocessed` is misspelt');
   });
@@ -382,14 +386,14 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: any) {
 
   it('does not ignore spelling mistakes that do not match any of the given regexes', async () => {
     const { code, stdout } = await runWithArguments('test/fixtures/incorrect.txt --ignore "Thisisnot" "processed"');
-    code.should.equal(1);
+    code!.should.equal(1);
     stdout.should.include('`Thisisnotaword` is misspelt');
     stdout.should.include('`preprocessed` is misspelt');
   });
 
   it('does not limit number of reported misspelling errors', async () => {
     const { code, stdout } = await runWithArguments('test/fixtures/gibberish-50-lines.txt');
-    code.should.equal(1);
+    code!.should.equal(1);
     stdout.should.include('50 warnings');
     stdout.should.not.include('Too many misspellings');
   });
@@ -403,13 +407,13 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: any) {
 
   it('enables suggestions by default', async () => {
     const { code, stdout } = await runWithArguments('test/fixtures/incorrect.txt');
-    code.should.equal(1);
+    code!.should.equal(1);
     stdout.should.include('`preprocessed` is misspelt; did you mean `reprocessed`?');
   });
 
   it('allows suggestions to be disabled', async () => {
     const { code, stdout } = await runWithArguments('test/fixtures/incorrect.txt --no-suggestions');
-    code.should.equal(1);
+    code!.should.equal(1);
     stdout.should.include('`preprocessed` is misspelt');
     stdout.should.not.include('`preprocessed` is misspelt; did you mean `reprocessed`?');
   });
@@ -424,7 +428,7 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: any) {
     createFileResult.should.not.have.property('code');
 
     const { code, stdout } = await runWithArguments('--no-gitignore --files test/fixtures/gitignored-file.txt');
-    code.should.equal(1);
+    code!.should.equal(1);
     stdout.should.include('`contians` is misspelt');
   });
 
@@ -437,24 +441,24 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: any) {
   });
 
   it('ignores spelling mistakes inside exclude comment blocks', async () => {
-    const code = await runWithArguments('test/fixtures/exclude-blocks.md');
-    code.should.not.have.property('code');
+    const result = await runWithArguments('test/fixtures/exclude-blocks.md');
+    result.should.not.have.property('code');
   });
 
   it('catch spelling mistakes inside incomplete exclude comment blocks', async () => {
     const { code, stdout } = await runWithArguments('test/fixtures/exclude-blocks-incorrect.md');
-    code.should.equal(1);
+    code!.should.equal(1);
     stdout.should.include('`iinside` is misspelt');
   });
 
   it('ignores spelling mistakes inside single-line exclude comments', async () => {
-    const code = await runWithArguments('test/fixtures/exclude-blocks-singleline.md');
-    code.should.not.have.property('code');
+    const result = await runWithArguments('test/fixtures/exclude-blocks-singleline.md');
+    result.should.not.have.property('code');
   });
 
   it('ignores spelling mistakes inside exclude comment blocks with special formatting', async () => {
-    const code = await runWithArguments('test/fixtures/exclude-blocks-formatting.md');
-    code.should.not.have.property('code');
+    const result = await runWithArguments('test/fixtures/exclude-blocks-formatting.md');
+    result.should.not.have.property('code');
   });
 
   it('can read options from a YAML config file', async () => {

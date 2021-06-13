@@ -1,4 +1,5 @@
 import chai from 'chai';
+import { VFileMessage } from 'vfile-reporter';
 
 import { hasMessages } from '../lib/has-messages';
 
@@ -29,6 +30,6 @@ describe('hasMessages', () => {
   it('filters messages using the given function', () => {
     hasMessages([
       buildVfile(['a', 'b', 'c']),
-    ], (message: any) => message.source === 'asdf').should.equal(false);
+    ], (message: VFileMessage) => message.source === 'asdf').should.equal(false);
   });
 });
