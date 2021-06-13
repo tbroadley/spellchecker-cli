@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
-import every from 'lodash/every';
 import assign from 'lodash/assign';
+import every from 'lodash/every';
 import remark from 'remark';
 import frontmatter from 'remark-frontmatter';
 import gemoji from 'remark-gemoji-to-emoji';
@@ -14,8 +14,8 @@ import syntaxUrls from 'retext-syntax-urls';
 import vfile from 'vfile';
 import { VFile, VFileMessage } from 'vfile-reporter';
 
-import { isMarkdownFile } from './is-markdown-file';
 import { FrontmatterConfig, frontmatterFilter } from './frontmatter-filter';
+import { isMarkdownFile } from './is-markdown-file';
 
 function buildSpellchecker({
   dictionary,

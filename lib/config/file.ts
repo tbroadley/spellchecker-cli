@@ -1,11 +1,13 @@
-import { extname } from 'path';
-import appRootPath from 'app-root-path';
 import { accessSync, readFileSync } from 'fs';
+import { extname } from 'path';
+
+import appRootPath from 'app-root-path';
 import yaml from 'js-yaml';
 import { jsonc } from 'jsonc';
 
-import { ExternalConfig } from './types';
 import { printError } from '../print-error';
+
+import { ExternalConfig } from './types';
 
 const tryLoad = (filePath: string): ExternalConfig => {
   let result: ExternalConfig;

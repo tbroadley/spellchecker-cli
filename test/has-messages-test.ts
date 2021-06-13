@@ -3,7 +3,7 @@ import { VFileMessage } from 'vfile-reporter';
 
 import { hasMessages } from '../lib/has-messages';
 
-import { fileWithNoMessages, buildVfile } from './helpers/vfile';
+import { buildVfile, fileWithNoMessages } from './helpers/vfile';
 
 chai.should();
 

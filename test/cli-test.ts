@@ -1,18 +1,20 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
+import { ExecException, exec } from 'child_process';
+import path from 'path';
+
 import chai from 'chai';
-import { exec, ExecException } from 'child_process';
 import glob from 'globby';
 import merge from 'lodash/merge';
 import parallel from 'mocha.parallel';
-import path from 'path';
+
 
 import {
-  supportedLanguages,
   addPlugins,
-  removePlugins,
-  supportedPlugins,
   defaultPlugins,
+  removePlugins,
+  supportedLanguages,
+  supportedPlugins,
 } from '../lib/config/command-line';
 
 chai.should();

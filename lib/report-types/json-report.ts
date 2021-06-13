@@ -1,4 +1,5 @@
 import fs from 'fs';
+
 import { VFile } from 'vfile-reporter';
 
 export const genJsonReport = (path: string, vfiles: VFile[]): void => {

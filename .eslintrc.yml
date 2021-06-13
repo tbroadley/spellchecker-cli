@@ -27,3 +27,8 @@ rules:
   "import/extensions":
     - error
     - never
+  "import/order":
+    - error
+    - newlines-between: always
+      alphabetize:
+        order: asc

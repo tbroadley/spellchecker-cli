@@ -1,10 +1,10 @@
 import yaml from 'js-yaml';
-import toml from 'toml';
 import isArray from 'lodash/isArray';
 import isObject from 'lodash/isObject';
 import map from 'lodash/map';
 import pick from 'lodash/pick';
 import toString from 'lodash/toString';
+import toml from 'toml';
 import visit from 'unist-util-visit';
 
 import { printError } from './print-error';

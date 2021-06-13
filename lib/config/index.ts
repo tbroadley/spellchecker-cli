@@ -1,13 +1,14 @@
 import difference from 'lodash/difference';
 import merge from 'lodash/merge';
 
+import { FrontmatterConfig } from '../frontmatter-filter';
+import { printError } from '../print-error';
+
 import {
-  defaultPlugins, getUsage, readArgs, supportedPlugins, supportedLanguages,
+  defaultPlugins, getUsage, readArgs, supportedLanguages, supportedPlugins,
 } from './command-line';
 import { readConfigFile } from './file';
 import { InternalConfig } from './types';
-import { printError } from '../print-error';
-import { FrontmatterConfig } from '../frontmatter-filter';
 
 const defaultValues = {
   language: 'en-US',

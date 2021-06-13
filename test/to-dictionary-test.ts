@@ -2,7 +2,7 @@ import chai from 'chai';
 
 import { toDictionary } from '../lib/to-dictionary';
 
-import { fileWithNoMessages, buildVfile } from './helpers/vfile';
+import { buildVfile, fileWithNoMessages } from './helpers/vfile';
 
 chai.should();
 

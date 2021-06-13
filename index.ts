@@ -8,9 +8,9 @@ import { buildPersonalDictionary } from './lib/build-personal-dictionary';
 import { parseConfig } from './lib/config';
 import { hasMessages } from './lib/has-messages';
 import { printError } from './lib/print-error';
+import { generateReports } from './lib/report-generator';
 import { Spellchecker } from './lib/spellchecker';
 import { toDictionary } from './lib/to-dictionary';
-import { generateReports } from './lib/report-generator';
 
 (async () => {
   const {

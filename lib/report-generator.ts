@@ -1,4 +1,5 @@
 import { VFile } from 'vfile-reporter';
+
 import { genJsonReport } from './report-types/json-report';
 import { genJunitReport } from './report-types/junit-report';
 
