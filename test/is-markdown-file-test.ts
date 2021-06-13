@@ -1,6 +1,6 @@
-const chai = require('chai');
+import chai from 'chai';
 
-const { isMarkdownFile } = require('../lib/is-markdown-file');
+import { isMarkdownFile } from '../lib/is-markdown-file';
 
 chai.should();
 

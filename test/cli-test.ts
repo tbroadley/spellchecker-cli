@@ -1,21 +1,21 @@
-const chai = require('chai');
-const { exec } = require('child_process');
-const glob = require('globby');
-const merge = require('lodash/merge');
-const parallel = require('mocha.parallel');
-const path = require('path');
+import chai from 'chai';
+import { exec } from 'child_process';
+import glob from 'globby';
+import merge from 'lodash/merge';
+import parallel from 'mocha.parallel';
+import path from 'path';
 
-const {
+import {
   supportedLanguages,
   addPlugins,
   removePlugins,
   supportedPlugins,
   defaultPlugins,
-} = require('../lib/command-line');
+} from '../lib/command-line';
 
 chai.should();
 
-function runCommand(command) {
+function runCommand(command: any): any {
   return new Promise((resolve) => {
     exec(
       command,
@@ -31,19 +31,19 @@ function runCommand(command) {
   });
 }
 
-function runWithArguments(args) {
+function runWithArguments(args: any) {
   return runCommand(`node build/index.js ${args}`);
 }
 
-const notSpell = plugin => plugin !== 'spell';
+const notSpell = (plugin: any) => plugin !== 'spell';
 
 const nonSpellPlugins = supportedPlugins.filter(notSpell);
 const nonSpellAddPlugins = addPlugins.filter(notSpell);
 const nonSpellRemovePlugins = removePlugins.filter(notSpell);
 
-const toSpaceAndHyphenSplitRegex = word => word.replace(/ /g, '\\s*').replace(/-/g, '-\\s*');
+const toSpaceAndHyphenSplitRegex = (word: any) => word.replace(/ /g, '\\s*').replace(/-/g, '-\\s*');
 
-parallel('Spellchecker CLI', function testSpellcheckerCLI() {
+parallel('Spellchecker CLI', function testSpellcheckerCLI(this: any) {
   this.timeout(5 * 60 * 1000);
   this.slow(5 * 60 * 1000);
 

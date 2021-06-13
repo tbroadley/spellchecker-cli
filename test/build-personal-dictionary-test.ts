@@ -1,6 +1,6 @@
-const chai = require('chai');
+import chai from 'chai';
 
-const { buildPersonalDictionary } = require('../lib/build-personal-dictionary');
+import { buildPersonalDictionary } from '../lib/build-personal-dictionary';
 
 chai.should();
 

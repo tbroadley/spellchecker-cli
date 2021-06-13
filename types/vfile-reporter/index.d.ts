@@ -54,3 +54,5 @@ declare module 'retext-syntax-mentions';
 declare module 'retext-syntax-urls';
 declare module 'unist-util-visit';
 declare module 'vfile';
+
+declare module 'mocha.parallel';

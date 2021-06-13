@@ -128,6 +128,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/chai@npm:^4.2.18":
+  version: 4.2.18
+  resolution: "@types/chai@npm:4.2.18"
+  checksum: db7e2c4e35d1f082ebb1d71e9617eff8f0de293bd39c52a07bb6d6bf93db91aa301e8ef16536497b49962689055736ab7cf6aaf6321c6cb4dd996c5691817811
+  languageName: node
+  linkType: hard
+
 "@types/command-line-args@npm:^5.0.0":
   version: 5.0.0
   resolution: "@types/command-line-args@npm:5.0.0"
@@ -185,6 +192,13 @@ __metadata:
   dependencies:
     "@types/unist": "*"
   checksum: d271df999e2b7144ef96a79bff75f22573d06d6c26ead8e190f59d4578da0b10af7c707f1453449bae6ba5c2dccfae8becf9f7a84a4bb30bc2a43fbc49607754
+  languageName: node
+  linkType: hard
+
+"@types/mocha@npm:^8.2.2":
+  version: 8.2.2
+  resolution: "@types/mocha@npm:8.2.2"
+  checksum: 3455211b134b0cfcfc71fee2d4f22a6ac3e313a93bf6c0cd3519c1e85653ffb8c9bb68dcff083b8e9e15b4ea3cb4f50d9916709946c082f072807aeba747575b
   languageName: node
   linkType: hard
 
@@ -3562,11 +3576,13 @@ fsevents@~2.3.1:
   resolution: "spellchecker-cli@workspace:."
   dependencies:
     "@types/app-root-path": ^1.2.4
+    "@types/chai": ^4.2.18
     "@types/command-line-args": ^5.0.0
     "@types/command-line-usage": ^5.0.1
     "@types/fs-extra": ^9.0.11
     "@types/js-yaml": ^4.0.1
     "@types/lodash": ^4.14.170
+    "@types/mocha": ^8.2.2
     "@types/node": ^15.12.2
     "@typescript-eslint/eslint-plugin": ^4.26.1
     "@typescript-eslint/parser": ^4.26.1

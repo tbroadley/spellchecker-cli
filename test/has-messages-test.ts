@@ -1,10 +1,10 @@
-const chai = require('chai');
+import chai from 'chai';
 
-const { hasMessages } = require('../lib/has-messages');
+import { hasMessages } from '../lib/has-messages';
+
+import { fileWithNoMessages, buildVfile } from './helpers/vfile';
 
 chai.should();
-
-const { fileWithNoMessages, buildVfile } = require('./helpers/vfile');
 
 describe('hasMessages', () => {
   it('returns false when passed an empty array', () => {
@@ -29,6 +29,6 @@ describe('hasMessages', () => {
   it('filters messages using the given function', () => {
     hasMessages([
       buildVfile(['a', 'b', 'c']),
-    ], message => message.source === 'asdf').should.equal(false);
+    ], (message: any) => message.source === 'asdf').should.equal(false);
   });
 });
