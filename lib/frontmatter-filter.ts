@@ -9,7 +9,7 @@ import visit from 'unist-util-visit';
 
 import { printError } from './print-error';
 
-function stringify(toStringify: any): any {
+function stringify(toStringify: unknown): string {
   if (isArray(toStringify)) {
     return map(toStringify, stringify).join('\n');
   }
@@ -19,9 +19,9 @@ function stringify(toStringify: any): any {
   return toString(toStringify);
 }
 
-function attacher(options: any) {
-  return (tree: any) => {
-    visit(tree, 'yaml', (node: any) => {
+export function frontmatterFilter(options: string[]): (tree: unknown) => void {
+  return (tree: unknown) => {
+    visit(tree, 'yaml', (node: { value: string, type: string }) => {
       let parsedFrontmatter;
 
       try {
@@ -38,7 +38,8 @@ function attacher(options: any) {
       node.type = 'text';
       /* eslint-enable no-param-reassign */
     });
-    visit(tree, 'toml', (node: any) => {
+
+    visit(tree, 'toml', (node: { value: string, type: string }) => {
       let parsedFrontmatter;
 
       try {
@@ -57,5 +58,3 @@ function attacher(options: any) {
     });
   };
 }
-
-export const frontmatterFilter = attacher;

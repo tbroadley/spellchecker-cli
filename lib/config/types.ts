@@ -22,7 +22,7 @@ export type InternalConfig = {
     noGitignore: boolean,
     ignoreRegexes: RegExp[],
     suggestions: boolean
-    plugins: (string | { [key: string]: any })[],
+    plugins: (string | { frontmatter: string[] })[],
     reports: string[],
     quiet: boolean,
 }

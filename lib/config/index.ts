@@ -64,7 +64,7 @@ export const parseConfig = (): InternalConfig => {
     process.exit(1);
   }
 
-  const updatedPlugins: (string | { [key: string]: any })[] = plugins;
+  const updatedPlugins: (string | { frontmatter: string[] })[] = plugins;
   const frontmatterPluginIndex = plugins.indexOf('frontmatter');
   if (frontmatterPluginIndex === -1 && frontmatterKeys.length > 0) {
     printError('The `--frontmatter-keys` option is invalid unless the `frontmatter` plugin is used.');
