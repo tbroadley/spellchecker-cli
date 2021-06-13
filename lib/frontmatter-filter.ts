@@ -1,15 +1,15 @@
-const yaml = require('js-yaml');
-const toml = require('toml');
-const isArray = require('lodash/isArray');
-const isObject = require('lodash/isObject');
-const map = require('lodash/map');
-const pick = require('lodash/pick');
-const toString = require('lodash/toString');
-const visit = require('unist-util-visit');
+import yaml from 'js-yaml';
+import toml from 'toml';
+import isArray from 'lodash/isArray';
+import isObject from 'lodash/isObject';
+import map from 'lodash/map';
+import pick from 'lodash/pick';
+import toString from 'lodash/toString';
+import visit from 'unist-util-visit';
 
-const { printError } = require('./print-error');
+import { printError } from './print-error';
 
-function stringify(toStringify) {
+function stringify(toStringify: any): any {
   if (isArray(toStringify)) {
     return map(toStringify, stringify).join('\n');
   }
@@ -19,13 +19,13 @@ function stringify(toStringify) {
   return toString(toStringify);
 }
 
-function attacher(options) {
-  return (tree) => {
-    visit(tree, 'yaml', (node) => {
+function attacher(options: any) {
+  return (tree: any) => {
+    visit(tree, 'yaml', (node: any) => {
       let parsedFrontmatter;
 
       try {
-        parsedFrontmatter = yaml.safeLoad(node.value);
+        parsedFrontmatter = yaml.load(node.value);
       } catch (e) {
         printError(`Failed to parse YAML frontmatter, ignoring it. Error: ${e}`);
         parsedFrontmatter = {};
@@ -38,7 +38,7 @@ function attacher(options) {
       node.type = 'text';
       /* eslint-enable no-param-reassign */
     });
-    visit(tree, 'toml', (node) => {
+    visit(tree, 'toml', (node: any) => {
       let parsedFrontmatter;
 
       try {
@@ -58,4 +58,4 @@ function attacher(options) {
   };
 }
 
-exports.frontmatterFilter = attacher;
+export const frontmatterFilter = attacher;

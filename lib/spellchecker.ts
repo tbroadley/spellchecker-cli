@@ -1,26 +1,26 @@
-const fs = require('fs-extra');
-const every = require('lodash/every');
-const assign = require('lodash/assign');
-const remark = require('remark');
-const frontmatter = require('remark-frontmatter');
-const gemoji = require('remark-gemoji-to-emoji');
-const remarkRetext = require('remark-retext');
-const retext = require('retext');
-const indefiniteArticle = require('retext-indefinite-article');
-const repeatedWords = require('retext-repeated-words');
-const spell = require('retext-spell');
-const syntaxMentions = require('retext-syntax-mentions');
-const syntaxUrls = require('retext-syntax-urls');
-const vfile = require('vfile');
+import fs from 'fs-extra';
+import every from 'lodash/every';
+import assign from 'lodash/assign';
+import remark from 'remark';
+import frontmatter from 'remark-frontmatter';
+import gemoji from 'remark-gemoji-to-emoji';
+import remarkRetext from 'remark-retext';
+import retext from 'retext';
+import indefiniteArticle from 'retext-indefinite-article';
+import repeatedWords from 'retext-repeated-words';
+import spell from 'retext-spell';
+import syntaxMentions from 'retext-syntax-mentions';
+import syntaxUrls from 'retext-syntax-urls';
+import vfile from 'vfile';
 
-const { isMarkdownFile } = require('./is-markdown-file');
-const { frontmatterFilter } = require('./frontmatter-filter');
+import { isMarkdownFile } from './is-markdown-file';
+import { frontmatterFilter } from './frontmatter-filter';
 
 function buildSpellchecker({
   dictionary,
   suggestions,
   plugins,
-}) {
+}: any) {
   const spellchecker = retext();
 
   if (plugins.includes('indefinite-article')) {
@@ -52,10 +52,10 @@ function buildSpellchecker({
 function buildMarkdownSpellchecker({
   plugins,
   spellchecker,
-}) {
+}: any) {
   const markdownSpellchecker = remark().use(gemoji);
 
-  const frontmatterOptions = plugins.filter(({ frontmatter: fm }) => fm);
+  const frontmatterOptions = plugins.filter(({ frontmatter: fm }: any) => fm);
   if (frontmatterOptions.length > 0) {
     markdownSpellchecker
       .use(frontmatter, ['yaml', 'toml'])
@@ -65,14 +65,19 @@ function buildMarkdownSpellchecker({
   return markdownSpellchecker.use(remarkRetext, spellchecker);
 }
 
-class Spellchecker {
+export class Spellchecker {
+  private spellchecker: any;
+  private markdownSpellchecker: any;
+  private ignoreRegexes: any;
+  private personalDictionary: any;
+
   constructor({
     language,
     personalDictionary,
     ignoreRegexes,
     suggestions,
     plugins,
-  }) {
+  }: any) {
     // eslint-disable-next-line global-require,import/no-dynamic-require
     const dictionary = require(`dictionary-${language.toLowerCase()}`);
     this.spellchecker = buildSpellchecker({ dictionary, suggestions, plugins });
@@ -84,7 +89,7 @@ class Spellchecker {
     this.personalDictionary = personalDictionary;
   }
 
-  async checkSpelling(filePath) {
+  async checkSpelling(filePath: any) {
     const spellcheckerForFileType = isMarkdownFile(filePath)
       ? this.markdownSpellchecker
       : this.spellchecker;
@@ -101,13 +106,11 @@ class Spellchecker {
     });
     const result = await spellcheckerForFileType.process(file);
     return assign({}, result, {
-      messages: result.messages.filter(({ actual }) => {
-        const doesNotMatch = regex => !regex.test(actual);
+      messages: result.messages.filter(({ actual }: any) => {
+        const doesNotMatch = (regex: any) => !regex.test(actual);
         return every(this.ignoreRegexes, doesNotMatch)
           && every(this.personalDictionary, doesNotMatch);
       }),
     });
   }
 }
-
-exports.Spellchecker = Spellchecker;

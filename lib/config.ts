@@ -1,11 +1,11 @@
-const difference = require('lodash/difference');
-const merge = require('lodash/merge');
+import difference from 'lodash/difference';
+import merge from 'lodash/merge';
 
-const { readConfigFile } = require('./config-file');
-const { printError } = require('./print-error');
-const {
+import { readConfigFile } from './config-file';
+import { printError } from './print-error';
+import {
   defaultPlugins, getUsage, readArgs, supportedPlugins, supportedLanguages,
-} = require('./command-line');
+} from './command-line';
 
 const defaultValues = {
   language: 'en-US',
@@ -17,7 +17,7 @@ const defaultValues = {
   reports: [],
 };
 
-const parseConfig = () => {
+export const parseConfig = () => {
   const args = readArgs();
   const configFile = readConfigFile(args.config);
   const parsedArgs = merge({}, defaultValues, configFile, args);
@@ -72,7 +72,7 @@ const parseConfig = () => {
     plugins[frontmatterPluginIndex] = { frontmatter: frontmatterKeys };
   }
 
-  const ignoreRegexes = ignoreRegexStrings.map(regexString => new RegExp(`^${regexString}$`));
+  const ignoreRegexes = ignoreRegexStrings.map((regexString: any) => new RegExp(`^${regexString}$`));
 
   return {
     files,
@@ -87,5 +87,3 @@ const parseConfig = () => {
     quiet,
   };
 };
-
-exports.parseConfig = parseConfig;
