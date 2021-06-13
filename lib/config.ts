@@ -7,6 +7,34 @@ import {
   defaultPlugins, getUsage, readArgs, supportedPlugins, supportedLanguages,
 } from './command-line';
 
+export type ExternalConfig = {
+  files?: string[]
+  language?: string
+  plugins?: string[]
+  dictionaries?: string[]
+  quiet?: boolean
+  reports?: string[]
+  help?: boolean
+  generateDictionary?: boolean
+  noGitignore?: boolean
+  noSuggestions?: boolean
+  frontmatterKeys?: string[]
+  config?: string;
+}
+
+export type InternalConfig = {
+  files: string[],
+    language: string,
+    personalDictionaryPaths: string[],
+    generateDictionary: boolean,
+    noGitignore: boolean,
+    ignoreRegexes: RegExp[],
+    suggestions: boolean
+    plugins: (string | { [key: string]: any })[],
+    reports: string[],
+    quiet: boolean,
+}
+
 const defaultValues = {
   language: 'en-US',
   dictionaries: [],
@@ -17,7 +45,7 @@ const defaultValues = {
   reports: [],
 };
 
-export const parseConfig = () => {
+export const parseConfig = (): InternalConfig => {
   const args = readArgs();
   const configFile = readConfigFile(args.config);
   const parsedArgs = merge({}, defaultValues, configFile, args);
@@ -63,13 +91,14 @@ export const parseConfig = () => {
     process.exit(1);
   }
 
+  const updatedPlugins: (string | { [key: string]: any })[] = plugins;
   const frontmatterPluginIndex = plugins.indexOf('frontmatter');
   if (frontmatterPluginIndex === -1 && frontmatterKeys.length > 0) {
     printError('The `--frontmatter-keys` option is invalid unless the `frontmatter` plugin is used.');
     console.log(usage);
     process.exit(1);
   } else if (frontmatterPluginIndex !== -1) {
-    plugins[frontmatterPluginIndex] = { frontmatter: frontmatterKeys };
+    updatedPlugins[frontmatterPluginIndex] = { frontmatter: frontmatterKeys };
   }
 
   const ignoreRegexes = ignoreRegexStrings.map((regexString: any) => new RegExp(`^${regexString}$`));
@@ -78,12 +107,12 @@ export const parseConfig = () => {
     files,
     language,
     personalDictionaryPaths,
-    generateDictionary,
+    generateDictionary: !!generateDictionary,
     noGitignore,
     ignoreRegexes,
     suggestions: !noSuggestions,
-    plugins,
+    plugins: updatedPlugins,
     reports,
-    quiet,
+    quiet: !!quiet,
   };
 };

@@ -3,6 +3,7 @@ import getCommandLineUsage from 'command-line-usage';
 import camelCase from 'lodash/camelCase';
 import mapKeys from 'lodash/mapKeys';
 
+import { ExternalConfig } from './config';
 import { printError } from './print-error';
 
 export const supportedLanguages = [
@@ -129,9 +130,9 @@ const usage = getCommandLineUsage([
   },
 ]);
 
-export const getUsage = () => usage;
+export const getUsage = (): string => usage;
 
-export const readArgs = () => {
+export const readArgs = (): ExternalConfig => {
   let args;
 
   try {
@@ -142,5 +143,5 @@ export const readArgs = () => {
     process.exit(1);
   }
 
-  return mapKeys(args, (_, key) => camelCase(key));
+  return mapKeys(args, (_, key) => camelCase(key)) as ExternalConfig;
 };

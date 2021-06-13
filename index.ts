@@ -2,7 +2,7 @@
 
 import * as fs from 'fs-extra';
 import glob from 'globby';
-import reporter from 'vfile-reporter';
+import reporter, { VFileMessage } from 'vfile-reporter';
 
 import { buildPersonalDictionary } from './lib/build-personal-dictionary';
 import { parseConfig } from './lib/config';
@@ -61,7 +61,7 @@ import { generateReports } from './lib/report-generator';
   }
 
   if (hasMessages(vfiles)) {
-    if (generateDictionary && hasMessages(vfiles, (message: any) => message.source === 'retext-spell')) {
+    if (generateDictionary && hasMessages(vfiles, (message: VFileMessage) => message.source === 'retext-spell')) {
       await fs.writeFile('dictionary.txt', toDictionary(vfiles));
       console.log('Personal dictionary written to dictionary.txt.');
     }
