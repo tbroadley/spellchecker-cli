@@ -55,7 +55,12 @@
     "vfile-reporter": "^6.0.0"
   },
   "devDependencies": {
+    "@types/app-root-path": "^1.2.4",
+    "@types/command-line-args": "^5.0.0",
+    "@types/command-line-usage": "^5.0.1",
     "@types/fs-extra": "^9.0.11",
+    "@types/js-yaml": "^4.0.1",
+    "@types/lodash": "^4.14.170",
     "@types/node": "^15.12.2",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
