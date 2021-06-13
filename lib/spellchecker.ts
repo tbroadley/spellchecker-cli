@@ -67,8 +67,11 @@ function buildMarkdownSpellchecker({
 
 export class Spellchecker {
   private spellchecker: any;
+
   private markdownSpellchecker: any;
+
   private ignoreRegexes: any;
+
   private personalDictionary: any;
 
   constructor({

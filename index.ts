@@ -4,13 +4,13 @@ import * as fs from 'fs-extra';
 import glob from 'globby';
 import reporter from 'vfile-reporter';
 
-const { buildPersonalDictionary } = require('./lib/build-personal-dictionary');
-const { parseConfig } = require('./lib/config');
-const { hasMessages } = require('./lib/has-messages');
-const { printError } = require('./lib/print-error');
-const { Spellchecker } = require('./lib/spellchecker');
-const { toDictionary } = require('./lib/to-dictionary');
-const { generateReports } = require('./lib/report-generator');
+import { buildPersonalDictionary } from './lib/build-personal-dictionary';
+import { parseConfig } from './lib/config';
+import { hasMessages } from './lib/has-messages';
+import { printError } from './lib/print-error';
+import { Spellchecker } from './lib/spellchecker';
+import { toDictionary } from './lib/to-dictionary';
+import { generateReports } from './lib/report-generator';
 
 (async () => {
   const {
