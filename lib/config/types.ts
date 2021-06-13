@@ -1,3 +1,5 @@
+import { FrontmatterConfig } from '../frontmatter-filter';
+
 export type ExternalConfig = {
   files?: string[]
   language?: string
@@ -22,7 +24,7 @@ export type InternalConfig = {
     noGitignore: boolean,
     ignoreRegexes: RegExp[],
     suggestions: boolean
-    plugins: (string | { frontmatter: string[] })[],
+    plugins: (string | FrontmatterConfig)[],
     reports: string[],
     quiet: boolean,
 }

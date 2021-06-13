@@ -7,6 +7,7 @@ import {
 import { readConfigFile } from './file';
 import { InternalConfig } from './types';
 import { printError } from '../print-error';
+import { FrontmatterConfig } from '../frontmatter-filter';
 
 const defaultValues = {
   language: 'en-US',
@@ -64,7 +65,7 @@ export const parseConfig = (): InternalConfig => {
     process.exit(1);
   }
 
-  const updatedPlugins: (string | { frontmatter: string[] })[] = plugins;
+  const updatedPlugins: (string | FrontmatterConfig)[] = plugins;
   const frontmatterPluginIndex = plugins.indexOf('frontmatter');
   if (frontmatterPluginIndex === -1 && frontmatterKeys.length > 0) {
     printError('The `--frontmatter-keys` option is invalid unless the `frontmatter` plugin is used.');

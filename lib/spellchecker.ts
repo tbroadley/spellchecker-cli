@@ -12,15 +12,16 @@ import spell from 'retext-spell';
 import syntaxMentions from 'retext-syntax-mentions';
 import syntaxUrls from 'retext-syntax-urls';
 import vfile from 'vfile';
+import { VFile, VFileMessage } from 'vfile-reporter';
 
 import { isMarkdownFile } from './is-markdown-file';
-import { frontmatterFilter } from './frontmatter-filter';
+import { FrontmatterConfig, frontmatterFilter } from './frontmatter-filter';
 
 function buildSpellchecker({
   dictionary,
   suggestions,
   plugins,
-}: any) {
+}: { dictionary: RegExp[], suggestions: boolean, plugins: (string | FrontmatterConfig)[] }) {
   const spellchecker = retext();
 
   if (plugins.includes('indefinite-article')) {
@@ -52,10 +53,10 @@ function buildSpellchecker({
 function buildMarkdownSpellchecker({
   plugins,
   spellchecker,
-}: any) {
+}: { plugins: (string | FrontmatterConfig)[], spellchecker: unknown }) {
   const markdownSpellchecker = remark().use(gemoji);
 
-  const frontmatterOptions = plugins.filter(({ frontmatter: fm }: any) => fm);
+  const frontmatterOptions = plugins.filter((plugin: string | FrontmatterConfig) => typeof plugin !== 'string') as FrontmatterConfig[];
   if (frontmatterOptions.length > 0) {
     markdownSpellchecker
       .use(frontmatter, ['yaml', 'toml'])
@@ -66,13 +67,13 @@ function buildMarkdownSpellchecker({
 }
 
 export class Spellchecker {
-  private spellchecker: any;
+  private spellchecker: { process(file: VFile): Promise<VFile> };
 
-  private markdownSpellchecker: any;
+  private markdownSpellchecker: { process(file: VFile): Promise<VFile> };
 
-  private ignoreRegexes: any;
+  private ignoreRegexes: RegExp[];
 
-  private personalDictionary: any;
+  private personalDictionary: RegExp[];
 
   constructor({
     language,
@@ -80,7 +81,13 @@ export class Spellchecker {
     ignoreRegexes,
     suggestions,
     plugins,
-  }: any) {
+  }: {
+    language: string,
+    personalDictionary: RegExp[],
+    ignoreRegexes: RegExp[],
+    suggestions: boolean,
+    plugins: (string | FrontmatterConfig)[]
+  }) {
     // eslint-disable-next-line global-require,import/no-dynamic-require
     const dictionary = require(`dictionary-${language.toLowerCase()}`);
     this.spellchecker = buildSpellchecker({ dictionary, suggestions, plugins });
@@ -92,7 +99,8 @@ export class Spellchecker {
     this.personalDictionary = personalDictionary;
   }
 
-  async checkSpelling(filePath: any) {
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  async checkSpelling(filePath: string) {
     const spellcheckerForFileType = isMarkdownFile(filePath)
       ? this.markdownSpellchecker
       : this.spellchecker;
@@ -109,8 +117,8 @@ export class Spellchecker {
     });
     const result = await spellcheckerForFileType.process(file);
     return assign({}, result, {
-      messages: result.messages.filter(({ actual }: any) => {
-        const doesNotMatch = (regex: any) => !regex.test(actual);
+      messages: result.messages.filter(({ actual }: VFileMessage) => {
+        const doesNotMatch = (regex: RegExp) => !regex.test(actual);
         return every(this.ignoreRegexes, doesNotMatch)
           && every(this.personalDictionary, doesNotMatch);
       }),

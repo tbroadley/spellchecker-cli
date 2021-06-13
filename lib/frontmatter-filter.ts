@@ -9,6 +9,8 @@ import visit from 'unist-util-visit';
 
 import { printError } from './print-error';
 
+export type FrontmatterConfig = { frontmatter: string[] }
+
 function stringify(toStringify: unknown): string {
   if (isArray(toStringify)) {
     return map(toStringify, stringify).join('\n');
