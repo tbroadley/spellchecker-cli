@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+- Add support for configuration in `package.json` ([@gadhagod](https://github.com/gadhagod)).
+
 ## [4.8.0] - 2021-06-13
 
 - Convert project to TypeScript.

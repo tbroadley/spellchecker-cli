@@ -477,4 +477,8 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: { timeout(n: num
     const result = await runWithArguments('--config test/fixtures/config/basic.jsonc');
     result.should.not.have.property('code');
   });
+  it ('can read options from `package.json`', async () => {
+    const result = await runCommand("node build/index.js");
+    result.should.not.have.property('code');
+  })
 });
