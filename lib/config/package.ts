@@ -11,9 +11,9 @@ export function readFromPackage(): ExternalConfig {
   } catch (err) {
     if ((err as Error).name === 'SyntaxError') {
       printError('Unable to parse package.json');
-    } else {
-      printError(`Unable to parse package.json. Error: ${(err as Error).message}`);
+      process.exit(1);
     }
+    return {};
   }
   if ('spellchecker' in config) {
     return config.spellchecker;
