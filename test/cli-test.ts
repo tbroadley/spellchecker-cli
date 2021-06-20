@@ -21,12 +21,12 @@ chai.should();
 
 type CommandResult = { stdout: string, stderr: string } & Partial<ExecException>
 
-function runCommand(command: string): Promise<CommandResult> {
+function runCommand(command: string, appRootPath?: string): Promise<CommandResult> {
   return new Promise((resolve) => {
     exec(
       command,
       // Prevent Spellchecker from picking up .spellcheckerrc.yml in these tests.
-      { env: Object.assign({}, process.env, { APP_ROOT_PATH: __dirname }) },
+      { env: Object.assign({}, process.env, { APP_ROOT_PATH: appRootPath ?? __dirname }) },
       (error, stdout, stderr) => {
         if (error) {
           resolve(merge({}, error, { stdout, stderr }));
@@ -37,8 +37,8 @@ function runCommand(command: string): Promise<CommandResult> {
   });
 }
 
-function runWithArguments(args: string) {
-  return runCommand(`node build/index.js ${args}`);
+function runWithArguments(args: string, appRootPath?: string) {
+  return runCommand(`node build/index.js ${args}`, appRootPath);
 }
 
 const notSpell = (plugin: string) => plugin !== 'spell';
@@ -477,8 +477,9 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: { timeout(n: num
     const result = await runWithArguments('--config test/fixtures/config/basic.jsonc');
     result.should.not.have.property('code');
   });
-  it ('can read options from `package.json`', async () => {
-    const result = await runCommand("node build/index.js");
+
+  it('can read options from `package.json`', async () => {
+    const result = await runWithArguments('', `${__dirname}/fixtures/config`);
     result.should.not.have.property('code');
-  })
+  });
 });
