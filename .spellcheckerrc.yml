@@ -1,5 +1,0 @@
-files:
-  - "**/*.md"
-  - "!test/**/*.md"
-dictionaries:
-  - dictionary.txt

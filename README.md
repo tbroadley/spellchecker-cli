@@ -68,6 +68,8 @@ Spellchecker CLI can also read configuration from a JSON or YAML file. By defaul
 
 You can specify any command line option in a config file. Just make sure to use camelcase option names in the config file, _e.g._ `frontmatterKeys` instead of `frontmatter-keys`.
 
+Also, you can specify command line options in your `package.json`. All keys under `spellchecker` in `package.json` are rendered the same way as other configuration-from-file methods.
+
 Command line arguments will override any configuration read from a file.
 
 ### Globs

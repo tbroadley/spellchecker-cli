@@ -8,6 +8,7 @@ import {
   defaultPlugins, getUsage, readArgs, supportedLanguages, supportedPlugins,
 } from './command-line';
 import { readConfigFile } from './file';
+import { readFromPackage } from './package';
 import { InternalConfig } from './types';
 
 const defaultValues = {
@@ -23,7 +24,8 @@ const defaultValues = {
 export const parseConfig = (): InternalConfig => {
   const args = readArgs();
   const configFile = readConfigFile(args.config);
-  const parsedArgs = merge({}, defaultValues, configFile, args);
+  const packageFile = readFromPackage();
+  const parsedArgs = merge({}, defaultValues, packageFile, configFile, args);
 
   const {
     files,

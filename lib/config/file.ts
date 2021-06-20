@@ -33,12 +33,11 @@ export const readConfigFile = (filePathFromArgs: string|undefined): ExternalConf
   if (filePathFromArgs) {
     return tryLoad(filePathFromArgs);
   }
-
   const filePath = [
     '/.spellcheckerrc.yaml',
     '/.spellcheckerrc.yml',
-    './spellcheckerrc.json',
-    './spellcheckerrc.jsonc',
+    '/.spellcheckerrc.json',
+    '/.spellcheckerrc.jsonc',
   ]
     .map(path => appRootPath.resolve(path))
     .find((path) => {
