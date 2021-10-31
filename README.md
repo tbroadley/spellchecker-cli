@@ -102,7 +102,7 @@ $ spellchecker --files <glob> --plugins spell indefinite-article
 
 ### Personal dictionaries
 
-Each line in a personal dictionary is treated as a regular expression. You could use this feature to ignore spelling mistakes with a common form but too many possible instances to be included in a personal dictionary. For instance, you could use the regular expression `[0-9a-f]{7}` to match Git short SHAs.
+Each line in a personal dictionary is treated as a regular expression. You could use this feature to ignore words with a common form but too many possible instances to be included in a personal dictionary. For instance, you could use the regular expression `[0-9a-f]{7}` to match Git short SHAs.
 
 These regular expressions are case-sensitive. If you want to ignore both the capitalized and uncapitalized version of a word, you should include both versions in the dictionary.
 
@@ -115,21 +115,23 @@ A personal dictionary should either be a plaintext file or a JavaScript file wit
 module.exports = ['foo', /^bazz?/];
 ```
 
+Note that it isn't possible to ignore multi-word sections of a document using this feature, but only single words or groups of words that you don't want spell-checked.
+
 ### Generating a personal dictionary
 
 This option is useful for adding Spellchecker CLI to an existing open-source software project with a lot of documentation. Instead of fixing every spelling mistake in one pull request, contributors can gradually remove misspellings from the generated dictionary. It's also helpful to be able to generate a personal dictionary then remove the actual misspellings from the dictionary, leaving behind only project-specific terms.
 
 ### Ignore regexes
 
-You could use this feature to ignore spelling mistakes with a common form but too many possible instances to be included in a personal dictionary. For instance, you could use the regular expression `[0-9a-f]{7}` to match Git short SHAs.
-
-Each regex will be wrapped with `^` and `$` before mistakes are tested against it. For example, suppose you invoke Spellchecker CLI as follows:
+Each word passed to `spellchecker` through the `--ignore` flag will be treated as if it were part of a personal dictionary. These words will be converted into regexes wrapped with `^` and `$`. During spellchecking, words that match one of these regexes will be ignored.
 
 ```
 spellchecker --files README.md --ignore "ize"
 ```
 
 In this case, only the literal word "ize" will be ignored, not words that contain it, like "optimize". To match optimize, you could use the regular expression `[A-Za-z]+ize`.
+
+Note that it isn't possible to ignore multi-word sections of a document using this feature, but only single words or groups of words that you don't want spell-checked.
 
 ### Gitignore integration
 
