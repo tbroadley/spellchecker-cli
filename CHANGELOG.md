@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+- Fix a bug where the tool wouldn't respect the `--plugins` command line option or the `plugins` key in config files.
+
 ## [4.8.0] - 2021-06-13
 
 - Convert project to TypeScript.

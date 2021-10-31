@@ -1,0 +1,5 @@
+files:
+  - test/fixtures/en-CA.txt
+plugins:
+  - spell
+language: en-CA

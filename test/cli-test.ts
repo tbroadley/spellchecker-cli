@@ -215,17 +215,13 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: { timeout(n: num
   it('exits with no error when passed an empty list of plugins', async () => {
     const result = await runWithArguments('--files a b c --plugins');
     result.should.not.have.property('code');
+    result.stdout.should.equal('Spellchecking 0 files...\n');
   });
 
   it('exits with an error when passed unknown plugins', async () => {
     const { code, stderr } = await runWithArguments('--files a b c --plugins d e f');
     code!.should.equal(1);
     stderr.should.include('The following retext plugins are not supported: d, e, f.');
-  });
-
-  it('does nothing when passed an empty list of plugins', async () => {
-    const { stdout } = await runWithArguments('--files a b c --plugins');
-    stdout.should.equal('Spellchecking 0 files...\n');
   });
 
   it('applies all default plugins by default', async () => {
@@ -254,6 +250,16 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: { timeout(n: num
     nonSpellRemovePlugins.forEach((plugin) => {
       stdout.should.include(`test/fixtures/${plugin}.md: no issues found`);
     });
+  });
+
+  it('doesn\'t apply plugins that aren\'t specified on the command line', async () => {
+    const result = await runWithArguments('--files test/fixtures/repeated-words.md --plugins spell');
+    result.should.not.have.property('code');
+  });
+
+  it('doesn\'t apply plugins that aren\'t specified in a config file', async () => {
+    const result = await runWithArguments('--files test/fixtures/repeated-words.md --config test/fixtures/config/spell-only.yml');
+    result.should.not.have.property('code');
   });
 
   it('applies retext-indefinite-article when it is specified', async () => {
