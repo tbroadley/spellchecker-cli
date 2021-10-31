@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [4.8.1] - 2021-10-31
+
+Happy Halloween!
+
 - Fix a bug where the tool wouldn't respect the `--plugins` command line option or the `plugins` key in config files.
 
 ## [4.8.0] - 2021-06-13
