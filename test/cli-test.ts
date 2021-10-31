@@ -215,17 +215,13 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: { timeout(n: num
   it('exits with no error when passed an empty list of plugins', async () => {
     const result = await runWithArguments('--files a b c --plugins');
     result.should.not.have.property('code');
+    result.stdout.should.equal('Spellchecking 0 files...\n');
   });
 
   it('exits with an error when passed unknown plugins', async () => {
     const { code, stderr } = await runWithArguments('--files a b c --plugins d e f');
     code!.should.equal(1);
     stderr.should.include('The following retext plugins are not supported: d, e, f.');
-  });
-
-  it('does nothing when passed an empty list of plugins', async () => {
-    const { stdout } = await runWithArguments('--files a b c --plugins');
-    stdout.should.equal('Spellchecking 0 files...\n');
   });
 
   it('applies all default plugins by default', async () => {
