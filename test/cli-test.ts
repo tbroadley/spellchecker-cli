@@ -252,6 +252,16 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: { timeout(n: num
     });
   });
 
+  it('doesn\'t apply plugins that aren\'t specified on the command line', async () => {
+    const result = await runWithArguments('--files test/fixtures/repeated-words.md --plugins spell');
+    result.should.not.have.property('code');
+  });
+
+  it('doesn\'t apply plugins that aren\'t specified in a config file', async () => {
+    const result = await runWithArguments('--files test/fixtures/repeated-words.md --config test/fixtures/config/spell-only.yml');
+    result.should.not.have.property('code');
+  });
+
   it('applies retext-indefinite-article when it is specified', async () => {
     const { code, stdout } = await runWithArguments('test/fixtures/indefinite-article.md -p indefinite-article');
     code!.should.equal(1);

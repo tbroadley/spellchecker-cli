@@ -1,5 +1,5 @@
+import assign from 'lodash/assign';
 import difference from 'lodash/difference';
-import merge from 'lodash/merge';
 
 import { FrontmatterConfig } from '../frontmatter-filter';
 import { printError } from '../print-error';
@@ -23,7 +23,7 @@ const defaultValues = {
 export const parseConfig = (): InternalConfig => {
   const args = readArgs();
   const configFile = readConfigFile(args.config);
-  const parsedArgs = merge({}, defaultValues, configFile, args);
+  const parsedArgs = assign({}, defaultValues, configFile, args);
 
   const {
     files,
