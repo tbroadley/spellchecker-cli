@@ -13,6 +13,10 @@ describe('isMarkdownFile', () => {
     isMarkdownFile('test.markdown').should.equal(true);
   });
 
+  it('returns true for a file with the extension `.mdx`', () => {
+    isMarkdownFile('test.mdx').should.equal(true);
+  });
+
   it('returns true for a file with the extension `.MD`', () => {
     isMarkdownFile('test.MD').should.equal(true);
   });
