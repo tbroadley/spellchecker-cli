@@ -4,7 +4,7 @@ A command-line tool for spellchecking files, built on top of [`retext`](https://
 
 [![Build Status](https://travis-ci.com/tbroadley/spellchecker-cli.svg?branch=master)](https://travis-ci.com/tbroadley/spellchecker-cli)
 [![npm](https://img.shields.io/npm/v/spellchecker-cli.svg)](https://www.npmjs.com/package/spellchecker-cli)
-![npm downloads](https://img.shields.io/npm/dw/spellchecker-cli?color=902382)
+![downloads](https://img.shields.io/npm/dw/spellchecker-cli?color=902382)
 
 ## Use Case
 
