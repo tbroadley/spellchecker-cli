@@ -24,12 +24,20 @@ If you want to use Spellchecker CLI as a command-line tool on your own computer,
 
 ```
 $ npm install --global spellchecker-cli
+
+or
+
+$ yarn global add spellchecker-cli
 ```
 
 If you want to run Spellchecker CLI in a Git hook or in a CI environment, it's better to add it as a development dependency of your application:
 
 ```
 $ npm install --save-dev spellchecker-cli
+
+or
+
+$ yarn add --dev spellchecker-cli
 ```
 
 ## Usage
