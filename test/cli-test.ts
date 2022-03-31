@@ -151,6 +151,14 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: { timeout(n: num
     });
   });
 
+  it('handles MDX syntax', async () => {
+    const { code, stdout } = await runWithArguments('--files test/fixtures/markdown.mdx');
+    code!.should.equal(1);
+    ['Spellig', 'paragrap', 'containin', 'mistaks', 'Bullts', 'Moar'].forEach((word) => {
+      stdout.should.include(`\`${word}\` is misspelt`);
+    });
+  });
+
   it('ignores spelling mistakes in code blocks', async () => {
     const result = await runWithArguments('-f test/fixtures/code-blocks.md');
     result.should.not.have.property('code');
