@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [4.9.0] - 2022-03-30
+## [4.9.1] - 2022-03-30
 
-Happy Halloween!
+- Upgrade dependencies.
+
+## [4.9.0] - 2022-03-30
 
 - Add support for MDX files([@davemooreuws](https://github.com/davemooreuws)).
 
@@ -149,7 +151,8 @@ Happy Halloween!
 
 - Added a shebang to [index.js](./index.js).
 
-[Unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v4.9.0...HEAD
+[Unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v4.9.1...HEAD
+[4.9.1]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.9.0...v4.9.1
 [4.9.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.8.0...v4.9.0
 [4.8.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.7.0...v4.8.0
 [4.7.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.6.0...v4.7.0
