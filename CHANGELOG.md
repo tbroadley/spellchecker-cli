@@ -155,7 +155,8 @@ Happy Halloween!
 
 [Unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v4.9.1...HEAD
 [4.9.1]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.9.0...v4.9.1
-[4.9.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.8.0...v4.9.0
+[4.9.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.8.1...v4.9.0
+[4.8.1]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.8.0...v4.8.1
 [4.8.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.7.0...v4.8.0
 [4.7.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.6.0...v4.7.0
 [4.6.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.5.0...v4.6.0
