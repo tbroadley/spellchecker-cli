@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [4.10.0] - 2022-04-23
+
 - Add built-in dictionaries for Next.js and React.
 
 ## [4.9.1] - 2022-03-30
@@ -153,7 +155,9 @@ Happy Halloween!
 
 - Added a shebang to [index.js](./index.js).
 
-[Unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v4.9.1...HEAD
+[Unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v4.10.0...HEAD
+[4.10.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.9.1...v4.10.0
+[4.9.1]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.9.0...v4.9.1
 [4.9.1]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.9.0...v4.9.1
 [4.9.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.8.1...v4.9.0
 [4.8.1]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.8.0...v4.8.1
