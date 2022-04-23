@@ -130,6 +130,14 @@ Note that it isn't possible to ignore multi-word sections of a document using th
 
 This option is useful for adding Spellchecker CLI to an existing open-source software project with a lot of documentation. Instead of fixing every spelling mistake in one pull request, contributors can gradually remove misspellings from the generated dictionary. It's also helpful to be able to generate a personal dictionary then remove the actual misspellings from the dictionary, leaving behind only project-specific terms.
 
+### Built-in dictionaries
+
+The `dictionaries` subfolder contains basic dictionaries for Next.js and React projects created using `create-next-app` and `create-react-app` respectively. You can provide them as arguments to the `spellchecker` command:
+
+```shell
+spellchecker --dictionaries node_modules/spellchecker/dictionaries/nextjs.txt --files ...
+```
+
 ### Ignore regexes
 
 Each word passed to `spellchecker` through the `--ignore` flag will be treated as if it were part of a personal dictionary. These words will be converted into regexes wrapped with `^` and `$`. During spellchecking, words that match one of these regexes will be ignored.

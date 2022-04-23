@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+- Add built-in dictionaries for Next.js and React.
+
 ## [4.9.1] - 2022-03-30
 
 - Upgrade dependencies.
