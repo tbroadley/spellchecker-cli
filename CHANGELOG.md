@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [4.10.1] - 2022-05-16
+
+- Rebuild package with LF line endings instead of CRLF.
+
 ## [4.10.0] - 2022-04-23
 
 - Add built-in dictionaries for Next.js and React.
