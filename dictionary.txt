@@ -27,3 +27,5 @@ camelcase
 JSONC
 MDX
 subfolder
+LF
+CRLF
