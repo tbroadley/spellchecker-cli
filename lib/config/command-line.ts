@@ -62,8 +62,9 @@ const optionList = [
   },
   {
     name: 'generate-dictionary',
-    type: Boolean,
-    description: 'Write a personal dictionary that contains all found misspellings to dictionary.txt.',
+    type: String,
+    typeLabel: '<file>',
+    description: 'Write a personal dictionary that contains all found misspellings. Optionally, provide a filepath for the dictionary. The default filepath is dictionary.txt.',
   },
   {
     name: 'no-gitignore',

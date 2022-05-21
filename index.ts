@@ -17,7 +17,7 @@ import { toDictionary } from './lib/to-dictionary';
     files,
     language,
     personalDictionaryPaths,
-    generateDictionary,
+    generateDictionaryPath,
     noGitignore,
     ignoreRegexes,
     suggestions,
@@ -61,9 +61,10 @@ import { toDictionary } from './lib/to-dictionary';
   }
 
   if (hasMessages(vfiles)) {
-    if (generateDictionary && hasMessages(vfiles, (message: VFileMessage) => message.source === 'retext-spell')) {
-      await fs.writeFile('dictionary.txt', toDictionary(vfiles));
-      console.log('Personal dictionary written to dictionary.txt.');
+    if (generateDictionaryPath !== undefined && hasMessages(vfiles, (message: VFileMessage) => message.source === 'retext-spell')) {
+      const path = generateDictionaryPath || 'dictionary.txt';
+      await fs.writeFile(path, toDictionary(vfiles));
+      console.log(`Personal dictionary written to ${path}.`);
     }
 
     process.exit(1);

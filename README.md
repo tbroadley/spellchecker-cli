@@ -49,7 +49,8 @@ Run Spellchecker CLI using the command `spellchecker`. This command takes the fo
 -l, --language <language>                The language of the files. The default language is en-US. The following
                                          languages are supported: en-AU, en-CA, en-GB, en-US, en-ZA, vi.
 -d, --dictionaries <file> <file>...      Files to combine into a personal dictionary.
---generate-dictionary                    Write a personal dictionary that contains all found misspellings to
+--generate-dictionary <file>             Write a personal dictionary that contains all found misspellings. Optionally,
+                                         provide a filepath for the dictionary. The default filepath is
                                          dictionary.txt.
 --no-gitignore                           Don't respect ignore files (.gitignore, .ignore, etc.).
 -i, --ignore <regex> <regex>...          Spelling mistakes that match any of these regexes (after being wrapped with ^

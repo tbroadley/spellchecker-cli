@@ -9,7 +9,7 @@ export type ExternalConfig = {
   quiet?: boolean
   reports?: string[]
   help?: boolean
-  generateDictionary?: boolean
+  generateDictionary?: string
   noGitignore?: boolean
   noSuggestions?: boolean
   frontmatterKeys?: string[]
@@ -20,7 +20,7 @@ export type InternalConfig = {
   files: string[],
     language: string,
     personalDictionaryPaths: string[],
-    generateDictionary: boolean,
+    generateDictionaryPath: string | undefined,
     noGitignore: boolean,
     ignoreRegexes: RegExp[],
     suggestions: boolean

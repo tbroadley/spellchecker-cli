@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+- Allow specifying a path to write the generated dictionary to.
+
 ## [4.10.1] - 2022-05-16
 
 - Rebuild package with LF line endings instead of CRLF.

@@ -82,7 +82,7 @@ export const parseConfig = (): InternalConfig => {
     files,
     language,
     personalDictionaryPaths,
-    generateDictionary: !!generateDictionary,
+    generateDictionaryPath: generateDictionary,
     noGitignore,
     ignoreRegexes,
     suggestions: !noSuggestions,

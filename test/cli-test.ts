@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 import { ExecException, exec } from 'child_process';
+import { readFileSync, rmSync, writeFileSync } from 'fs';
 import path from 'path';
 
 import chai from 'chai';
@@ -349,7 +350,12 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: { timeout(n: num
   });
 
   it('does not generate a personal dictionary if no spelling mistakes are found', async () => {
-    const { stdout } = await runWithArguments('test/fixtures/repeated-words.md --plugins spell repeated-words');
+    const { stdout } = await runWithArguments('test/fixtures/repeated-words.md --plugins spell repeated-words --generate-dictionary');
+    stdout.should.not.include('Personal dictionary written to dictionary.txt.');
+  });
+
+  it('does not generate a personal dictionary if the argument is not passed', async () => {
+    const { stdout } = await runWithArguments('test/fixtures/incorrect.txt --plugins spell');
     stdout.should.not.include('Personal dictionary written to dictionary.txt.');
   });
 
@@ -490,5 +496,29 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: { timeout(n: num
   it('can read options from a JSONC config file', async () => {
     const result = await runWithArguments('--config test/fixtures/config/basic.jsonc');
     result.should.not.have.property('code');
+  });
+});
+
+describe('Spellchecker CLI (not parallel)', () => {
+  it('generates a personal dictionary if spelling mistakes are found and argument is passed', async () => {
+    const dictionary = readFileSync('dictionary.txt', { encoding: 'utf8' });
+
+    try {
+      const { stdout } = await runWithArguments('test/fixtures/incorrect.txt --plugins spell --generate-dictionary');
+      stdout.should.include('Personal dictionary written to dictionary.txt.');
+      readFileSync('dictionary.txt', 'utf8').should.equal('Thisisnotaword\npreprocessed\n');
+    } finally {
+      writeFileSync('dictionary.txt', dictionary);
+    }
+  });
+
+  it('writes personal dictionary to given path', async () => {
+    try {
+      const { stdout } = await runWithArguments('test/fixtures/incorrect.txt --plugins spell --generate-dictionary test/dictionary.txt');
+      stdout.should.include('Personal dictionary written to test/dictionary.txt.');
+      readFileSync('test/dictionary.txt', 'utf8').should.equal('Thisisnotaword\npreprocessed\n');
+    } finally {
+      rmSync('test/dictionary.txt');
+    }
   });
 });
