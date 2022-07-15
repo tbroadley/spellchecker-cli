@@ -1,3 +1,9 @@
+import dictionaryEn from 'dictionary-en';
+import dictionaryEnAu from 'dictionary-en-au';
+import dictionaryEnCa from 'dictionary-en-ca';
+import dictionaryEnGb from 'dictionary-en-gb';
+import dictionaryEnZa from 'dictionary-en-za';
+import dictionaryVi from 'dictionary-vi';
 import fs from 'fs-extra';
 import assign from 'lodash/assign.js';
 import every from 'lodash/every.js';
@@ -13,12 +19,6 @@ import syntaxMentions from 'retext-syntax-mentions';
 import syntaxUrls from 'retext-syntax-urls';
 import vfile from 'vfile';
 import { VFile, VFileMessage } from 'vfile-reporter';
-import dictionaryEnAu from 'dictionary-en-au';
-import dictionaryEnCa from 'dictionary-en-ca';
-import dictionaryEnGb from 'dictionary-en-gb';
-import dictionaryEn from 'dictionary-en';
-import dictionaryEnZa from 'dictionary-en-za';
-import dictionaryVi from 'dictionary-vi';
 
 import { FrontmatterConfig, frontmatterFilter } from './frontmatter-filter.js';
 import { isMarkdownFile } from './is-markdown-file.js';
@@ -27,7 +27,7 @@ function buildSpellchecker({
   dictionary,
   suggestions,
   plugins,
-}: { dictionary: any, suggestions: boolean, plugins: (string | FrontmatterConfig)[] }) {
+}: { dictionary: (callback: dictionaryEn.Callback) => void, suggestions: boolean, plugins: (string | FrontmatterConfig)[] }) {
   const spellchecker = retext();
 
   if (plugins.includes('indefinite-article')) {
@@ -74,14 +74,14 @@ function buildMarkdownSpellchecker({
 
 function getDictionary(language: string) {
   switch (language) {
-    case "en-AU": return dictionaryEnAu;
-    case "en-CA": return dictionaryEnCa;
-    case "en-GB": return dictionaryEnGb;
-    case "en-US": return dictionaryEn;
-    case "en-ZA": return dictionaryEnZa;
-    case "vi": return dictionaryVi;
+    case 'en-AU': return dictionaryEnAu;
+    case 'en-CA': return dictionaryEnCa;
+    case 'en-GB': return dictionaryEnGb;
+    case 'en-US': return dictionaryEn;
+    case 'en-ZA': return dictionaryEnZa;
+    case 'vi': return dictionaryVi;
     default: throw new Error(`Unknown language ${language}`);
-}
+  }
 }
 
 export class Spellchecker {

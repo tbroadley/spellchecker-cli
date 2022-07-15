@@ -1,4 +1,4 @@
-import { FrontmatterConfig } from '../frontmatter-filter';
+import { FrontmatterConfig } from '../frontmatter-filter.js';
 
 export type ExternalConfig = {
   files?: string[]

@@ -26,9 +26,11 @@ rules:
     - off
   "import/extensions":
     - error
-    - never
+    - ignorePackages
   "import/order":
     - error
     - newlines-between: always
       alphabetize:
         order: asc
+  "import/no-unresolved":
+    - off
