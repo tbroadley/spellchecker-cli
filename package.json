@@ -12,8 +12,8 @@
   "scripts": {
     "ci": "yarn spellchecker && yarn lint && yarn test",
     "lint": "eslint \"**/*.js\" \"**/*.ts\"",
-    "spellchecker": "ts-node ./index.ts",
-    "test": "tsc && mocha -r ts-node/register test/**/*test.ts",
+    "spellchecker": "tsc && node build/index.js",
+    "test": "tsc && mocha build/test/**/*test.js",
     "prepack": "tsc"
   },
   "author": "Thomas Broadley <buriedunderbooks@hotmail.com>",
@@ -72,7 +72,6 @@
     "eslint-plugin-import": "^2.23.3",
     "mocha": "^9.2.2",
     "mocha.parallel": "0.15.5",
-    "ts-node": "^10.0.0",
     "typescript": "^4.3.2"
   }
 }
