@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import * as fs from 'fs-extra';
+import fs from 'fs-extra';
 import glob from 'globby';
 import reporter, { VFileMessage } from 'vfile-reporter';
 
