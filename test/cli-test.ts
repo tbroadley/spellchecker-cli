@@ -27,7 +27,7 @@ function runCommand(command: string): Promise<CommandResult> {
     exec(
       command,
       // Prevent Spellchecker from picking up .spellcheckerrc.yml in these tests.
-      { env: Object.assign({}, process.env, { APP_ROOT_PATH: __dirname }) },
+      { env: Object.assign({}, process.env, { APP_ROOT_PATH: './test' }) },
       (error, stdout, stderr) => {
         if (error) {
           resolve(merge({}, error, { stdout, stderr }));

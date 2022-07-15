@@ -9,8 +9,8 @@ function toDictionaryRegExp(entry: string) {
 
 async function readPersonalDictionary(filePath: string) {
   if (path.extname(filePath).toLowerCase() === '.js') {
-    // eslint-disable-next-line global-require,import/no-dynamic-require
-    return require(path.join(process.cwd(), filePath)).map((entry: string | RegExp) => {
+    const dictionaryEntries = await import(path.join(process.cwd(), filePath)) as (string | RegExp)[];
+    return dictionaryEntries.map((entry: string | RegExp) => {
       if (entry instanceof RegExp) {
         return entry;
       }

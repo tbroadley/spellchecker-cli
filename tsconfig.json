@@ -1,7 +1,8 @@
 {
   "include": ["index.*", "lib/**/*", "test/**/*"],
   "compilerOptions": {
-    "target": "es6",
+    "target": "esnext",
+    "module": "esnext",
     "moduleResolution": "node",
     "outDir": "./build",
     "strict": true,
