@@ -445,23 +445,6 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: { timeout(n: num
     result.should.not.have.property('code');
   });
 
-  it('exits with an error when run on a file that is included in the .gitignore and the --no-gitignore flag is passed', async () => {
-    const createFileResult = await runCommand('echo "This file contians a misspelled word." > test/fixtures/gitignored-file.txt');
-    createFileResult.should.not.have.property('code');
-
-    const { code, stdout } = await runWithArguments('--no-gitignore --files test/fixtures/gitignored-file.txt');
-    code!.should.equal(1);
-    stdout.should.include('`contians` is misspelt');
-  });
-
-  it('exits with no error when run on a file that is included in the .gitignore', async () => {
-    const createFileResult = await runCommand('echo "This file contians a misspelled word." > test/fixtures/gitignored-file.txt');
-    createFileResult.should.not.have.property('code');
-
-    const result = await runWithArguments('--files test/fixtures/gitignored-file.txt');
-    result.should.not.have.property('code');
-  });
-
   it('ignores spelling mistakes inside exclude comment blocks', async () => {
     const result = await runWithArguments('test/fixtures/exclude-blocks.md');
     result.should.not.have.property('code');
@@ -520,5 +503,30 @@ describe('Spellchecker CLI (not parallel)', () => {
     } finally {
       rmSync('test/dictionary.txt');
     }
+  });
+
+  it('exits with an error when run on a file that is included in the .gitignore and the --no-gitignore flag is passed', async () => {
+    try {
+    const createFileResult = await runCommand('echo "This file contians a misspelled word." > test/fixtures/gitignored-file.txt');
+    createFileResult.should.not.have.property('code');
+
+    const { code, stdout } = await runWithArguments('--no-gitignore --files test/fixtures/gitignored-file.txt');
+    code!.should.equal(1);
+    stdout.should.include('`contians` is misspelt');
+    } finally {
+    rmSync('test/fixtures/gitignored-file.txt');
+}
+  });
+
+  it('exits with no error when run on a file that is included in the .gitignore', async () => {
+    try {
+    const createFileResult = await runCommand('echo "This file contians a misspelled word." > test/fixtures/gitignored-file.txt');
+    createFileResult.should.not.have.property('code');
+
+    const result = await runWithArguments('--files test/fixtures/gitignored-file.txt');
+    result.should.not.have.property('code');
+    } finally {
+    rmSync('test/fixtures/gitignored-file.txt');
+}
   });
 });
