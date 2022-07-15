@@ -1,8 +1,8 @@
 {
   "include": ["index.*", "lib/**/*", "test/**/*"],
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "target": "es5",
+    "module": "es2020",
     "moduleResolution": "node",
     "outDir": "./build",
     "strict": true,

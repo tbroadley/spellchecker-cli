@@ -118,7 +118,7 @@ These regular expressions are case-sensitive. If you want to ignore both the cap
 
 Each regex will be wrapped with `^` and `$` before mistakes are tested against it. For example, if "ize" is included in the dictionary, "optimize" and other words that contain "ize" will not be ignored. To match "optimize", you could use the regular expression `[A-Za-z]+ize`.
 
-A personal dictionary should either be a plaintext file or a JavaScript file. Since spellchecker-cli uses ES modules, you should use the extension `.cjs` if you want to use CommonJS module syntax:
+A personal dictionary should either be a plaintext file or a JavaScript file. Since Spellchecker CLI uses ES modules, you should use the extension `.cjs` if you want to use CommonJS module syntax:
 
 ```js
 // dictionary.cjs
