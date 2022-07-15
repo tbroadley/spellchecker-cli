@@ -187,7 +187,7 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: { timeout(n: num
 
   it('spellchecks all files in a glob', async () => {
     const { stdout } = await runWithArguments('test/fixtures/*');
-    const fileNames = await glob('*', { cwd: path.join(__dirname, 'test/fixtures') });
+    const fileNames = await glob('*', { cwd: 'test/fixtures' });
     fileNames.forEach((fileName) => {
       stdout.should.contain(`test/fixtures/${fileName}`);
     });
@@ -365,17 +365,17 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: { timeout(n: num
   });
 
   it('supports programmatic dictionaries', async () => {
-    const result = await runWithArguments('test/fixtures/incorrect.txt --dictionaries test/fixtures/dictionaries/programmatic.js');
+    const result = await runWithArguments('test/fixtures/incorrect.txt --dictionaries test/fixtures/dictionaries/programmatic.cjs');
     result.should.not.have.property('code');
   });
 
   it('loads programmatic dictionaries relative to the current working directory', async () => {
-    const result = await runCommand('cd test && node ../build/index.js fixtures/incorrect.txt --dictionaries fixtures/dictionaries/programmatic.js');
+    const result = await runCommand('cd test && node ../build/index.js fixtures/incorrect.txt --dictionaries fixtures/dictionaries/programmatic.cjs');
     result.should.not.have.property('code');
   });
 
   it('supports specifying both non-programmatic and programmatic dictionaries', async () => {
-    const result = await runWithArguments('test/fixtures/incorrect-2.txt --dictionaries test/fixtures/dictionaries/programmatic.js test/fixtures/dictionaries/two.txt');
+    const result = await runWithArguments('test/fixtures/incorrect-2.txt --dictionaries test/fixtures/dictionaries/programmatic.cjs test/fixtures/dictionaries/two.txt');
     result.should.not.have.property('code');
   });
 
@@ -392,12 +392,12 @@ parallel('Spellchecker CLI', function testSpellcheckerCLI(this: { timeout(n: num
   });
 
   it('supports programmatic dictionaries that pass mixed regexes and strings', async () => {
-    const result = await runWithArguments('test/fixtures/incorrect.txt --dictionaries test/fixtures/dictionaries/regex.js');
+    const result = await runWithArguments('test/fixtures/incorrect.txt --dictionaries test/fixtures/dictionaries/regex.cjs');
     result.should.not.have.property('code');
   });
 
   it('supports programmatic dictionaries that contain case-insensitive regexes', async () => {
-    const result = await runWithArguments('test/fixtures/incorrect-case-insensitive.txt --dictionaries test/fixtures/dictionaries/regex.js');
+    const result = await runWithArguments('test/fixtures/incorrect-case-insensitive.txt --dictionaries test/fixtures/dictionaries/regex.cjs');
     result.should.not.have.property('code');
   });
 
