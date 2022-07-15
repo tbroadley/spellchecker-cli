@@ -29,3 +29,4 @@ MDX
 subfolder
 LF
 CRLF
+CommonJS

@@ -1,4 +1,1 @@
-module.exports = [
-  'Thisisnotaword',
-  'preprocessed',
-];
+export default ['Thisisnotaword', 'preprocessed'];

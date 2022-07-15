@@ -1,9 +1,9 @@
 import chai from 'chai';
 import { VFileMessage } from 'vfile-reporter';
 
-import { hasMessages } from '../lib/has-messages';
+import { hasMessages } from '../lib/has-messages.js';
 
-import { buildVfile, fileWithNoMessages } from './helpers/vfile';
+import { buildVfile, fileWithNoMessages } from './helpers/vfile.js';
 
 chai.should();
 
@@ -21,15 +21,13 @@ describe('hasMessages', () => {
   });
 
   it('returns true when passed an array containing one file with a message', () => {
-    hasMessages([
-      fileWithNoMessages,
-      buildVfile(['a']),
-    ]).should.equal(true);
+    hasMessages([fileWithNoMessages, buildVfile(['a'])]).should.equal(true);
   });
 
   it('filters messages using the given function', () => {
-    hasMessages([
-      buildVfile(['a', 'b', 'c']),
-    ], (message: VFileMessage) => message.source === 'asdf').should.equal(false);
+    hasMessages(
+      [buildVfile(['a', 'b', 'c'])],
+      (message: VFileMessage) => message.source === 'asdf'
+    ).should.equal(false);
   });
 });

@@ -3,6 +3,7 @@
   "version": "4.11.0",
   "description": "A command-line tool for spellchecking files.",
   "main": "build/index.js",
+  "type": "module",
   "files": [
     "build"
   ],
@@ -11,10 +12,11 @@
   },
   "scripts": {
     "ci": "yarn spellchecker && yarn lint && yarn test",
-    "lint": "eslint \"**/*.js\" \"**/*.ts\"",
-    "spellchecker": "ts-node ./index.ts",
-    "test": "tsc && mocha -r ts-node/register test/**/*test.ts",
-    "prepack": "tsc"
+    "lint": "eslint \"**/*.ts\"",
+    "spellchecker": "tsc && node build/index.js",
+    "test": "tsc && mocha build/test/**/*test.js",
+    "prepack": "tsc",
+    "prepare": "husky install"
   },
   "author": "Thomas Broadley <buriedunderbooks@hotmail.com>",
   "license": "MIT",
@@ -27,10 +29,10 @@
     "chalk": "^2.4.2",
     "command-line-args": "^5.1.1",
     "command-line-usage": "^5.0.4",
+    "dictionary-en": "^3",
     "dictionary-en-au": "^2.3.0",
     "dictionary-en-ca": "^2.3.0",
     "dictionary-en-gb": "^2.3.0",
-    "dictionary-en-us": "^2.2.1",
     "dictionary-en-za": "^2.0.4",
     "dictionary-vi": "^2.1.3",
     "fs-extra": "^6.0.1",
@@ -70,9 +72,11 @@
     "eslint": "^7.28.0",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.23.3",
+    "husky": "^8.0.1",
     "mocha": "^9.2.2",
     "mocha.parallel": "0.15.5",
-    "ts-node": "^10.0.0",
+    "prettier": "^2.7.1",
+    "pretty-quick": "^3.1.3",
     "typescript": "^4.3.2"
   }
 }

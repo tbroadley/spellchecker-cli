@@ -5,9 +5,9 @@ import appRootPath from 'app-root-path';
 import yaml from 'js-yaml';
 import { jsonc } from 'jsonc';
 
-import { printError } from '../print-error';
+import { printError } from '../print-error.js';
 
-import { ExternalConfig } from './types';
+import { ExternalConfig } from './types.js';
 
 const tryLoad = (filePath: string): ExternalConfig => {
   let result: ExternalConfig;
@@ -29,7 +29,9 @@ const tryLoad = (filePath: string): ExternalConfig => {
   return result;
 };
 
-export const readConfigFile = (filePathFromArgs: string|undefined): ExternalConfig => {
+export const readConfigFile = (
+  filePathFromArgs: string | undefined
+): ExternalConfig => {
   if (filePathFromArgs) {
     return tryLoad(filePathFromArgs);
   }
@@ -41,7 +43,7 @@ export const readConfigFile = (filePathFromArgs: string|undefined): ExternalConf
     './spellcheckerrc.jsonc',
   ]
     .map(path => appRootPath.resolve(path))
-    .find((path) => {
+    .find(path => {
       try {
         accessSync(path);
       } catch (e) {

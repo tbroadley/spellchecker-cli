@@ -1,6 +1,12 @@
+import dictionaryEn from 'dictionary-en';
+import dictionaryEnAu from 'dictionary-en-au';
+import dictionaryEnCa from 'dictionary-en-ca';
+import dictionaryEnGb from 'dictionary-en-gb';
+import dictionaryEnZa from 'dictionary-en-za';
+import dictionaryVi from 'dictionary-vi';
 import fs from 'fs-extra';
-import assign from 'lodash/assign';
-import every from 'lodash/every';
+import assign from 'lodash/assign.js';
+import every from 'lodash/every.js';
 import remark from 'remark';
 import frontmatter from 'remark-frontmatter';
 import gemoji from 'remark-gemoji-to-emoji';
@@ -14,14 +20,18 @@ import syntaxUrls from 'retext-syntax-urls';
 import vfile from 'vfile';
 import { VFile, VFileMessage } from 'vfile-reporter';
 
-import { FrontmatterConfig, frontmatterFilter } from './frontmatter-filter';
-import { isMarkdownFile } from './is-markdown-file';
+import { FrontmatterConfig, frontmatterFilter } from './frontmatter-filter.js';
+import { isMarkdownFile } from './is-markdown-file.js';
 
 function buildSpellchecker({
   dictionary,
   suggestions,
   plugins,
-}: { dictionary: RegExp[], suggestions: boolean, plugins: (string | FrontmatterConfig)[] }) {
+}: {
+  dictionary: (callback: dictionaryEn.Callback) => void;
+  suggestions: boolean;
+  plugins: (string | FrontmatterConfig)[];
+}) {
   const spellchecker = retext();
 
   if (plugins.includes('indefinite-article')) {
@@ -53,10 +63,15 @@ function buildSpellchecker({
 function buildMarkdownSpellchecker({
   plugins,
   spellchecker,
-}: { plugins: (string | FrontmatterConfig)[], spellchecker: unknown }) {
+}: {
+  plugins: (string | FrontmatterConfig)[];
+  spellchecker: unknown;
+}) {
   const markdownSpellchecker = remark().use(gemoji);
 
-  const frontmatterOptions = plugins.filter((plugin: string | FrontmatterConfig) => typeof plugin !== 'string') as FrontmatterConfig[];
+  const frontmatterOptions = plugins.filter(
+    (plugin: string | FrontmatterConfig) => typeof plugin !== 'string'
+  ) as FrontmatterConfig[];
   if (frontmatterOptions.length > 0) {
     markdownSpellchecker
       .use(frontmatter, ['yaml', 'toml'])
@@ -64,6 +79,25 @@ function buildMarkdownSpellchecker({
   }
 
   return markdownSpellchecker.use(remarkRetext, spellchecker);
+}
+
+function getDictionary(language: string) {
+  switch (language) {
+    case 'en-AU':
+      return dictionaryEnAu;
+    case 'en-CA':
+      return dictionaryEnCa;
+    case 'en-GB':
+      return dictionaryEnGb;
+    case 'en-US':
+      return dictionaryEn;
+    case 'en-ZA':
+      return dictionaryEnZa;
+    case 'vi':
+      return dictionaryVi;
+    default:
+      throw new Error(`Unknown language ${language}`);
+  }
 }
 
 export class Spellchecker {
@@ -82,14 +116,13 @@ export class Spellchecker {
     suggestions,
     plugins,
   }: {
-    language: string,
-    personalDictionary: RegExp[],
-    ignoreRegexes: RegExp[],
-    suggestions: boolean,
-    plugins: (string | FrontmatterConfig)[]
+    language: string;
+    personalDictionary: RegExp[];
+    ignoreRegexes: RegExp[];
+    suggestions: boolean;
+    plugins: (string | FrontmatterConfig)[];
   }) {
-    // eslint-disable-next-line global-require,import/no-dynamic-require
-    const dictionary = require(`dictionary-${language.toLowerCase()}`);
+    const dictionary = getDictionary(language);
     this.spellchecker = buildSpellchecker({ dictionary, suggestions, plugins });
     this.markdownSpellchecker = buildMarkdownSpellchecker({
       plugins,
@@ -105,11 +138,15 @@ export class Spellchecker {
       ? this.markdownSpellchecker
       : this.spellchecker;
 
-    const excludeBlockRe = /(<!--\s*spellchecker-disable\s*-->([\S\s]*?)<!--\s*spellchecker-enable\s*-->)/ig;
+    const excludeBlockRe =
+      /(<!--\s*spellchecker-disable\s*-->([\S\s]*?)<!--\s*spellchecker-enable\s*-->)/gi;
 
     const contents = (await fs.readFile(filePath)).toString();
     const contentsWithoutExcludes = contents.replace(excludeBlockRe, '');
-    const contentsWithoutVariationSelectors = contentsWithoutExcludes.replace(/[\uFE0E\uFE0F]/g, '');
+    const contentsWithoutVariationSelectors = contentsWithoutExcludes.replace(
+      /[\uFE0E\uFE0F]/g,
+      ''
+    );
 
     const file = vfile({
       contents: contentsWithoutVariationSelectors,
@@ -119,8 +156,10 @@ export class Spellchecker {
     return assign({}, result, {
       messages: result.messages.filter(({ actual }: VFileMessage) => {
         const doesNotMatch = (regex: RegExp) => !regex.test(actual);
-        return every(this.ignoreRegexes, doesNotMatch)
-          && every(this.personalDictionary, doesNotMatch);
+        return (
+          every(this.ignoreRegexes, doesNotMatch) &&
+          every(this.personalDictionary, doesNotMatch)
+        );
       }),
     });
   }

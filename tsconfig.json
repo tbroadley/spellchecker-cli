@@ -2,7 +2,8 @@
   "include": ["index.*", "lib/**/*", "test/**/*"],
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "es2020",
+    "moduleResolution": "node",
     "outDir": "./build",
     "strict": true,
     "esModuleInterop": true,

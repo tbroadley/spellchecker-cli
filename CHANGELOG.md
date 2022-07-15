@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Breaking changes
+
+- Spellchecker now uses TypeScript's `es2020`
+- Spellchecker now uses ES modules instead of CommonJS modules. This means that the tool will fail to import personal dictionaries from `.js` files that use CommonJS module syntax. To fix this, change the personal dictionary file's extension from `.js` to `.cjs`.
+
 ## [4.11.0] - 2022-05-21
 
 - Allow specifying a path to write the generated dictionary to.
@@ -163,31 +168,31 @@ Happy Halloween!
 
 - Added a shebang to [index.js](./index.js).
 
-[Unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v4.11.0...HEAD
-[4.11.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.10.1...v4.11.0
-[4.10.1]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.10.0...v4.10.1
-[4.10.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.9.1...v4.10.0
-[4.9.1]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.9.0...v4.9.1
-[4.9.1]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.9.0...v4.9.1
-[4.9.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.8.1...v4.9.0
-[4.8.1]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.8.0...v4.8.1
-[4.8.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.7.0...v4.8.0
-[4.7.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.6.0...v4.7.0
-[4.6.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.5.0...v4.6.0
-[4.5.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.4.1...v4.5.0
-[4.4.1]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.4.0...v4.4.1
-[4.4.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.3.0...v4.4.0
-[4.3.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.2.0...v4.3.0
-[4.2.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.1.1...v4.2.0
-[4.1.1]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.1.0...v4.1.1
-[4.1.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.0.2...v4.1.0
-[4.0.2]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.0.1...v4.0.2
-[4.0.1]:      https://github.com/tbroadley/spellchecker-cli/compare/v4.0.0...v4.0.1
-[4.0.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v3.1.0...v4.0.0
-[3.1.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v3.0.3...v3.1.0
-[3.0.3]:      https://github.com/tbroadley/spellchecker-cli/compare/v3.0.2...v3.0.3
-[3.0.2]:      https://github.com/tbroadley/spellchecker-cli/compare/v3.0.1...v3.0.2
-[3.0.1]:      https://github.com/tbroadley/spellchecker-cli/compare/v3.0.0...v3.0.1
-[3.0.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v2.0.0...v3.0.0
-[2.0.0]:      https://github.com/tbroadley/spellchecker-cli/compare/v1.0.1...v2.0.0
-[1.0.1]:      https://github.com/tbroadley/spellchecker-cli/compare/v1.0.0...v1.0.1
+[unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v4.11.0...HEAD
+[4.11.0]: https://github.com/tbroadley/spellchecker-cli/compare/v4.10.1...v4.11.0
+[4.10.1]: https://github.com/tbroadley/spellchecker-cli/compare/v4.10.0...v4.10.1
+[4.10.0]: https://github.com/tbroadley/spellchecker-cli/compare/v4.9.1...v4.10.0
+[4.9.1]: https://github.com/tbroadley/spellchecker-cli/compare/v4.9.0...v4.9.1
+[4.9.1]: https://github.com/tbroadley/spellchecker-cli/compare/v4.9.0...v4.9.1
+[4.9.0]: https://github.com/tbroadley/spellchecker-cli/compare/v4.8.1...v4.9.0
+[4.8.1]: https://github.com/tbroadley/spellchecker-cli/compare/v4.8.0...v4.8.1
+[4.8.0]: https://github.com/tbroadley/spellchecker-cli/compare/v4.7.0...v4.8.0
+[4.7.0]: https://github.com/tbroadley/spellchecker-cli/compare/v4.6.0...v4.7.0
+[4.6.0]: https://github.com/tbroadley/spellchecker-cli/compare/v4.5.0...v4.6.0
+[4.5.0]: https://github.com/tbroadley/spellchecker-cli/compare/v4.4.1...v4.5.0
+[4.4.1]: https://github.com/tbroadley/spellchecker-cli/compare/v4.4.0...v4.4.1
+[4.4.0]: https://github.com/tbroadley/spellchecker-cli/compare/v4.3.0...v4.4.0
+[4.3.0]: https://github.com/tbroadley/spellchecker-cli/compare/v4.2.0...v4.3.0
+[4.2.0]: https://github.com/tbroadley/spellchecker-cli/compare/v4.1.1...v4.2.0
+[4.1.1]: https://github.com/tbroadley/spellchecker-cli/compare/v4.1.0...v4.1.1
+[4.1.0]: https://github.com/tbroadley/spellchecker-cli/compare/v4.0.2...v4.1.0
+[4.0.2]: https://github.com/tbroadley/spellchecker-cli/compare/v4.0.1...v4.0.2
+[4.0.1]: https://github.com/tbroadley/spellchecker-cli/compare/v4.0.0...v4.0.1
+[4.0.0]: https://github.com/tbroadley/spellchecker-cli/compare/v3.1.0...v4.0.0
+[3.1.0]: https://github.com/tbroadley/spellchecker-cli/compare/v3.0.3...v3.1.0
+[3.0.3]: https://github.com/tbroadley/spellchecker-cli/compare/v3.0.2...v3.0.3
+[3.0.2]: https://github.com/tbroadley/spellchecker-cli/compare/v3.0.1...v3.0.2
+[3.0.1]: https://github.com/tbroadley/spellchecker-cli/compare/v3.0.0...v3.0.1
+[3.0.0]: https://github.com/tbroadley/spellchecker-cli/compare/v2.0.0...v3.0.0
+[2.0.0]: https://github.com/tbroadley/spellchecker-cli/compare/v1.0.1...v2.0.0
+[1.0.1]: https://github.com/tbroadley/spellchecker-cli/compare/v1.0.0...v1.0.1
