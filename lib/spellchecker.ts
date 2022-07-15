@@ -9,7 +9,7 @@ import assign from 'lodash/assign.js';
 import every from 'lodash/every.js';
 import { remark } from 'remark';
 import frontmatter from 'remark-frontmatter';
-import gemoji from 'remark-gemoji';
+import emoji from 'retext-emoji';
 import remarkRetext from 'remark-retext';
 import { retext } from 'retext';
 import indefiniteArticle from 'retext-indefinite-article';
@@ -32,7 +32,7 @@ function buildSpellchecker({
   suggestions: boolean;
   plugins: (string | FrontmatterConfig)[];
 }) {
-  const spellchecker = retext();
+  const spellchecker = retext().use(emoji);
 
   if (plugins.includes('indefinite-article')) {
     spellchecker.use(indefiniteArticle);
@@ -67,7 +67,7 @@ function buildMarkdownSpellchecker({
   plugins: (string | FrontmatterConfig)[];
   spellchecker: unknown;
 }) {
-  const markdownSpellchecker = remark().use(gemoji);
+  const markdownSpellchecker = remark();
 
   const frontmatterOptions = plugins.filter(
     (plugin: string | FrontmatterConfig) => typeof plugin !== 'string'
