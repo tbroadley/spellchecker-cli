@@ -469,9 +469,16 @@ parallel(
       result.should.not.have.property('code');
     });
 
-    it('supports programmatic dictionaries', async () => {
+    it('supports CommonJS programmatic dictionaries', async () => {
       const result = await runWithArguments(
         'test/fixtures/incorrect.txt --dictionaries test/fixtures/dictionaries/programmatic.cjs'
+      );
+      result.should.not.have.property('code');
+    });
+
+    it('supports ES module programmatic dictionaries', async () => {
+      const result = await runWithArguments(
+        'test/fixtures/incorrect.txt --dictionaries test/fixtures/dictionaries/programmatic.js'
       );
       result.should.not.have.property('code');
     });

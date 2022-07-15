@@ -3,12 +3,14 @@ import path from 'path';
 import fs from 'fs-extra';
 import concat from 'lodash/concat.js';
 
+const JS_EXTENSIONS = ['.js', '.mjs', '.cjs'];
+
 function toDictionaryRegExp(entry: string) {
   return new RegExp(`^${entry}$`);
 }
 
 async function readPersonalDictionary(filePath: string) {
-  if (path.extname(filePath).toLowerCase() === '.cjs') {
+  if (JS_EXTENSIONS.includes(path.extname(filePath).toLowerCase())) {
     const dictionaryEntries = (
       await import(`file://${path.join(process.cwd(), filePath)}`)
     ).default as (string | RegExp)[];
