@@ -7,10 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-### Breaking changes
-
-- Spellchecker now uses TypeScript's `es2020`
 - Spellchecker now uses ES modules instead of CommonJS modules. This means that the tool will fail to import personal dictionaries from `.js` files that use CommonJS module syntax. To fix this, change the personal dictionary file's extension from `.js` to `.cjs`.
+- Fix an issue where the `:gear:` Gemoji would show up as a spelling mistake.
 
 ## [4.11.0] - 2022-05-21
 
