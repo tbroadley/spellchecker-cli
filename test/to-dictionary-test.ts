@@ -1,8 +1,8 @@
 import chai from 'chai';
 
-import { toDictionary } from '../lib/to-dictionary';
+import { toDictionary } from '../lib/to-dictionary.js';
 
-import { buildVfile, fileWithNoMessages } from './helpers/vfile';
+import { buildVfile, fileWithNoMessages } from './helpers/vfile.js';
 
 chai.should();
 

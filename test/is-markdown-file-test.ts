@@ -1,6 +1,6 @@
 import chai from 'chai';
 
-import { isMarkdownFile } from '../lib/is-markdown-file';
+import { isMarkdownFile } from '../lib/is-markdown-file.js';
 
 chai.should();
 

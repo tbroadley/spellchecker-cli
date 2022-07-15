@@ -1,9 +1,9 @@
 import chai from 'chai';
 import { VFileMessage } from 'vfile-reporter';
 
-import { hasMessages } from '../lib/has-messages';
+import { hasMessages } from '../lib/has-messages.js';
 
-import { buildVfile, fileWithNoMessages } from './helpers/vfile';
+import { buildVfile, fileWithNoMessages } from './helpers/vfile.js';
 
 chai.should();
 

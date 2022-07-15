@@ -6,7 +6,7 @@ import path from 'path';
 
 import chai from 'chai';
 import glob from 'globby';
-import merge from 'lodash/merge';
+import merge from 'lodash/merge.js';
 import parallel from 'mocha.parallel';
 
 
@@ -16,7 +16,7 @@ import {
   removePlugins,
   supportedLanguages,
   supportedPlugins,
-} from '../lib/config/command-line';
+} from '../lib/config/command-line.js';
 
 chai.should();
 
