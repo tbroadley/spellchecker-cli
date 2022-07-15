@@ -8,7 +8,7 @@ export const hasMessages = (
 ): boolean => {
   const messageCount = sumBy(
     vfiles,
-    (file) => file.messages.filter(filterMessages).length
+    file => file.messages.filter(filterMessages).length
   );
   return messageCount > 0;
 };

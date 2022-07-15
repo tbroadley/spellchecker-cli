@@ -2,7 +2,6 @@
 
 import { ExecException, exec } from 'child_process';
 import { readFileSync, rmSync, writeFileSync } from 'fs';
-import path from 'path';
 
 import chai from 'chai';
 import glob from 'globby';
@@ -25,7 +24,7 @@ type CommandResult = {
 } & Partial<ExecException>;
 
 function runCommand(command: string): Promise<CommandResult> {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     exec(
       command,
       // Prevent Spellchecker from picking up .spellcheckerrc.yml in these tests.
@@ -166,7 +165,7 @@ parallel(
         'test/fixtures/en-CA.txt'
       );
       code!.should.equal(1);
-      ['Colour', 'honour', 'behaviour'].forEach((word) => {
+      ['Colour', 'honour', 'behaviour'].forEach(word => {
         stdout.should.include(`\`${word}\` is misspelt`);
       });
     });
@@ -184,7 +183,7 @@ parallel(
       );
       code!.should.equal(1);
       ['Spellig', 'paragrap', 'containin', 'mistaks', 'Bullts', 'Moar'].forEach(
-        (word) => {
+        word => {
           stdout.should.include(`\`${word}\` is misspelt`);
         }
       );
@@ -196,7 +195,7 @@ parallel(
       );
       code!.should.equal(1);
       ['Spellig', 'paragrap', 'containin', 'mistaks', 'Bullts', 'Moar'].forEach(
-        (word) => {
+        word => {
           stdout.should.include(`\`${word}\` is misspelt`);
         }
       );
@@ -234,7 +233,7 @@ parallel(
     it('spellchecks all files in a glob', async () => {
       const { stdout } = await runWithArguments('test/fixtures/*');
       const fileNames = await glob('*', { cwd: 'test/fixtures' });
-      fileNames.forEach((fileName) => {
+      fileNames.forEach(fileName => {
         stdout.should.contain(`test/fixtures/${fileName}`);
       });
     });
@@ -305,11 +304,11 @@ parallel(
       stdout.should.include('retext-spell');
       stdout.should.not.include('test/fixtures/incorrect.txt: no issues found');
 
-      nonSpellAddPlugins.forEach((plugin) => {
+      nonSpellAddPlugins.forEach(plugin => {
         stdout.should.include(`retext-${plugin}`);
       });
 
-      nonSpellRemovePlugins.forEach((plugin) => {
+      nonSpellRemovePlugins.forEach(plugin => {
         stdout.should.include(`test/fixtures/${plugin}.md: no issues found`);
       });
     });
@@ -321,10 +320,10 @@ parallel(
         )}}.md --plugins ${nonSpellPlugins.join(' ')}`
       );
       code!.should.equal(1);
-      nonSpellAddPlugins.forEach((plugin) => {
+      nonSpellAddPlugins.forEach(plugin => {
         stdout.should.include(`retext-${plugin}`);
       });
-      nonSpellRemovePlugins.forEach((plugin) => {
+      nonSpellRemovePlugins.forEach(plugin => {
         stdout.should.include(`test/fixtures/${plugin}.md: no issues found`);
       });
     });

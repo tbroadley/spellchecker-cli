@@ -84,7 +84,7 @@ import { toDictionary } from './lib/to-dictionary.js';
 
     process.exit(1);
   }
-})().catch((error) => {
+})().catch(error => {
   printError(error);
   process.exit(1);
 });

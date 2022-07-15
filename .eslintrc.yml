@@ -1,11 +1,11 @@
 extends:
   - airbnb-base
-  - "plugin:@typescript-eslint/recommended"
-  - "plugin:import/typescript"
+  - 'plugin:@typescript-eslint/recommended'
+  - 'plugin:import/typescript'
 root: true
-parser: "@typescript-eslint/parser"
+parser: '@typescript-eslint/parser'
 plugins:
-  - "@typescript-eslint"
+  - '@typescript-eslint'
 env:
   node: true
 ignorePatterns:
@@ -20,17 +20,23 @@ rules:
       functions: never
   no-console:
     - off
-  "@typescript-eslint/no-var-requires":
+  '@typescript-eslint/no-var-requires':
     - off
-  "import/prefer-default-export":
+  'import/prefer-default-export':
     - off
-  "import/extensions":
+  'import/extensions':
     - error
     - ignorePackages
-  "import/order":
+  'import/order':
     - error
     - newlines-between: always
       alphabetize:
         order: asc
-  "import/no-unresolved":
+  'import/no-unresolved':
+    - off
+  'arrow-parens':
+    - off
+  'implicit-arrow-linebreak':
+    - off
+  'operator-linebreak':
     - off

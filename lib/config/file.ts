@@ -42,8 +42,8 @@ export const readConfigFile = (
     './spellcheckerrc.json',
     './spellcheckerrc.jsonc',
   ]
-    .map((path) => appRootPath.resolve(path))
-    .find((path) => {
+    .map(path => appRootPath.resolve(path))
+    .find(path => {
       try {
         accessSync(path);
       } catch (e) {

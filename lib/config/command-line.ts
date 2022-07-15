@@ -142,7 +142,7 @@ export const readArgs = (): ExternalConfig => {
   try {
     args = commandLineArgs(optionList);
   } catch (error) {
-    printError((error as any).toString());
+    printError((error as Error).toString());
     console.log(usage);
     process.exit(1);
   }
