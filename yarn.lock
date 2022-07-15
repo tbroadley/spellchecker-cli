@@ -592,34 +592,34 @@ define-properties@^1.1.3:
     object-keys "^1.0.12"
 
 dictionary-en-au@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/dictionary-en-au/-/dictionary-en-au-2.3.0.tgz#261e8e8d0bd776afcf7ff49722815656438d5be9"
-  integrity sha512-KoEotpXPCyCgZ5DHlexHyzFfNwPnv9VupeCrp6r+JrtEkycPmZYbQiXF+cXz9NJr1gXy0AMEpzZ8UfxF40+8OQ==
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/dictionary-en-au/-/dictionary-en-au-2.4.0.tgz#6d7199c623bce7f9797f96aa89fbf79fd25d1f1f"
+  integrity sha512-SEETr3rqt26/Umc43gemwaH/ez4gPv7I4alifu/QLi8uxiCm6a7cn3wKb22HNB5l6j/R7/Sfkq9NTKk/QRVUHw==
 
 dictionary-en-ca@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/dictionary-en-ca/-/dictionary-en-ca-2.3.0.tgz#c430b0307cdb24418810c1b141e1aea11fcb0663"
-  integrity sha512-5p6B2+GLByVz3Gvb42Y5hTdFBNxJhgG7XRVM74J7hcp+DvtAfOrufTZFfkux9t0qWOjORZoDCmDI6uKiX8qeuQ==
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/dictionary-en-ca/-/dictionary-en-ca-2.4.0.tgz#5af3527670f0d5c0da23af1ee3aed7006b215c27"
+  integrity sha512-uDoOe7/dz1XD3niVpOroSo3Pas7cdsAp+NSwfan30MGzzeXaD04lQuTRDqHpsXuP8fq3U7f9v8Iaiyk5q/kgzw==
 
 dictionary-en-gb@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/dictionary-en-gb/-/dictionary-en-gb-2.3.0.tgz#f6aa1948350615507e39a4c3cae950caa681df52"
-  integrity sha512-P/J2VQp/hDsMTfJhmIYPUBxZqezWuDaUzSgb6oW7JLpUV2So9jCXbR5TaUYXwfO50ZXPYEzQqQHPQK3pKcs7Rg==
-
-dictionary-en-us@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/dictionary-en-us/-/dictionary-en-us-2.2.1.tgz#f57ef9ae0edcfa0a70db6558843de5a01cb87771"
-  integrity sha512-Z8mycV0ywTfjbUTi0JZfQHqBZhu4CYFtpf7KluSGpt3xHpFlal2S/hiK50tlPynOtR5K3pG5wCradnz1yxwOHA==
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/dictionary-en-gb/-/dictionary-en-gb-2.4.0.tgz#110bd4e8b64111487a6caa16d0b9c324c6245226"
+  integrity sha512-zwc7e6CM/+Em+v74a5/ia6663nwR9vvtEayaX5WkgvHD99al1qm/RbcdLludqX3mggYxXXFN1zN5hzyREW/DXg==
 
 dictionary-en-za@^2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/dictionary-en-za/-/dictionary-en-za-2.0.4.tgz#21b16ddd48a4172d23a381459b6747ce7dcd20f0"
-  integrity sha512-EgI61DvQsrnIFBmmCz7GB9P/wkCnKnZgKRXyYpbkZomnY0I4vDfNZtjaX81lwb9s+eudP9QJ+8sMzK7eoUapEg==
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/dictionary-en-za/-/dictionary-en-za-2.2.0.tgz#59e25092f13d5906515d798f7022e95d8818ea73"
+  integrity sha512-YFod3pshfaecqCe221rczW5lVWn4ZhfFH6E395DN1bEbL4dUndGm9Bn/zxMOU2w9imYKwptYalO23hetwUx+OA==
+
+dictionary-en@^3:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/dictionary-en/-/dictionary-en-3.2.0.tgz#5d5b5a156a5b1eb26ff96c80da3b919587f16b4b"
+  integrity sha512-oujbJhuplUTlDntmOoultEcNyk8ge7cFI6yXNn7eJvpbBJOhGNhWtK0XjOJsiwl4EfIeyvDKwGB95vJXv1d+lQ==
 
 dictionary-vi@^2.1.3:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/dictionary-vi/-/dictionary-vi-2.1.3.tgz#943e21d1fe38d43bf0c8a21d046e7fd9bbd577b1"
-  integrity sha512-fB4WiFGNDXQ0qtRiOz+ZZ5uWrpxZLxw35fU0EXxWouZwoiCnRex5nE8VdhGSzn6SG+JEDiUOXoxNu4l7LKcXQA==
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/dictionary-vi/-/dictionary-vi-2.2.0.tgz#c5ef4a1a7da0cf2ba50d28a6c53456b5e3e39a61"
+  integrity sha512-WDCaSzHMtayCIEa2hPq0rL8ds603SKNzMzNXU0kbLM7kzXoaXaKeHgPXJHKjKMxxnozKLMsg+rES7hC6Lxe7iA==
 
 diff@5.0.0:
   version "5.0.0"

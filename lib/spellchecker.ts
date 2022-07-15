@@ -13,6 +13,12 @@ import syntaxMentions from 'retext-syntax-mentions';
 import syntaxUrls from 'retext-syntax-urls';
 import vfile from 'vfile';
 import { VFile, VFileMessage } from 'vfile-reporter';
+import dictionaryEnAu from 'dictionary-en-au';
+import dictionaryEnCa from 'dictionary-en-ca';
+import dictionaryEnGb from 'dictionary-en-gb';
+import dictionaryEn from 'dictionary-en';
+import dictionaryEnZa from 'dictionary-en-za';
+import dictionaryVi from 'dictionary-vi';
 
 import { FrontmatterConfig, frontmatterFilter } from './frontmatter-filter.js';
 import { isMarkdownFile } from './is-markdown-file.js';
@@ -21,7 +27,7 @@ function buildSpellchecker({
   dictionary,
   suggestions,
   plugins,
-}: { dictionary: RegExp[], suggestions: boolean, plugins: (string | FrontmatterConfig)[] }) {
+}: { dictionary: any, suggestions: boolean, plugins: (string | FrontmatterConfig)[] }) {
   const spellchecker = retext();
 
   if (plugins.includes('indefinite-article')) {
@@ -66,6 +72,18 @@ function buildMarkdownSpellchecker({
   return markdownSpellchecker.use(remarkRetext, spellchecker);
 }
 
+function getDictionary(language: string) {
+  switch (language) {
+    case "en-AU": return dictionaryEnAu;
+    case "en-CA": return dictionaryEnCa;
+    case "en-GB": return dictionaryEnGb;
+    case "en-US": return dictionaryEn;
+    case "en-ZA": return dictionaryEnZa;
+    case "vi": return dictionaryVi;
+    default: throw new Error(`Unknown language ${language}`);
+}
+}
+
 export class Spellchecker {
   private spellchecker: { process(file: VFile): Promise<VFile> };
 
@@ -88,8 +106,7 @@ export class Spellchecker {
     suggestions: boolean,
     plugins: (string | FrontmatterConfig)[]
   }) {
-    // eslint-disable-next-line global-require,import/no-dynamic-require
-    const dictionary = require(`dictionary-${language.toLowerCase()}`);
+    const dictionary = getDictionary(language);
     this.spellchecker = buildSpellchecker({ dictionary, suggestions, plugins });
     this.markdownSpellchecker = buildMarkdownSpellchecker({
       plugins,
