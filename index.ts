@@ -4,13 +4,13 @@ import * as fs from 'fs-extra';
 import glob from 'globby';
 import reporter, { VFileMessage } from 'vfile-reporter';
 
-import { buildPersonalDictionary } from './lib/build-personal-dictionary';
-import { parseConfig } from './lib/config';
-import { hasMessages } from './lib/has-messages';
-import { printError } from './lib/print-error';
-import { generateReports } from './lib/report-generator';
-import { Spellchecker } from './lib/spellchecker';
-import { toDictionary } from './lib/to-dictionary';
+import { buildPersonalDictionary } from './lib/build-personal-dictionary.js';
+import { parseConfig } from './lib/config/index.js';
+import { hasMessages } from './lib/has-messages.js';
+import { printError } from './lib/print-error.js';
+import { generateReports } from './lib/report-generator.js';
+import { Spellchecker } from './lib/spellchecker.js';
+import { toDictionary } from './lib/to-dictionary.js';
 
 (async () => {
   const {

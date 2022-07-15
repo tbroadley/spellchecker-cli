@@ -1,7 +1,7 @@
 import path from 'path';
 
 import fs from 'fs-extra';
-import concat from 'lodash/concat';
+import concat from 'lodash/concat.js';
 
 function toDictionaryRegExp(entry: string) {
   return new RegExp(`^${entry}$`);

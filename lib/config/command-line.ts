@@ -1,11 +1,11 @@
 import commandLineArgs from 'command-line-args';
 import getCommandLineUsage from 'command-line-usage';
-import camelCase from 'lodash/camelCase';
-import mapKeys from 'lodash/mapKeys';
+import camelCase from 'lodash/camelCase.js';
+import mapKeys from 'lodash/mapKeys.js';
 
-import { printError } from '../print-error';
+import { printError } from '../print-error.js';
 
-import { ExternalConfig } from './types';
+import { ExternalConfig } from './types.js';
 
 export const supportedLanguages = [
   'en-AU',

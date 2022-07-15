@@ -1,13 +1,13 @@
 import yaml from 'js-yaml';
-import isArray from 'lodash/isArray';
-import isObject from 'lodash/isObject';
-import map from 'lodash/map';
-import pick from 'lodash/pick';
-import toString from 'lodash/toString';
+import isArray from 'lodash/isArray.js';
+import isObject from 'lodash/isObject.js';
+import map from 'lodash/map.js';
+import pick from 'lodash/pick.js';
+import toString from 'lodash/toString.js';
 import toml from 'toml';
 import visit from 'unist-util-visit';
 
-import { printError } from './print-error';
+import { printError } from './print-error.js';
 
 export type FrontmatterConfig = { frontmatter: string[] }
 

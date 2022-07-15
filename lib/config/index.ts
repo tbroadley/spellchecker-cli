@@ -1,14 +1,14 @@
-import assign from 'lodash/assign';
-import difference from 'lodash/difference';
+import assign from 'lodash/assign.js';
+import difference from 'lodash/difference.js';
 
-import { FrontmatterConfig } from '../frontmatter-filter';
-import { printError } from '../print-error';
+import { FrontmatterConfig } from '../frontmatter-filter.js';
+import { printError } from '../print-error.js';
 
 import {
   defaultPlugins, getUsage, readArgs, supportedLanguages, supportedPlugins,
-} from './command-line';
-import { readConfigFile } from './file';
-import { InternalConfig } from './types';
+} from './command-line.js';
+import { readConfigFile } from './file.js';
+import { InternalConfig } from './types.js';
 
 const defaultValues = {
   language: 'en-US',

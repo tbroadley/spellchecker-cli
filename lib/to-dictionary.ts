@@ -1,5 +1,5 @@
-import flatMap from 'lodash/flatMap';
-import uniq from 'lodash/uniq';
+import flatMap from 'lodash/flatMap.js';
+import uniq from 'lodash/uniq.js';
 import { VFile, VFileMessage } from 'vfile-reporter';
 
 export const toDictionary = (vfiles: VFile[]): string => {

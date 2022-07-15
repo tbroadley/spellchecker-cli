@@ -1,5 +1,5 @@
-import constant from 'lodash/constant';
-import sumBy from 'lodash/sumBy';
+import constant from 'lodash/constant.js';
+import sumBy from 'lodash/sumBy.js';
 import { VFile, VFileMessage } from 'vfile-reporter';
 
 export const hasMessages = (

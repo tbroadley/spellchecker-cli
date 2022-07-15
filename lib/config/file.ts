@@ -5,9 +5,9 @@ import appRootPath from 'app-root-path';
 import yaml from 'js-yaml';
 import { jsonc } from 'jsonc';
 
-import { printError } from '../print-error';
+import { printError } from '../print-error.js';
 
-import { ExternalConfig } from './types';
+import { ExternalConfig } from './types.js';
 
 const tryLoad = (filePath: string): ExternalConfig => {
   let result: ExternalConfig;
