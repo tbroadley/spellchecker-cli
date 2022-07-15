@@ -1,8 +1,8 @@
 {
   "include": ["index.*", "lib/**/*", "test/**/*"],
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
+    "target": "es6",
+    "moduleResolution": "node",
     "outDir": "./build",
     "strict": true,
     "esModuleInterop": true,
