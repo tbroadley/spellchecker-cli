@@ -24,7 +24,7 @@ describe('buildPersonalDictionary', () => {
   });
 
   it('reads a JavaScript dictionary', async () => {
-    (await buildPersonalDictionary(['test/fixtures/dictionaries/regex.js'])).should.deep.equal([
+    (await buildPersonalDictionary(['test/fixtures/dictionaries/regex.cjs'])).should.deep.equal([
       /^Thisisnotaword$/,
       /^(pre)?processed$/,
       /^canadaa$/i,
@@ -34,7 +34,7 @@ describe('buildPersonalDictionary', () => {
   it('reads multiple dictionaries', async () => {
     (await buildPersonalDictionary([
       'test/fixtures/dictionaries/one.txt',
-      'test/fixtures/dictionaries/regex.js',
+      'test/fixtures/dictionaries/regex.cjs',
     ])).should.deep.equal([
       /^Thisisnotaword$/,
       /^preprocessed$/,

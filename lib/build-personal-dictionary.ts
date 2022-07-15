@@ -8,8 +8,8 @@ function toDictionaryRegExp(entry: string) {
 }
 
 async function readPersonalDictionary(filePath: string) {
-  if (path.extname(filePath).toLowerCase() === '.js') {
-    const dictionaryEntries = await import(path.join(process.cwd(), filePath)) as (string | RegExp)[];
+  if (path.extname(filePath).toLowerCase() === '.cjs') {
+    const dictionaryEntries = (await import(`file://${path.join(process.cwd(), filePath)}`)).default as (string | RegExp)[];
     return dictionaryEntries.map((entry: string | RegExp) => {
       if (entry instanceof RegExp) {
         return entry;
