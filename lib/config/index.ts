@@ -5,7 +5,11 @@ import { FrontmatterConfig } from '../frontmatter-filter.js';
 import { printError } from '../print-error.js';
 
 import {
-  defaultPlugins, getUsage, readArgs, supportedLanguages, supportedPlugins,
+  defaultPlugins,
+  getUsage,
+  readArgs,
+  supportedLanguages,
+  supportedPlugins,
 } from './command-line.js';
 import { readConfigFile } from './file.js';
 import { InternalConfig } from './types.js';
@@ -61,7 +65,11 @@ export const parseConfig = (): InternalConfig => {
 
   const unsupportedPlugins = difference(plugins, supportedPlugins);
   if (unsupportedPlugins.length > 0) {
-    printError(`The following retext plugins are not supported: ${unsupportedPlugins.join(', ')}.`);
+    printError(
+      `The following retext plugins are not supported: ${unsupportedPlugins.join(
+        ', '
+      )}.`
+    );
     console.log(usage);
     process.exit(1);
   }
@@ -69,14 +77,18 @@ export const parseConfig = (): InternalConfig => {
   const updatedPlugins: (string | FrontmatterConfig)[] = plugins;
   const frontmatterPluginIndex = plugins.indexOf('frontmatter');
   if (frontmatterPluginIndex === -1 && frontmatterKeys.length > 0) {
-    printError('The `--frontmatter-keys` option is invalid unless the `frontmatter` plugin is used.');
+    printError(
+      'The `--frontmatter-keys` option is invalid unless the `frontmatter` plugin is used.'
+    );
     console.log(usage);
     process.exit(1);
   } else if (frontmatterPluginIndex !== -1) {
     updatedPlugins[frontmatterPluginIndex] = { frontmatter: frontmatterKeys };
   }
 
-  const ignoreRegexes = ignoreRegexStrings.map((regexString: string) => new RegExp(`^${regexString}$`));
+  const ignoreRegexes = ignoreRegexStrings.map(
+    (regexString: string) => new RegExp(`^${regexString}$`)
+  );
 
   return {
     files,

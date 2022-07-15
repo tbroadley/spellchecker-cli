@@ -27,7 +27,11 @@ function buildSpellchecker({
   dictionary,
   suggestions,
   plugins,
-}: { dictionary: (callback: dictionaryEn.Callback) => void, suggestions: boolean, plugins: (string | FrontmatterConfig)[] }) {
+}: {
+  dictionary: (callback: dictionaryEn.Callback) => void;
+  suggestions: boolean;
+  plugins: (string | FrontmatterConfig)[];
+}) {
   const spellchecker = retext();
 
   if (plugins.includes('indefinite-article')) {
@@ -59,10 +63,15 @@ function buildSpellchecker({
 function buildMarkdownSpellchecker({
   plugins,
   spellchecker,
-}: { plugins: (string | FrontmatterConfig)[], spellchecker: unknown }) {
+}: {
+  plugins: (string | FrontmatterConfig)[];
+  spellchecker: unknown;
+}) {
   const markdownSpellchecker = remark().use(gemoji);
 
-  const frontmatterOptions = plugins.filter((plugin: string | FrontmatterConfig) => typeof plugin !== 'string') as FrontmatterConfig[];
+  const frontmatterOptions = plugins.filter(
+    (plugin: string | FrontmatterConfig) => typeof plugin !== 'string'
+  ) as FrontmatterConfig[];
   if (frontmatterOptions.length > 0) {
     markdownSpellchecker
       .use(frontmatter, ['yaml', 'toml'])
@@ -74,13 +83,20 @@ function buildMarkdownSpellchecker({
 
 function getDictionary(language: string) {
   switch (language) {
-    case 'en-AU': return dictionaryEnAu;
-    case 'en-CA': return dictionaryEnCa;
-    case 'en-GB': return dictionaryEnGb;
-    case 'en-US': return dictionaryEn;
-    case 'en-ZA': return dictionaryEnZa;
-    case 'vi': return dictionaryVi;
-    default: throw new Error(`Unknown language ${language}`);
+    case 'en-AU':
+      return dictionaryEnAu;
+    case 'en-CA':
+      return dictionaryEnCa;
+    case 'en-GB':
+      return dictionaryEnGb;
+    case 'en-US':
+      return dictionaryEn;
+    case 'en-ZA':
+      return dictionaryEnZa;
+    case 'vi':
+      return dictionaryVi;
+    default:
+      throw new Error(`Unknown language ${language}`);
   }
 }
 
@@ -100,11 +116,11 @@ export class Spellchecker {
     suggestions,
     plugins,
   }: {
-    language: string,
-    personalDictionary: RegExp[],
-    ignoreRegexes: RegExp[],
-    suggestions: boolean,
-    plugins: (string | FrontmatterConfig)[]
+    language: string;
+    personalDictionary: RegExp[];
+    ignoreRegexes: RegExp[];
+    suggestions: boolean;
+    plugins: (string | FrontmatterConfig)[];
   }) {
     const dictionary = getDictionary(language);
     this.spellchecker = buildSpellchecker({ dictionary, suggestions, plugins });
@@ -122,11 +138,15 @@ export class Spellchecker {
       ? this.markdownSpellchecker
       : this.spellchecker;
 
-    const excludeBlockRe = /(<!--\s*spellchecker-disable\s*-->([\S\s]*?)<!--\s*spellchecker-enable\s*-->)/ig;
+    const excludeBlockRe =
+      /(<!--\s*spellchecker-disable\s*-->([\S\s]*?)<!--\s*spellchecker-enable\s*-->)/gi;
 
     const contents = (await fs.readFile(filePath)).toString();
     const contentsWithoutExcludes = contents.replace(excludeBlockRe, '');
-    const contentsWithoutVariationSelectors = contentsWithoutExcludes.replace(/[\uFE0E\uFE0F]/g, '');
+    const contentsWithoutVariationSelectors = contentsWithoutExcludes.replace(
+      /[\uFE0E\uFE0F]/g,
+      ''
+    );
 
     const file = vfile({
       contents: contentsWithoutVariationSelectors,
@@ -136,8 +156,10 @@ export class Spellchecker {
     return assign({}, result, {
       messages: result.messages.filter(({ actual }: VFileMessage) => {
         const doesNotMatch = (regex: RegExp) => !regex.test(actual);
-        return every(this.ignoreRegexes, doesNotMatch)
-          && every(this.personalDictionary, doesNotMatch);
+        return (
+          every(this.ignoreRegexes, doesNotMatch) &&
+          every(this.personalDictionary, doesNotMatch)
+        );
       }),
     });
   }

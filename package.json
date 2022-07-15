@@ -12,7 +12,7 @@
   },
   "scripts": {
     "ci": "yarn spellchecker && yarn lint && yarn test",
-    "lint": "eslint \"**/*.js\" \"**/*.ts\"",
+    "lint": "eslint \"**/*.ts\"",
     "spellchecker": "tsc && node build/index.js",
     "test": "tsc && mocha build/test/**/*test.js",
     "prepack": "tsc",

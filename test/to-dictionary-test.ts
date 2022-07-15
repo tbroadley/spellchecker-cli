@@ -6,7 +6,8 @@ import { buildVfile, fileWithNoMessages } from './helpers/vfile.js';
 
 chai.should();
 
-const addNewlines = (strings: string[]) => strings.map((s: string) => `${s}\n`).join('');
+const addNewlines = (strings: string[]) =>
+  strings.map((s: string) => `${s}\n`).join('');
 
 describe('toDictionary', () => {
   it('returns an empty string when passed an empty array', () => {

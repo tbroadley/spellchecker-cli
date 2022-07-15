@@ -29,7 +29,9 @@ const tryLoad = (filePath: string): ExternalConfig => {
   return result;
 };
 
-export const readConfigFile = (filePathFromArgs: string|undefined): ExternalConfig => {
+export const readConfigFile = (
+  filePathFromArgs: string | undefined
+): ExternalConfig => {
   if (filePathFromArgs) {
     return tryLoad(filePathFromArgs);
   }
@@ -40,7 +42,7 @@ export const readConfigFile = (filePathFromArgs: string|undefined): ExternalConf
     './spellcheckerrc.json',
     './spellcheckerrc.jsonc',
   ]
-    .map(path => appRootPath.resolve(path))
+    .map((path) => appRootPath.resolve(path))
     .find((path) => {
       try {
         accessSync(path);

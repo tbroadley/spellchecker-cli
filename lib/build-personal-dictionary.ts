@@ -9,7 +9,9 @@ function toDictionaryRegExp(entry: string) {
 
 async function readPersonalDictionary(filePath: string) {
   if (path.extname(filePath).toLowerCase() === '.cjs') {
-    const dictionaryEntries = (await import(`file://${path.join(process.cwd(), filePath)}`)).default as (string | RegExp)[];
+    const dictionaryEntries = (
+      await import(`file://${path.join(process.cwd(), filePath)}`)
+    ).default as (string | RegExp)[];
     return dictionaryEntries.map((entry: string | RegExp) => {
       if (entry instanceof RegExp) {
         return entry;
@@ -27,9 +29,13 @@ async function readPersonalDictionary(filePath: string) {
     .map(toDictionaryRegExp);
 }
 
-export const buildPersonalDictionary = async (dictionaryPaths: string[]): Promise<RegExp[]> => {
+export const buildPersonalDictionary = async (
+  dictionaryPaths: string[]
+): Promise<RegExp[]> => {
   if (dictionaryPaths.length === 0) return [];
 
-  const personalDictionaries = await Promise.all(dictionaryPaths.map(readPersonalDictionary));
+  const personalDictionaries = await Promise.all(
+    dictionaryPaths.map(readPersonalDictionary)
+  );
   return concat(personalDictionaries[0], ...personalDictionaries.slice(1));
 };
