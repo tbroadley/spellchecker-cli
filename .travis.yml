@@ -1,7 +1,8 @@
 language: node_js
 node_js:
-- '14'
+  - '14'
+  - '16'
 script: yarn ci
 cache:
   directories:
-  - node_modules
+    - node_modules
