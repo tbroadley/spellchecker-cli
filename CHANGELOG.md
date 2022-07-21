@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [5.0.1] - 2022-07-21
+
+- Rebuild package with LF line endings instead of CRLF.
+
 ## [5.0.0] - 2022-07-15
 
 - Spellchecker now uses ES modules instead of CommonJS modules. This means that the tool will fail to import personal dictionaries from `.js` files that use CommonJS module syntax. To fix this, change the personal dictionary file's extension from `.js` to `.cjs`.
@@ -168,7 +172,8 @@ Happy Halloween!
 
 - Added a shebang to [index.js](./index.js).
 
-[unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v5.0.0...HEAD
+[unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v5.0.1...HEAD
+[5.0.1]: https://github.com/tbroadley/spellchecker-cli/compare/v5.0.0...v5.0.1
 [5.0.0]: https://github.com/tbroadley/spellchecker-cli/compare/v4.11.0...v5.0.0
 [4.11.0]: https://github.com/tbroadley/spellchecker-cli/compare/v4.10.1...v4.11.0
 [4.10.1]: https://github.com/tbroadley/spellchecker-cli/compare/v4.10.0...v4.10.1
