@@ -36,7 +36,7 @@ export const readConfigFile = (
     return tryLoad(filePathFromArgs);
   }
 
-  const packageDirectory = packageDirectorySync();
+  const packageDirectory = packageDirectorySync() ?? process.cwd();
 
   const filePath = [
     './.spellcheckerrc.yaml',
