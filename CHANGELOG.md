@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-- Use `pkg-dir` instead of `app-root-path` to find a Spellchecker CLI config file.
+## [6.0.0] - 2022-07-23
+
+- Use `pkg-dir` instead of `app-root-path` to find a Spellchecker CLI config file. `pkg-dir` looks for the root directory of a Node.js project by searching up from the current working directory for a directory containing a `package.json` file. This is simpler than `app-root-path`'s strategy.
 
 ## [5.0.1] - 2022-07-21
 
