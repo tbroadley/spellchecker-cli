@@ -30,3 +30,4 @@ subfolder
 LF
 CRLF
 CommonJS
+junit-report-builder
