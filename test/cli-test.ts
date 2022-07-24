@@ -25,17 +25,12 @@ type CommandResult = {
 
 function runCommand(command: string): Promise<CommandResult> {
   return new Promise(resolve => {
-    exec(
-      command,
-      // Prevent Spellchecker from picking up .spellcheckerrc.yml in these tests.
-      { env: Object.assign({}, process.env, { APP_ROOT_PATH: './test' }) },
-      (error, stdout, stderr) => {
-        if (error) {
-          resolve(merge({}, error, { stdout, stderr }));
-        }
-        resolve({ stdout, stderr });
+    exec(command, {}, (error, stdout, stderr) => {
+      if (error) {
+        resolve(merge({}, error, { stdout, stderr }));
       }
-    );
+      resolve({ stdout, stderr });
+    });
   });
 }
 
@@ -109,12 +104,6 @@ parallel(
         supportedPlugins.map(toSpaceAndHyphenSplitRegex).join(',\\s*')
       );
       stdout.should.match(pluginRegex);
-    });
-
-    it('exits with an error when no arguments are provided', async () => {
-      const { code, stderr } = await runWithArguments('');
-      code!.should.equal(1);
-      stderr.should.include('A list of files is required.');
     });
 
     it('exits with an error when an empty config file is specified', async () => {
@@ -638,6 +627,20 @@ parallel(
 );
 
 describe('Spellchecker CLI (not parallel)', () => {
+  it('exits with an error when no arguments are provided', async () => {
+    // Remove .spellcheckerrc.yml so that Spellchecker CLI doesn't use it in this test.
+    const config = readFileSync('.spellcheckerrc.yml', { encoding: 'utf8' });
+    rmSync('.spellcheckerrc.yml');
+
+    try {
+      const { code, stderr } = await runWithArguments('');
+      code!.should.equal(1);
+      stderr.should.include('A list of files is required.');
+    } finally {
+      writeFileSync('.spellcheckerrc.yml', config);
+    }
+  });
+
   it('generates a personal dictionary if spelling mistakes are found and argument is passed', async () => {
     const dictionary = readFileSync('dictionary.txt', { encoding: 'utf8' });
 

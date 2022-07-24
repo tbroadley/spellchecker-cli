@@ -1,9 +1,9 @@
 import { accessSync, readFileSync } from 'fs';
-import { extname } from 'path';
+import { extname, resolve } from 'path';
 
-import appRootPath from 'app-root-path';
 import yaml from 'js-yaml';
 import { jsonc } from 'jsonc';
+import { packageDirectorySync } from 'pkg-dir';
 
 import { printError } from '../print-error.js';
 
@@ -36,13 +36,15 @@ export const readConfigFile = (
     return tryLoad(filePathFromArgs);
   }
 
+  const packageDirectory = packageDirectorySync();
+
   const filePath = [
-    '/.spellcheckerrc.yaml',
-    '/.spellcheckerrc.yml',
-    './spellcheckerrc.json',
-    './spellcheckerrc.jsonc',
+    './.spellcheckerrc.yaml',
+    './.spellcheckerrc.yml',
+    './.spellcheckerrc.json',
+    './.spellcheckerrc.jsonc',
   ]
-    .map(path => appRootPath.resolve(path))
+    .map(fileName => resolve(packageDirectory, fileName))
     .find(path => {
       try {
         accessSync(path);

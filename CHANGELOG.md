@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+- Use `pkg-dir` instead of `app-root-path` to find a Spellchecker CLI config file.
+
 ## [5.0.1] - 2022-07-21
 
 - Rebuild package with LF line endings instead of CRLF.
