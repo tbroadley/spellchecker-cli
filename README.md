@@ -20,6 +20,8 @@ You can help contributors to your open-source software project catch spelling mi
 
 ## Installation
 
+If you want to use Spellchecker CLI in a GitHub Actions workflow, try the official GitHub Action: https://github.com/marketplace/actions/spellchecker-cli
+
 If you want to use Spellchecker CLI as a command-line tool on your own computer, you can install it globally:
 
 ```
