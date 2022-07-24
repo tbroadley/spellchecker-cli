@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [6.0.1] - 2022-07-23
+
+- Fix an issue where the tool crashes if installed globally.
+
 ## [6.0.0] - 2022-07-23
 
 - Use `pkg-dir` instead of `app-root-path` to find a Spellchecker CLI config file. `pkg-dir` looks for the root directory of a Node.js project by searching up from the current working directory for a directory containing a `package.json` file. This is simpler than `app-root-path`'s strategy.
@@ -176,7 +180,9 @@ Happy Halloween!
 
 - Added a shebang to [index.js](./index.js).
 
-[unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v5.0.1...HEAD
+[unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v6.0.1...HEAD
+[6.0.1]: https://github.com/tbroadley/spellchecker-cli/compare/v6.0.0...v6.0.1
+[6.0.0]: https://github.com/tbroadley/spellchecker-cli/compare/v5.0.1...v6.0.0
 [5.0.1]: https://github.com/tbroadley/spellchecker-cli/compare/v5.0.0...v5.0.1
 [5.0.0]: https://github.com/tbroadley/spellchecker-cli/compare/v4.11.0...v5.0.0
 [4.11.0]: https://github.com/tbroadley/spellchecker-cli/compare/v4.10.1...v4.11.0
