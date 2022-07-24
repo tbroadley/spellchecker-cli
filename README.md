@@ -74,7 +74,7 @@ If you've installed Spellchecker CLI globally, you can simply run `spellchecker`
 
 ### Configuration files
 
-Spellchecker CLI can also read configuration from a JSON or YAML file. By default, it will try to read `.spellcheckerrc.yaml`, `.spellcheckerrc.yml`, `.spellcheckerrc.json`, or `.spellcheckerrc.jsonc` in the root directory of your project. You can also specify a different path using the `--config` command line argument.
+Spellchecker CLI can also read configuration from a JSON or YAML file. By default, it will try to read `.spellcheckerrc.yaml`, `.spellcheckerrc.yml`, `.spellcheckerrc.json`, or `.spellcheckerrc.jsonc` in the root directory of your project (as determined by [`pkg-dir`](https://github.com/sindresorhus/pkg-dir)). You can also specify a different path using the `--config` command line argument.
 
 You can specify any command line option in a config file. Just make sure to use camelcase option names in the config file, _e.g._ `frontmatterKeys` instead of `frontmatter-keys`.
 
