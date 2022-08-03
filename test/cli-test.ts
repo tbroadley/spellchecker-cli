@@ -196,7 +196,10 @@ parallel(
     });
 
     it('ignores Gemoji', async () => {
-      const result = await runWithArguments('-f test/fixtures/gemoji.md');
+      const result = await runWithArguments(
+        '-f test/fixtures/gemoji.md --dictionaries test/fixtures/dictionary-temp.txt -l en-CA'
+      );
+      console.log(result);
       result.should.not.have.property('code');
     });
 
