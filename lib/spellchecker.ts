@@ -17,11 +17,14 @@ import repeatedWords from 'retext-repeated-words';
 import spell from 'retext-spell';
 import syntaxMentions from 'retext-syntax-mentions';
 import syntaxUrls from 'retext-syntax-urls';
-import vfile from 'vfile';
-import { VFile, VFileMessage } from 'vfile-reporter';
+import { VFile as _VFile } from 'vfile';
+import { VFileMessage } from 'vfile-message';
+// import { VFile, VFileMessage } from 'vfile-reporter';
 
 import { FrontmatterConfig, frontmatterFilter } from './frontmatter-filter.js';
 import { isMarkdownFile } from './is-markdown-file.js';
+
+type VFile = typeof _VFile;
 
 function buildSpellchecker({
   dictionary,
@@ -148,18 +151,21 @@ export class Spellchecker {
       ''
     );
 
-    const file = vfile({
+    const file = new _VFile({
       contents: contentsWithoutVariationSelectors,
       path: filePath,
     });
     const result = await spellcheckerForFileType.process(file);
     return assign({}, result, {
       messages: result.messages.filter(({ actual }: VFileMessage) => {
-        const doesNotMatch = (regex: RegExp) => !regex.test(actual);
-        return (
-          every(this.ignoreRegexes, doesNotMatch) &&
-          every(this.personalDictionary, doesNotMatch)
-        );
+        if (actual) {
+          const doesNotMatch = (regex: RegExp) => !regex.test(actual);
+          return (
+            every(this.ignoreRegexes, doesNotMatch) &&
+            every(this.personalDictionary, doesNotMatch)
+          );
+        }
+        return true;
       }),
     });
   }
