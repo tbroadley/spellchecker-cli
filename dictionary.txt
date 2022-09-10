@@ -31,3 +31,5 @@ LF
 CRLF
 CommonJS
 junit-report-builder
+customizable
+PRs
