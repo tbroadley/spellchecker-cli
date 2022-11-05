@@ -21,7 +21,6 @@ booleans
 Bourne-again
 breakpoint
 BST
-cancelled
 centric
 chmod
 chown
@@ -30,7 +29,6 @@ CLI
 CMYK
 codebases
 codename
-colorable
 concat
 config
 connectionless
@@ -141,7 +139,6 @@ OWASP
 OWASP's
 P2P
 pathname
-personalization
 PID
 pipelining
 plaintext
