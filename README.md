@@ -20,7 +20,7 @@ You can help contributors to your open-source software project catch spelling mi
 
 ## Installation
 
-If you want to use Spellchecker CLI in a GitHub Actions workflow, try: 
+If you want to use Spellchecker CLI in a GitHub Actions workflow, try:
 
 - https://github.com/marketplace/actions/spellchecker-cli for a simple, customizable wrapper around Spellchecker CLI
 - https://github.com/marketplace/actions/spellchecker-cli-summary for a full-featured Spellchecker CLI workflow that can leave comments and status checks on your PRs
@@ -145,7 +145,7 @@ This option is useful for adding Spellchecker CLI to an existing open-source sof
 
 ### Built-in dictionaries
 
-The `dictionaries` subfolder contains basic dictionaries for Next.js and React projects created using `create-next-app` and `create-react-app` respectively. You can provide them as arguments to the `spellchecker` command:
+The `dictionaries` subfolder contains basic dictionaries for Next.js and React projects in addition to a basic dictionary of general software terms created using `create-next-app` and `create-react-app` respectively. You can provide them as arguments to the `spellchecker` command:
 
 ```shell
 spellchecker --dictionaries node_modules/spellchecker/dictionaries/nextjs.txt --files ...
