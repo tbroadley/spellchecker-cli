@@ -145,7 +145,7 @@ This option is useful for adding Spellchecker CLI to an existing open-source sof
 
 ### Built-in dictionaries
 
-The `dictionaries` subfolder contains basic dictionaries for Next.js and React projects in addition to a basic dictionary of general software terms created using `create-next-app` and `create-react-app` respectively. You can provide them as arguments to the `spellchecker` command:
+The `dictionaries` subfolder contains `base.txt`, a  basic dictionary of general software terms. It also contains starter dictionaries for Next.js and React projects created using `create-next-app` and `create-react-app` respectively. You can provide them as arguments to the `spellchecker` command:
 
 ```shell
 spellchecker --dictionaries node_modules/spellchecker/dictionaries/nextjs.txt --files ...
