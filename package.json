@@ -5,7 +5,8 @@
   "main": "build/index.js",
   "type": "module",
   "files": [
-    "build"
+    "build",
+    "dictionaries"
   ],
   "bin": {
     "spellchecker": "./build/index.js"
