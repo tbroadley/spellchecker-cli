@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [6.1.0] - 2022-11-07
+
 - Add a dictionary of technology related words
+- Fix an issue where base dictionaries weren't included in the NPM package.
 
 ## [6.0.2] - 2022-08-03
 
@@ -186,7 +189,8 @@ Happy Halloween!
 
 - Added a shebang to [index.js](./index.js).
 
-[unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v6.0.1...HEAD
+[unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v6.1.0...HEAD
+[6.1.0]: https://github.com/tbroadley/spellchecker-cli/compare/v6.0.2...v6.1.0
 [6.0.2]: https://github.com/tbroadley/spellchecker-cli/compare/v6.0.1...v6.0.2
 [6.0.1]: https://github.com/tbroadley/spellchecker-cli/compare/v6.0.0...v6.0.1
 [6.0.0]: https://github.com/tbroadley/spellchecker-cli/compare/v5.0.1...v6.0.0
