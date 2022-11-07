@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+- Add a dictionary of technology related words
+
 ## [6.0.2] - 2022-08-03
 
 - Upgrade junit-report-builder to fix a deprecation warning when installing the package.
