@@ -4,7 +4,7 @@ import { ExecException, exec } from 'child_process';
 import { readFileSync, rmSync, writeFileSync } from 'fs';
 
 import chai from 'chai';
-import glob from 'globby';
+import { globby } from 'globby';
 import merge from 'lodash/merge.js';
 import parallel from 'mocha.parallel';
 
@@ -219,9 +219,9 @@ parallel(
       stdout.should.not.contain('test/fixtures/dictionaries/one.txt');
     });
 
-    it('spellchecks all files in a glob', async () => {
+    it('spellchecks all files in a globby', async () => {
       const { stdout } = await runWithArguments('test/fixtures/*');
-      const fileNames = await glob('*', { cwd: 'test/fixtures' });
+      const fileNames = await globby('*', { cwd: 'test/fixtures' });
       fileNames.forEach(fileName => {
         stdout.should.contain(`test/fixtures/${fileName}`);
       });
@@ -256,10 +256,10 @@ parallel(
       stdout.should.include('Spellchecking 1 file...');
     });
 
-    it('prints the number of files to be spellchecked when passed a glob', async () => {
+    it('prints the number of files to be spellchecked when passed a globby', async () => {
       const globExpression = 'test/fixtures/*.md';
       const { stdout } = await runWithArguments(`--files ${globExpression}`);
-      const fileCount = (await glob(globExpression)).length;
+      const fileCount = (await globby(globExpression)).length;
       stdout.should.include(
         `Spellchecking ${fileCount} file${fileCount === 1 ? '' : 's'}...`
       );

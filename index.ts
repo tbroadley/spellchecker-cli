@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import fs from 'fs-extra';
-import glob from 'globby';
+import { globby } from 'globby';
 import reporter, { VFileMessage } from 'vfile-reporter';
 
 import { buildPersonalDictionary } from './lib/build-personal-dictionary.js';
@@ -43,7 +43,7 @@ import { toDictionary } from './lib/to-dictionary.js';
     );
   }
 
-  const filesFromGlobs = await glob(files, { gitignore: !noGitignore });
+  const filesFromGlobs = await globby(files, { gitignore: !noGitignore });
 
   if (!quiet) {
     console.log(

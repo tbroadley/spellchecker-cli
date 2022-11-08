@@ -5,7 +5,7 @@ import map from 'lodash/map.js';
 import pick from 'lodash/pick.js';
 import toString from 'lodash/toString.js';
 import toml from 'toml';
-import visit from 'unist-util-visit';
+import { visit } from 'unist-util-visit';
 
 import { printError } from './print-error.js';
 
