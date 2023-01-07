@@ -33,3 +33,4 @@ CommonJS
 junit-report-builder
 customizable
 PRs
+json5
