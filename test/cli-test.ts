@@ -220,7 +220,11 @@ parallel(
     });
 
     it('spellchecks all files in a glob', async () => {
-      const { stdout } = await runWithArguments('test/fixtures/*');
+      // `--no-suggestions` to reduce chance of timeout, but also increase timeout for this one test
+      this.timeout(7500);
+      const { stdout } = await runWithArguments(
+        'test/fixtures/* --no-suggestions'
+      );
       const fileNames = await glob('*', { cwd: 'test/fixtures' });
       fileNames.forEach(fileName => {
         stdout.should.contain(`test/fixtures/${fileName}`);

@@ -5,6 +5,7 @@ A command-line tool for spellchecking files, built on top of [`retext`](https://
 [![Build Status](https://travis-ci.com/tbroadley/spellchecker-cli.svg?branch=master)](https://travis-ci.com/tbroadley/spellchecker-cli)
 [![npm](https://img.shields.io/npm/v/spellchecker-cli.svg)](https://www.npmjs.com/package/spellchecker-cli)
 ![downloads](https://img.shields.io/npm/dw/spellchecker-cli?color=902382)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 
 ## Use Case
 
@@ -27,22 +28,34 @@ If you want to use Spellchecker CLI in a GitHub Actions workflow, try:
 
 If you want to use Spellchecker CLI as a command-line tool on your own computer, you can install it globally:
 
-```
-$ npm install --global spellchecker-cli
+```shell
+npm install --global spellchecker-cli
 
-or
+# or
 
-$ yarn global add spellchecker-cli
+yarn global add spellchecker-cli
 ```
 
 If you want to run Spellchecker CLI in a Git hook or in a CI environment, it's better to add it as a development dependency of your application:
 
+```shell
+npm install --save-dev spellchecker-cli
+
+# or
+
+yarn add --dev spellchecker-cli
 ```
-$ npm install --save-dev spellchecker-cli
 
-or
+If you want to use the Spellchecker CLI as part of a [`pre-commit` hook](https://pre-commit.com/):
 
-$ yarn add --dev spellchecker-cli
+```yaml
+- repo: https://github.com/tbroadley/spellchecker-cli
+  hooks:
+    - id: spellchecker-cli
+      name: spellcheck
+      types: [markdown]
+      stages: # optional: if you want to specify stages to run the hook on
+        - '' # see https://pre-commit.com/#confining-hooks-to-run-at-certain-stages
 ```
 
 ## Usage
@@ -89,8 +102,8 @@ Command line arguments will override any configuration read from a file.
 
 Spellchecker CLI uses [`globby`](https://github.com/sindresorhus/globby), which is based on [`glob`](https://github.com/isaacs/node-glob), to parse globs. The tool passes the provided list of globs directly to `globby`. This means that you can, for instance, use `!` to negate a glob:
 
-```
-$ spellchecker --files '**/*.md' '!test/**/*.md' 'test/README.md'
+```shell
+spellchecker --files '**/*.md' '!test/**/*.md' 'test/README.md'
 ```
 
 See [the `node-glob` documentation](https://github.com/isaacs/node-glob#glob-primer) for a full description of glob syntax.
@@ -111,8 +124,8 @@ The following `remark` plugins are supported:
 
 When using the `--plugins` command-line option, make sure to remove `retext-` or `remark-` from the beginning of the plugin name. For example, to use only `retext-spell` and `retext-indefinite-article`, run:
 
-```
-$ spellchecker --files <glob> --plugins spell indefinite-article
+```shell
+spellchecker --files <glob> --plugins spell indefinite-article
 ```
 
 ### Personal dictionaries
@@ -155,7 +168,7 @@ spellchecker --dictionaries node_modules/spellchecker-cli/dictionaries/nextjs.tx
 
 Each word passed to `spellchecker` through the `--ignore` flag will be treated as if it were part of a personal dictionary. These words will be converted into regexes wrapped with `^` and `$`. During spellchecking, words that match one of these regexes will be ignored.
 
-```
+```shell
 spellchecker --files README.md --ignore "ize"
 ```
 

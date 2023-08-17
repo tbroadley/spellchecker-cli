@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+- Add option for `pre-commit` hook. [@mindlessroman](https://github.com/mindlessroman)
+
 ## [6.1.1] - 2023-01-08
 
 - Upgrade json5 to fix a security vulnerability.
