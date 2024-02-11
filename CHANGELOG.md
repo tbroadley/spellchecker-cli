@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [6.2.0] - 2024-02-11
+
 - Add option for `pre-commit` hook. [@mindlessroman](https://github.com/mindlessroman)
 
 ## [6.1.1] - 2023-01-08
@@ -195,7 +197,8 @@ Happy Halloween!
 
 - Added a shebang to [index.js](./index.js).
 
-[unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v6.1.1...HEAD
+[unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v6.2.0...HEAD
+[6.2.0]: https://github.com/tbroadley/spellchecker-cli/compare/v6.1.1...v6.2.0
 [6.1.1]: https://github.com/tbroadley/spellchecker-cli/compare/v6.1.0...v6.1.1
 [6.1.0]: https://github.com/tbroadley/spellchecker-cli/compare/v6.0.2...v6.1.0
 [6.0.2]: https://github.com/tbroadley/spellchecker-cli/compare/v6.0.1...v6.0.2
