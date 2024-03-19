@@ -50,9 +50,11 @@ If you want to use the Spellchecker CLI as part of a [`pre-commit` hook](https:/
 
 ```yaml
 - repo: https://github.com/tbroadley/spellchecker-cli
+  rev: v6.2.0
   hooks:
     - id: spellchecker-cli
       name: spellcheck
+      language_version: 18.19.1
       types: [markdown]
       stages: # optional: if you want to specify stages to run the hook on
         - '' # see https://pre-commit.com/#confining-hooks-to-run-at-certain-stages
