@@ -166,6 +166,8 @@ export class Spellchecker {
     const result = await spellcheckerForFileType.process(file);
     return assign({}, result, {
       messages: result.messages.filter(({ actual }: VFileMessage) => {
+        if (actual === undefined) return false;
+
         const doesNotMatch = (regex: RegExp) => !regex.test(actual);
         return (
           every(this.ignoreRegexes, doesNotMatch) &&
