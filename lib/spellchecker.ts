@@ -85,6 +85,7 @@ function buildMarkdownSpellchecker({
 }
 
 function buildHtmlSpellchecker(spellchecker: unknown) {
+  // TODO: Avoid using any.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return rehype().use(rehypeRetext, spellchecker as any);
 }
