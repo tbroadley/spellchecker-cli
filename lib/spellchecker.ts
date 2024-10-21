@@ -7,11 +7,11 @@ import dictionaryVi from 'dictionary-vi';
 import fs from 'fs-extra';
 import assign from 'lodash/assign.js';
 import every from 'lodash/every.js';
+import { rehype } from 'rehype';
+import rehypeRetext from 'rehype-retext';
 import { remark } from 'remark';
 import frontmatter from 'remark-frontmatter';
 import remarkRetext from 'remark-retext';
-import { rehype } from 'rehype';
-import rehypeRetext from 'rehype-retext';
 import { retext } from 'retext';
 import emoji from 'retext-emoji';
 import indefiniteArticle from 'retext-indefinite-article';
@@ -23,8 +23,8 @@ import vfile from 'vfile';
 import { VFile, VFileMessage } from 'vfile-reporter';
 
 import { FrontmatterConfig, frontmatterFilter } from './frontmatter-filter.js';
-import { isMarkdownFile } from './is-markdown-file.js';
 import { isHtmlFile } from './is-html-file.js';
+import { isMarkdownFile } from './is-markdown-file.js';
 
 function buildSpellchecker({
   dictionary,
@@ -111,6 +111,7 @@ export class Spellchecker {
   private spellchecker: { process(file: VFile): Promise<VFile> };
 
   private markdownSpellchecker: { process(file: VFile): Promise<VFile> };
+
   private htmlSpellchecker: { process(file: VFile): Promise<VFile> };
 
   private ignoreRegexes: RegExp[];
@@ -143,11 +144,7 @@ export class Spellchecker {
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   async checkSpelling(filePath: string) {
-    const spellcheckerForFileType = isMarkdownFile(filePath)
-      ? this.markdownSpellchecker
-      : isHtmlFile(filePath)
-      ? this.htmlSpellchecker
-      : this.spellchecker;
+    const spellcheckerForFileType = this.getSpellcheckerForFileType(filePath);
 
     const excludeBlockRe =
       /(<!--\s*spellchecker-disable\s*-->([\S\s]*?)<!--\s*spellchecker-enable\s*-->)/gi;
@@ -175,5 +172,13 @@ export class Spellchecker {
         );
       }),
     });
+  }
+
+  private getSpellcheckerForFileType(filePath: string) {
+    if (isMarkdownFile(filePath)) return this.markdownSpellchecker;
+
+    if (isHtmlFile(filePath)) return this.htmlSpellchecker;
+
+    return this.spellchecker;
   }
 }
