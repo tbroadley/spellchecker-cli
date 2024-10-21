@@ -24,4 +24,8 @@ describe('isMarkdownFile', () => {
   it('returns false for a file with a non-Markdown extension', () => {
     isMarkdownFile('test.txt').should.equal(false);
   });
+
+  it('returns false for a file with no extension', () => {
+    isMarkdownFile('test').should.equal(false);
+  });
 });

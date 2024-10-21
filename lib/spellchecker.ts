@@ -7,6 +7,8 @@ import dictionaryVi from 'dictionary-vi';
 import fs from 'fs-extra';
 import assign from 'lodash/assign.js';
 import every from 'lodash/every.js';
+import { rehype } from 'rehype';
+import rehypeRetext from 'rehype-retext';
 import { remark } from 'remark';
 import frontmatter from 'remark-frontmatter';
 import remarkRetext from 'remark-retext';
@@ -21,6 +23,7 @@ import vfile from 'vfile';
 import { VFile, VFileMessage } from 'vfile-reporter';
 
 import { FrontmatterConfig, frontmatterFilter } from './frontmatter-filter.js';
+import { isHtmlFile } from './is-html-file.js';
 import { isMarkdownFile } from './is-markdown-file.js';
 
 function buildSpellchecker({
@@ -81,6 +84,12 @@ function buildMarkdownSpellchecker({
   return markdownSpellchecker.use(remarkRetext, spellchecker);
 }
 
+function buildHtmlSpellchecker(spellchecker: unknown) {
+  // TODO: Avoid using any.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return rehype().use(rehypeRetext, spellchecker as any);
+}
+
 function getDictionary(language: string) {
   switch (language) {
     case 'en-AU':
@@ -105,6 +114,8 @@ export class Spellchecker {
 
   private markdownSpellchecker: { process(file: VFile): Promise<VFile> };
 
+  private htmlSpellchecker: { process(file: VFile): Promise<VFile> };
+
   private ignoreRegexes: RegExp[];
 
   private personalDictionary: RegExp[];
@@ -128,15 +139,14 @@ export class Spellchecker {
       plugins,
       spellchecker: this.spellchecker,
     });
+    this.htmlSpellchecker = buildHtmlSpellchecker(this.spellchecker);
     this.ignoreRegexes = ignoreRegexes;
     this.personalDictionary = personalDictionary;
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   async checkSpelling(filePath: string) {
-    const spellcheckerForFileType = isMarkdownFile(filePath)
-      ? this.markdownSpellchecker
-      : this.spellchecker;
+    const spellcheckerForFileType = this.getSpellcheckerForFileType(filePath);
 
     const excludeBlockRe =
       /(<!--\s*spellchecker-disable\s*-->([\S\s]*?)<!--\s*spellchecker-enable\s*-->)/gi;
@@ -155,6 +165,8 @@ export class Spellchecker {
     const result = await spellcheckerForFileType.process(file);
     return assign({}, result, {
       messages: result.messages.filter(({ actual }: VFileMessage) => {
+        if (actual === undefined) return false;
+
         const doesNotMatch = (regex: RegExp) => !regex.test(actual);
         return (
           every(this.ignoreRegexes, doesNotMatch) &&
@@ -162,5 +174,13 @@ export class Spellchecker {
         );
       }),
     });
+  }
+
+  private getSpellcheckerForFileType(filePath: string) {
+    if (isMarkdownFile(filePath)) return this.markdownSpellchecker;
+
+    if (isHtmlFile(filePath)) return this.htmlSpellchecker;
+
+    return this.spellchecker;
   }
 }

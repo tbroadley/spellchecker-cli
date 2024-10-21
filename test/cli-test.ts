@@ -190,6 +190,16 @@ parallel(
       );
     });
 
+    it('handles HTML', async () => {
+      const { code, stdout } = await runWithArguments(
+        '--files test/fixtures/html.html'
+      );
+      code!.should.equal(1);
+      ['mistaks', 'paragrap', 'contans'].forEach(word => {
+        stdout.should.include(`\`${word}\` is misspelt`);
+      });
+    });
+
     it('ignores spelling mistakes in code blocks', async () => {
       const result = await runWithArguments('-f test/fixtures/code-blocks.md');
       result.should.not.have.property('code');
