@@ -13,7 +13,7 @@ You can help contributors to your open-source software project catch spelling mi
 
 ## Features
 
-- Run on any plain text file, with special handling for Markdown syntax
+- Run on any plain text file, with special handling for Markdown and HTML
 - Check for spelling mistakes, repeated words, and/or correct usage of "a" and "and"
 - Check spelling using an American, British, Canadian, Australian, or South African English dictionary
 - Specify a custom dictionary of project-specific terms to be combined with the dictionary for the specified language
@@ -193,6 +193,10 @@ Spellchecker CLI can parse Markdown frontmatter when the `frontmatter` plugin is
 #### Exclude blocks
 
 If you want to exclude whole blocks in a Markdown file from spellchecking, this could be achieved by using the HTML inline comments `<!-- spellchecker-disable -->` and `<!-- spellchecker-enable -->`. Everything between these comments will be removed before proceeding with the spellcheck.
+
+### HTML
+
+Spellchecker CLI parses HTML files (_i.e._ files with the extension `.html`, ignoring capitalization) and spell-checks their content.
 
 ### Reports
 

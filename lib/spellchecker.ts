@@ -10,6 +10,8 @@ import every from 'lodash/every.js';
 import { remark } from 'remark';
 import frontmatter from 'remark-frontmatter';
 import remarkRetext from 'remark-retext';
+import { rehype } from 'rehype';
+import rehypeRetext from 'rehype-retext';
 import { retext } from 'retext';
 import emoji from 'retext-emoji';
 import indefiniteArticle from 'retext-indefinite-article';
@@ -22,6 +24,7 @@ import { VFile, VFileMessage } from 'vfile-reporter';
 
 import { FrontmatterConfig, frontmatterFilter } from './frontmatter-filter.js';
 import { isMarkdownFile } from './is-markdown-file.js';
+import { isHtmlFile } from './is-html-file.js';
 
 function buildSpellchecker({
   dictionary,
@@ -81,6 +84,10 @@ function buildMarkdownSpellchecker({
   return markdownSpellchecker.use(remarkRetext, spellchecker);
 }
 
+function buildHtmlSpellchecker(spellchecker: unknown) {
+  return rehype().use(rehypeRetext, spellchecker as any /* TODO */);
+}
+
 function getDictionary(language: string) {
   switch (language) {
     case 'en-AU':
@@ -104,6 +111,7 @@ export class Spellchecker {
   private spellchecker: { process(file: VFile): Promise<VFile> };
 
   private markdownSpellchecker: { process(file: VFile): Promise<VFile> };
+  private htmlSpellchecker: { process(file: VFile): Promise<VFile> };
 
   private ignoreRegexes: RegExp[];
 
@@ -128,6 +136,7 @@ export class Spellchecker {
       plugins,
       spellchecker: this.spellchecker,
     });
+    this.htmlSpellchecker = buildHtmlSpellchecker(this.spellchecker);
     this.ignoreRegexes = ignoreRegexes;
     this.personalDictionary = personalDictionary;
   }
@@ -136,6 +145,8 @@ export class Spellchecker {
   async checkSpelling(filePath: string) {
     const spellcheckerForFileType = isMarkdownFile(filePath)
       ? this.markdownSpellchecker
+      : isHtmlFile(filePath)
+      ? this.htmlSpellchecker
       : this.spellchecker;
 
     const excludeBlockRe =

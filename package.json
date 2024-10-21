@@ -42,6 +42,8 @@
     "junit-report-builder": "^3.0.1",
     "lodash": "^4.17.21",
     "pkg-dir": "^6.0.1",
+    "rehype": "^13.0.2",
+    "rehype-retext": "^5.0.0",
     "remark": "^14.0.0",
     "remark-frontmatter": "^4.0.0",
     "remark-retext": "^5.0.1",
