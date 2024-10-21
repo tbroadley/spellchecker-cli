@@ -2,6 +2,7 @@
 
 A command-line tool for spellchecking files, built on top of [`retext`](https://github.com/retextjs/retext) and [`remark`](https://github.com/remarkjs/remark).
 
+![CI status](https://github.com/tbroadley/spellchecker-cli/actions/workflows/ci.yaml/badge.svg)
 [![npm](https://img.shields.io/npm/v/spellchecker-cli.svg)](https://www.npmjs.com/package/spellchecker-cli)
 ![downloads](https://img.shields.io/npm/dw/spellchecker-cli?color=902382)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
