@@ -195,7 +195,7 @@ parallel(
         '--files test/fixtures/html.html'
       );
       code!.should.equal(1);
-      ['Spellig', 'mistaks', 'contans'].forEach(word => {
+      ['mistaks', 'paragrap', 'contans'].forEach(word => {
         stdout.should.include(`\`${word}\` is misspelt`);
       });
     });
