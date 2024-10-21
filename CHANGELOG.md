@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+- Parse HTML before spell-checking, using `rehype-retext`.
+
 ## [6.2.0] - 2024-02-11
 
 - Add option for `pre-commit` hook. [@mindlessroman](https://github.com/mindlessroman)
