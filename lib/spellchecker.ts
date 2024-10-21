@@ -85,7 +85,8 @@ function buildMarkdownSpellchecker({
 }
 
 function buildHtmlSpellchecker(spellchecker: unknown) {
-  return rehype().use(rehypeRetext, spellchecker as any /* TODO */);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return rehype().use(rehypeRetext, spellchecker as any);
 }
 
 function getDictionary(language: string) {
