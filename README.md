@@ -26,7 +26,13 @@ If you want to use Spellchecker CLI in a GitHub Actions workflow, try:
 - https://github.com/marketplace/actions/spellchecker-cli for a simple, customizable wrapper around Spellchecker CLI
 - https://github.com/marketplace/actions/spellchecker-cli-summary for a full-featured Spellchecker CLI workflow that can leave comments and status checks on your PRs
 
-If you want to use Spellchecker CLI as a command-line tool on your own computer, you can install it globally:
+If you want to use Spellchecker CLI as a command-line tool on your own computer witout having to manage it as a dependency, you can run it directly:
+
+```shell
+npx spellchecker-cli
+```
+
+Or you can install it globally:
 
 ```shell
 npm install --global spellchecker-cli
