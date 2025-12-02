@@ -34,3 +34,5 @@ junit-report-builder
 customizable
 PRs
 json5
+mdast-util-to-hast
+js-yaml
