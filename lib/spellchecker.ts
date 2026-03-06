@@ -1,4 +1,4 @@
-import dictionaryEn from 'dictionary-en';
+import dictionaryEn, { Dictionary } from 'dictionary-en';
 import dictionaryEnAu from 'dictionary-en-au';
 import dictionaryEnCa from 'dictionary-en-ca';
 import dictionaryEnGb from 'dictionary-en-gb';
@@ -19,8 +19,10 @@ import repeatedWords from 'retext-repeated-words';
 import spell from 'retext-spell';
 import syntaxMentions from 'retext-syntax-mentions';
 import syntaxUrls from 'retext-syntax-urls';
-import vfile from 'vfile';
-import { VFile, VFileMessage } from 'vfile-reporter';
+import { VFile as VFileClass } from 'vfile';
+import type { VFileMessage } from 'vfile-message';
+
+type VFile = InstanceType<typeof VFileClass>;
 
 import { FrontmatterConfig, frontmatterFilter } from './frontmatter-filter.js';
 import { isHtmlFile } from './is-html-file.js';
@@ -31,7 +33,7 @@ function buildSpellchecker({
   suggestions,
   plugins,
 }: {
-  dictionary: (callback: dictionaryEn.Callback) => void;
+  dictionary: Dictionary;
   suggestions: boolean;
   plugins: (string | FrontmatterConfig)[];
 }) {
@@ -73,7 +75,7 @@ function buildMarkdownSpellchecker({
   const markdownSpellchecker = remark();
 
   const frontmatterOptions = plugins.filter(
-    (plugin: string | FrontmatterConfig) => typeof plugin !== 'string'
+    (plugin: string | FrontmatterConfig) => typeof plugin !== 'string',
   ) as FrontmatterConfig[];
   if (frontmatterOptions.length > 0) {
     markdownSpellchecker
@@ -144,7 +146,6 @@ export class Spellchecker {
     this.personalDictionary = personalDictionary;
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   async checkSpelling(filePath: string) {
     const spellcheckerForFileType = this.getSpellcheckerForFileType(filePath);
 
@@ -155,11 +156,11 @@ export class Spellchecker {
     const contentsWithoutExcludes = contents.replace(excludeBlockRe, '');
     const contentsWithoutVariationSelectors = contentsWithoutExcludes.replace(
       /[\uFE0E\uFE0F]/g,
-      ''
+      '',
     );
 
-    const file = vfile({
-      contents: contentsWithoutVariationSelectors,
+    const file = new VFileClass({
+      value: contentsWithoutVariationSelectors,
       path: filePath,
     });
     const result = await spellcheckerForFileType.process(file);

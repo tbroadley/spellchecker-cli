@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+- Upgrade all dependencies to fix 25 security vulnerabilities (5 Low, 4 Moderate, 16 High).
+
 ## [7.0.2] - 2025-12-02
 
 - Upgrade mdast-util-to-hast.

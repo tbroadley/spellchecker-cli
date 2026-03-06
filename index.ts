@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 import fs from 'fs-extra';
-import glob from 'globby';
-import reporter, { VFileMessage } from 'vfile-reporter';
+import { globby as glob } from 'globby';
+import reporter from 'vfile-reporter';
+import type { VFileMessage } from 'vfile-message';
 
 import { buildPersonalDictionary } from './lib/build-personal-dictionary.js';
 import { parseConfig } from './lib/config/index.js';
@@ -27,7 +28,7 @@ import { toDictionary } from './lib/to-dictionary.js';
   } = parseConfig();
 
   const personalDictionary = await buildPersonalDictionary(
-    personalDictionaryPaths
+    personalDictionaryPaths,
   );
   const spellchecker = new Spellchecker({
     language,
@@ -39,7 +40,7 @@ import { toDictionary } from './lib/to-dictionary.js';
 
   if (personalDictionaryPaths.length > 0) {
     files.push(
-      ...personalDictionaryPaths.map((filePath: string) => `!${filePath}`)
+      ...personalDictionaryPaths.map((filePath: string) => `!${filePath}`),
     );
   }
 
@@ -49,7 +50,7 @@ import { toDictionary } from './lib/to-dictionary.js';
     console.log(
       `Spellchecking ${filesFromGlobs.length} file${
         filesFromGlobs.length === 1 ? '' : 's'
-      }...`
+      }...`,
     );
   }
 
@@ -74,7 +75,7 @@ import { toDictionary } from './lib/to-dictionary.js';
       generateDictionaryPath !== undefined &&
       hasMessages(
         vfiles,
-        (message: VFileMessage) => message.source === 'retext-spell'
+        (message: VFileMessage) => message.source === 'retext-spell',
       )
     ) {
       const path = generateDictionaryPath || 'dictionary.txt';

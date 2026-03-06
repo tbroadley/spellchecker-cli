@@ -30,7 +30,7 @@ const tryLoad = (filePath: string): ExternalConfig => {
 };
 
 export const readConfigFile = (
-  filePathFromArgs: string | undefined
+  filePathFromArgs: string | undefined,
 ): ExternalConfig => {
   if (filePathFromArgs) {
     return tryLoad(filePathFromArgs);
@@ -48,7 +48,7 @@ export const readConfigFile = (
     .find(path => {
       try {
         accessSync(path);
-      } catch (e) {
+      } catch (_e) {
         return false;
       }
 
