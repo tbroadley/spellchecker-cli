@@ -20,7 +20,6 @@ import spell from 'retext-spell';
 import syntaxMentions from 'retext-syntax-mentions';
 import syntaxUrls from 'retext-syntax-urls';
 import { VFile as VFileClass } from 'vfile';
-import type { VFile as VFileType } from 'vfile';
 import type { VFileMessage } from 'vfile-message';
 
 type VFile = InstanceType<typeof VFileClass>;
@@ -147,7 +146,6 @@ export class Spellchecker {
     this.personalDictionary = personalDictionary;
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   async checkSpelling(filePath: string) {
     const spellcheckerForFileType = this.getSpellcheckerForFileType(filePath);
 

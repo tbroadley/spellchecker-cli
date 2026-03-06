@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-
 import { ExecException, exec } from 'child_process';
 import { readFileSync, rmSync, writeFileSync } from 'fs';
 

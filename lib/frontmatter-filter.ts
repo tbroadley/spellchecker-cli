@@ -39,10 +39,8 @@ export function frontmatterFilter(options: string[]): (tree: unknown) => void {
 
       const filteredFrontmatter = pick(parsedFrontmatter, options || []);
 
-      /* eslint-disable no-param-reassign */
       node.value = stringify(filteredFrontmatter);
       node.type = 'text';
-      /* eslint-enable no-param-reassign */
     });
 
     visit(tree, 'toml', (node: { value: string; type: string }) => {
@@ -59,10 +57,8 @@ export function frontmatterFilter(options: string[]): (tree: unknown) => void {
 
       const filteredFrontmatter = pick(parsedFrontmatter, options || []);
 
-      /* eslint-disable no-param-reassign */
       node.value = stringify(filteredFrontmatter);
       node.type = 'text';
-      /* eslint-enable no-param-reassign */
     });
   };
 }

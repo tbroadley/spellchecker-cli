@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+import type { Assertion } from 'chai';
+
 declare global {
   export namespace Chai {
     interface Assertion {
@@ -7,25 +11,25 @@ declare global {
 }
 
 declare module 'chai' {
-  interface Should extends Chai.Assertion {}
+  interface Should extends Assertion {}
 }
 
 // Augment all types with should property
 declare global {
   interface Object {
-    should: Chai.Assertion;
+    should: Assertion;
   }
   interface Array<T> {
-    should: Chai.Assertion;
+    should: Assertion;
   }
   interface String {
-    should: Chai.Assertion;
+    should: Assertion;
   }
   interface Number {
-    should: Chai.Assertion;
+    should: Assertion;
   }
   interface Boolean {
-    should: Chai.Assertion;
+    should: Assertion;
   }
 }
 
