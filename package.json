@@ -1,6 +1,6 @@
 {
   "name": "spellchecker-cli",
-  "version": "7.0.3",
+  "version": "7.0.4",
   "description": "A command-line tool for spellchecking files.",
   "main": "build/index.js",
   "type": "module",
@@ -37,10 +37,10 @@
     "dictionary-vi": "^3.0.0",
     "fs-extra": "^11.3.4",
     "globby": "^16.1.1",
-    "js-yaml": "^4.1.1",
+    "js-yaml": "^4.3.2",
     "jsonc": "^2.0.0",
     "junit-report-builder": "^5.1.1",
-    "lodash": "^4.17.23",
+    "lodash": "^4.18.1",
     "pkg-dir": "^9.0.0",
     "rehype": "^13.0.2",
     "rehype-retext": "^5.0.1",
@@ -54,7 +54,7 @@
     "retext-spell": "^6.1.0",
     "retext-syntax-mentions": "^4.0.0",
     "retext-syntax-urls": "^4.0.0",
-    "toml": "^3.0.0",
+    "toml": "^5.0.0",
     "unist-util-visit": "^5.1.0",
     "vfile": "^6.0.3",
     "vfile-reporter": "^8.1.1"
@@ -86,6 +86,6 @@
   },
   "resolutions": {
     "diff": "^8.0.3",
-    "serialize-javascript": "^7.0.3"
+    "serialize-javascript": "^7.1.1"
   }
 }

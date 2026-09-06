@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [7.0.4] - 2026-09-06
+
+- Upgrade dependencies to fix 58 security vulnerabilities (22 Moderate, 36 High).
+- Upgrade toml from 3 to 5. This raises the minimum supported Node.js version for TOML frontmatter parsing to Node.js 20.
+
 ## [7.0.3] - 2026-03-05
 
 - Upgrade all dependencies to fix 25 security vulnerabilities (5 Low, 4 Moderate, 16 High).
@@ -213,7 +218,8 @@ Happy Halloween!
 
 - Added a shebang to [index.js](./index.js).
 
-[unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.3...HEAD
+[unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.4...HEAD
+[7.0.4]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.3...v7.0.4
 [7.0.3]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.2...v7.0.3
 [7.0.2]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.1...v7.0.2
 [7.0.1]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.0...v7.0.1
