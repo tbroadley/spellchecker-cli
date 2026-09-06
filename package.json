@@ -6,6 +6,7 @@
   "type": "module",
   "files": [
     "build",
+    "!build/test",
     "dictionaries"
   ],
   "bin": {

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+- Exclude compiled test files from the published npm package.
+
 ## [7.0.4] - 2026-09-06
 
 - Upgrade dependencies to fix 58 security vulnerabilities (22 Moderate, 36 High).
