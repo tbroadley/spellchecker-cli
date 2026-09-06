@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 - Exclude compiled test files from the published npm package.
+- Remove the unused `eslint-config-airbnb-base` and `eslint-plugin-import` development dependencies and the stale `.eslintrc.yml`, resolving peer dependency warnings on install.
 
 ## [7.0.4] - 2026-09-06
 
