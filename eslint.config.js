@@ -26,7 +26,7 @@ export default [
       // TypeScript ESLint recommended rules
       ...tseslint.configs.recommended.rules,
 
-      // Custom rules from .eslintrc.yml
+      // Custom rules
       'comma-dangle': [
         'error',
         {
