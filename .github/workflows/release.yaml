@@ -1,7 +1,9 @@
 name: Release
 
-# Publishes to npm when a version tag (e.g. v7.0.6) is pushed.
+# Stages a release on npm when a version tag (e.g. v7.0.6) is pushed.
 # Uses npm trusted publishing (OIDC), so no npm token is stored anywhere.
+# The staged version goes live only after a maintainer approves it with 2FA
+# on npmjs.com (see RELEASE.md).
 # The trusted publisher on npmjs.com must name this exact file: release.yaml
 
 on:
@@ -49,5 +51,15 @@ jobs:
       - name: Run CI script
         run: yarn ci
 
-      - name: Publish to npm
-        run: npm publish
+      - name: Check npm supports staged publishing
+        run: |
+          node -e '
+            const [major, minor] = process.argv[1].split(".").map(Number);
+            if (major < 11 || (major === 11 && minor < 15)) {
+              console.error(`npm ${process.argv[1]} is too old for npm stage publish (needs 11.15.0+)`);
+              process.exit(1);
+            }
+          ' "$(npm --version)"
+
+      - name: Stage release on npm
+        run: npm stage publish
