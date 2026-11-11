@@ -2374,10 +2374,10 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-toml@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/toml/-/toml-5.0.0.tgz#687e98925aa3a5039719d8c652ca30c21a99b7f3"
-  integrity sha512-bsqEd+g7fzlrw7LEynQ6W6aOK/lTOlepz5x1sJyIV9fTZVJS2Q76nuju6FK+gZhW5bUpvB7mCEqdR0u4WziMFw==
+toml@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/toml/-/toml-5.0.1.tgz#67ca011810a2dd8741c2cede1027ee2084b73d67"
+  integrity sha512-EqYNA/YvUNndrA2B3O2ojzLQoTQrBxeZ9UIjQwk8t10oe6n7dwclBwd9IdZQTOKwe6vWX+AXtl6IntXRbepdxQ==
 
 trim-lines@^3.0.0:
   version "3.0.1"
