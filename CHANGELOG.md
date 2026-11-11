@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [7.0.5] - 2026-11-11
 
-- Upgrade toml to 5.0.1 to fix four high-severity security vulnerabilities in TOML frontmatter parsing (prototype pollution and CPU denial of service).
-- Upgrade the development dependencies brace-expansion and serialize-javascript to fix security vulnerabilities.
+- Upgrade `toml` to 5.0.1 to fix four high-severity security vulnerabilities in TOML frontmatter parsing (prototype pollution and CPU denial of service).
+- Upgrade the development dependencies `brace-expansion` and `serialize-javascript` to fix security vulnerabilities.
 - Exclude compiled test files from the published npm package.
 - Remove the unused `eslint-config-airbnb-base` and `eslint-plugin-import` development dependencies and the stale `.eslintrc.yml`, resolving peer dependency warnings on install.
 
