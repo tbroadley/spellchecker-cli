@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [7.0.5] - 2026-11-11
+
+- Upgrade `toml` to 5.0.1 to fix four high-severity security vulnerabilities in TOML frontmatter parsing (prototype pollution and CPU denial of service).
+- Upgrade the development dependencies `brace-expansion` and `serialize-javascript` to fix security vulnerabilities.
 - Exclude compiled test files from the published npm package.
 - Remove the unused `eslint-config-airbnb-base` and `eslint-plugin-import` development dependencies and the stale `.eslintrc.yml`, resolving peer dependency warnings on install.
 
@@ -221,7 +225,8 @@ Happy Halloween!
 
 - Added a shebang to [index.js](./index.js).
 
-[unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.4...HEAD
+[unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.5...HEAD
+[7.0.5]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.4...v7.0.5
 [7.0.4]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.3...v7.0.4
 [7.0.3]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.2...v7.0.3
 [7.0.2]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.1...v7.0.2
