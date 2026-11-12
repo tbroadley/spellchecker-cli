@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [7.0.6] - 2026-11-11
+
+- Publish releases to npm from GitHub Actions using npm trusted publishing. No npm token is stored anywhere, and each release is approved by a maintainer with 2FA before it goes live.
+- Change the `repository.url` in `package.json` to `git+https://github.com/tbroadley/spellchecker-cli.git`, which npm trusted publishing checks against the GitHub repository.
+
 ## [7.0.5] - 2026-11-11
 
 - Upgrade `toml` to 5.0.1 to fix four high-severity security vulnerabilities in TOML frontmatter parsing (prototype pollution and CPU denial of service).
@@ -225,7 +230,8 @@ Happy Halloween!
 
 - Added a shebang to [index.js](./index.js).
 
-[unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.5...HEAD
+[unreleased]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.6...HEAD
+[7.0.6]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.5...v7.0.6
 [7.0.5]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.4...v7.0.5
 [7.0.4]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.3...v7.0.4
 [7.0.3]: https://github.com/tbroadley/spellchecker-cli/compare/v7.0.2...v7.0.3
