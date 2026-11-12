@@ -35,7 +35,9 @@ jobs:
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '24'
-          registry-url: 'https://registry.npmjs.org'
+          # No registry-url: it writes an .npmrc that needs NODE_AUTH_TOKEN,
+          # which breaks yarn install. Trusted publishing needs no token, and
+          # npm uses registry.npmjs.org by default.
 
       - name: Check tag matches package.json version
         run: |
