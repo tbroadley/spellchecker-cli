@@ -24,7 +24,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:tbroadley/spellchecker-cli.git"
+    "url": "git+https://github.com/tbroadley/spellchecker-cli.git"
   },
   "dependencies": {
     "chalk": "^5.6.2",

@@ -1,0 +1,65 @@
+name: Release
+
+# Stages a release on npm when a version tag (e.g. v7.0.6) is pushed.
+# Uses npm trusted publishing (OIDC), so no npm token is stored anywhere.
+# The staged version goes live only after a maintainer approves it with 2FA
+# on npmjs.com (see RELEASE.md).
+# The trusted publisher on npmjs.com must name this exact file: release.yaml
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # lets npm verify this run came from this repo and workflow
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Check tag matches package.json version
+        run: |
+          version="v$(node -p "require('./package.json').version")"
+          if [ "$version" != "$GITHUB_REF_NAME" ]; then
+            echo "Tag $GITHUB_REF_NAME does not match package.json version $version"
+            exit 1
+          fi
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run CI script
+        run: yarn ci
+
+      - name: Check npm supports staged publishing
+        run: |
+          node -e '
+            const [major, minor] = process.argv[1].split(".").map(Number);
+            if (major < 11 || (major === 11 && minor < 15)) {
+              console.error(`npm ${process.argv[1]} is too old for npm stage publish (needs 11.15.0+)`);
+              process.exit(1);
+            }
+          ' "$(npm --version)"
+
+      - name: Stage release on npm
+        run: npm stage publish
